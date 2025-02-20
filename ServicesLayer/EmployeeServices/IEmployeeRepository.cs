@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ServicesLayer.Services
+namespace ServicesLayer.EmployeeServices
 {
-    internal class Class1
+    interface IEmployeeRepository
     {
     }
 }
