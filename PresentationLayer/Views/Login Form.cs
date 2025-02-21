@@ -8,12 +8,13 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace PresentationLayer.Views;
-
-public partial class Form1: Form
+namespace PresentationLayer.Views
 {
-    public Form1()
+    public partial class Login_Form: Form
     {
-        InitializeComponent();
+        public Login_Form()
+        {
+            InitializeComponent();
+        }
     }
 }
