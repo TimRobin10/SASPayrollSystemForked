@@ -9,17 +9,10 @@
   </PropertyGroup>
 
   <ItemGroup>
-<<<<<<< HEAD
     <Folder Include="Presenters\" />
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Guna.UI2.WinForms" Version="2.0.4.7" />
-  </ItemGroup>
-
-  <ItemGroup>
-=======
->>>>>>> a51a9b66c6ee0a4b016d11f2a300853def3944ee
     <ProjectReference Include="..\ServicesLayer\ServicesLayer.csproj" />
   </ItemGroup>
 

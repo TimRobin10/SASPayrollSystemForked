@@ -1,15 +1,17 @@
-﻿using System.ComponentModel.DataAnnotations;
-using DomainLayer.Models.Attendance.Interfaces;
-using DomainLayer.Models.Employee.Interfaces;
+﻿using DomainLayer.Models.Common;
+using System.ComponentModel.DataAnnotations;
 
 
 namespace DomainLayer.Models.Employee
 {
-    public class EmployeeModel : IEmployeeModel
+    public class EmployeeModel : IEntityModel, IEmployeeModel
     {
         [Key]
-        public int EmployeeId { get; set; }
-        public string EmployeeName { get; set; } = null!;
-        public ICollection<IAttendanceModel>? Attendances { get; set; }
+        public int Id { get; set; }
+        public string FirstName { get; set; } = null!;
+        public string? MiddleName { get; set; }
+        public string LastName { get; set; } = null!;
+        public DateTime DateOfBirth { get; set; }
+        public DateTime EmployementDate { get; set; }
     }
 }
