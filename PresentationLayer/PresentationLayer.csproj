@@ -9,6 +9,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+<<<<<<< HEAD
     <Folder Include="Presenters\" />
   </ItemGroup>
 
@@ -17,6 +18,8 @@
   </ItemGroup>
 
   <ItemGroup>
+=======
+>>>>>>> a51a9b66c6ee0a4b016d11f2a300853def3944ee
     <ProjectReference Include="..\ServicesLayer\ServicesLayer.csproj" />
   </ItemGroup>
 
