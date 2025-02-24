@@ -5,19 +5,21 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace DomainLayer.Models.Permission
 {
-    public class PermissionModel : IEntityModel, IPermissionModel
+    public class PermissionModel(IEntityModel resource) : IEntityModel, IPermissionModel
     {
         [Key]
         public int Id { get; set; }
         public string Name { get; set; } = null!;
         public string? Description { get; set; }
-        public string Action { get; set; } = null!;
-        public string Resource { get; set; } = null!;
+        public bool AllowRead { get; set; }
+        public bool AllowWrite { get; set; }
+        public bool AllowDelete { get; set; }
+        public bool AllowUpdate { get; set; }
 
-        [ForeignKey(nameof(RoleId))]
-        public int RoleId { get; set; }
-        public virtual IRoleModel Role { get; set; } = null!;
+        public ICollection<IRoleModel> Roles { get; set; } = new List<IRoleModel>();
 
-
+        [ForeignKey(nameof(ResourceId))]
+        public int ResourceId { get; set; }
+        public IEntityModel Resource { get; set; } = resource;
     }
 }

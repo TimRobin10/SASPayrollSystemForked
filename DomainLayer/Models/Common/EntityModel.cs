@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DomainLayer.Models.Common
 {
-    abstract class EntityModel : IEntityModel
+    public class EntityModel : IEntityModel
     {
         public int Id { get; set; }
     }

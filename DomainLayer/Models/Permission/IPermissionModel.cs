@@ -1,15 +1,19 @@
-﻿using DomainLayer.Models.Role;
+﻿using DomainLayer.Models.Common;
+using DomainLayer.Models.Role;
 
 namespace DomainLayer.Models.Permission
 {
     public interface IPermissionModel
     {
-        string Action { get; set; }
+        bool AllowDelete { get; set; }
+        bool AllowRead { get; set; }
+        bool AllowUpdate { get; set; }
+        bool AllowWrite { get; set; }
         string? Description { get; set; }
         int Id { get; set; }
         string Name { get; set; }
-        string Resource { get; set; }
-        IRoleModel Role { get; set; }
-        int RoleId { get; set; }
+        IEntityModel Resource { get; set; }
+        int ResourceId { get; set; }
+        ICollection<IRoleModel> Roles { get; set; }
     }
 }
