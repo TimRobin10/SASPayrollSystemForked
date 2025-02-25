@@ -19,4 +19,6 @@ public class AppDbContext : IdentityDbContext<AppUser>
     }
 
     public DbSet<AttendanceModel> Attendances { get; set; }
+    public DbSet<AttendanceModel> Departments { get; set; }
+    public DbSet<AttendanceModel> Employees { get; set; }
 }

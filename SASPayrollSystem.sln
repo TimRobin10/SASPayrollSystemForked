@@ -11,7 +11,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "InfrastructureLayer", "Infr
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ServicesLayer", "ServicesLayer\ServicesLayer.csproj", "{73679738-F08A-4EDA-8B83-5F45BBFFB71B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApplication1", "WebApplication1\WebApplication1.csproj", "{7073AC2E-07C8-425C-980D-B86D719C45FC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Database", "WebApplication1\Database.csproj", "{7073AC2E-07C8-425C-980D-B86D719C45FC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

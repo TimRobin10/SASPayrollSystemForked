@@ -9,10 +9,10 @@ using WebApplication1.Data;
 
 #nullable disable
 
-namespace WebApplication1.Migrations
+namespace Database.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20250224011007_InitialCreate")]
+    [Migration("20250225011515_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -33,9 +33,6 @@ namespace WebApplication1.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("AppUserId")
-                        .HasColumnType("nvarchar(450)");
-
                     b.Property<DateTime>("Date")
                         .HasColumnType("datetime2");
 
@@ -53,9 +50,93 @@ namespace WebApplication1.Migrations
 
                     b.HasKey("Id");
 
+                    b.ToTable("AttendanceModel");
+                });
+
+            modelBuilder.Entity("DomainLayer.Models.Department.DepartmentModel", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Decription")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("DepartmentModel");
+                });
+
+            modelBuilder.Entity("DomainLayer.Models.Employee.EmployeeModel", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("AppUserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("BankDetails")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<decimal>("BasicRate")
+                        .HasColumnType("money");
+
+                    b.Property<string>("ContactNumber")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("DateOfBirth")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("DepartmentId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("EmployementDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("FirstName")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<string>("JobTitle")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("LastName")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<string>("PhilHealthNumber")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("SSSId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("TINId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
                     b.HasIndex("AppUserId");
 
-                    b.ToTable("Attendances");
+                    b.HasIndex("DepartmentId");
+
+                    b.ToTable("EmployeeModel");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -260,11 +341,19 @@ namespace WebApplication1.Migrations
                     b.ToTable("AspNetUsers", (string)null);
                 });
 
-            modelBuilder.Entity("DomainLayer.Models.Attendance.AttendanceModel", b =>
+            modelBuilder.Entity("DomainLayer.Models.Employee.EmployeeModel", b =>
                 {
                     b.HasOne("WebApplication1.Areas.Identity.Data.AppUser", null)
-                        .WithMany("Attendances")
+                        .WithMany("Employees")
                         .HasForeignKey("AppUserId");
+
+                    b.HasOne("DomainLayer.Models.Department.DepartmentModel", "Department")
+                        .WithMany("Employees")
+                        .HasForeignKey("DepartmentId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Department");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -318,9 +407,14 @@ namespace WebApplication1.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("DomainLayer.Models.Department.DepartmentModel", b =>
+                {
+                    b.Navigation("Employees");
+                });
+
             modelBuilder.Entity("WebApplication1.Areas.Identity.Data.AppUser", b =>
                 {
-                    b.Navigation("Attendances");
+                    b.Navigation("Employees");
                 });
 #pragma warning restore 612, 618
         }

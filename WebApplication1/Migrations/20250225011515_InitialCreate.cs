@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-namespace WebApplication1.Migrations
+namespace Database.Migrations
 {
     /// <inheritdoc />
     public partial class InitialCreate : Migration
@@ -48,6 +48,37 @@ namespace WebApplication1.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_AspNetUsers", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "AttendanceModel",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Date = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    TimeIn = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    TimeOut = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    TotalHours = table.Column<int>(type: "int", nullable: false),
+                    Status = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_AttendanceModel", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "DepartmentModel",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Decription = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_DepartmentModel", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -157,26 +188,39 @@ namespace WebApplication1.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Attendances",
+                name: "EmployeeModel",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Date = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    TimeIn = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    TimeOut = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    TotalHours = table.Column<int>(type: "int", nullable: false),
-                    Status = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    FirstName = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    LastName = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    DateOfBirth = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    EmployementDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    JobTitle = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    BasicRate = table.Column<decimal>(type: "money", nullable: false),
+                    ContactNumber = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    SSSId = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    TINId = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    PhilHealthNumber = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    BankDetails = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    DepartmentId = table.Column<int>(type: "int", nullable: false),
                     AppUserId = table.Column<string>(type: "nvarchar(450)", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Attendances", x => x.Id);
+                    table.PrimaryKey("PK_EmployeeModel", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Attendances_AspNetUsers_AppUserId",
+                        name: "FK_EmployeeModel_AspNetUsers_AppUserId",
                         column: x => x.AppUserId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_EmployeeModel_DepartmentModel_DepartmentId",
+                        column: x => x.DepartmentId,
+                        principalTable: "DepartmentModel",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
@@ -219,9 +263,14 @@ namespace WebApplication1.Migrations
                 filter: "[NormalizedUserName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Attendances_AppUserId",
-                table: "Attendances",
+                name: "IX_EmployeeModel_AppUserId",
+                table: "EmployeeModel",
                 column: "AppUserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_EmployeeModel_DepartmentId",
+                table: "EmployeeModel",
+                column: "DepartmentId");
         }
 
         /// <inheritdoc />
@@ -243,13 +292,19 @@ namespace WebApplication1.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
-                name: "Attendances");
+                name: "AttendanceModel");
+
+            migrationBuilder.DropTable(
+                name: "EmployeeModel");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");
+
+            migrationBuilder.DropTable(
+                name: "DepartmentModel");
         }
     }
 }
