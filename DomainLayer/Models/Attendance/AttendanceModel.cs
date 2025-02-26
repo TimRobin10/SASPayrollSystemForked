@@ -9,14 +9,17 @@ namespace DomainLayer.Models.Attendance
     {
         [Key]
         public int Id { get; set; }
+        [Column(TypeName = "date")]
         public DateTime Date { get; set; }
-        public DateTime TimeIn { get; set; }
-        public DateTime TimeOut { get; set; }
+        [Column(TypeName = "time")]
+        public TimeOnly TimeIn { get; set; }
+        [Column(TypeName = "time")]
+        public TimeOnly TimeOut { get; set; }
         public int TotalHours { get; set; }
         public string? Status { get; set; }
 
         [ForeignKey(nameof(EmployeeId))]
         public int EmployeeId { get; set; }
-        public virtual IEmployeeModel Employee { get; set; } = null!;
+        public virtual EmployeeModel Employee { get; set; } = null!;
     }
 }

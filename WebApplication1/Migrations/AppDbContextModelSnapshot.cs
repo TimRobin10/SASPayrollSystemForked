@@ -31,21 +31,26 @@ namespace Database.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<DateTime>("Date")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("date");
+
+                    b.Property<int>("EmployeeId")
+                        .HasColumnType("int");
 
                     b.Property<string>("Status")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("TimeIn")
-                        .HasColumnType("datetime2");
+                    b.Property<TimeOnly>("TimeIn")
+                        .HasColumnType("time");
 
-                    b.Property<DateTime>("TimeOut")
-                        .HasColumnType("datetime2");
+                    b.Property<TimeOnly>("TimeOut")
+                        .HasColumnType("time");
 
                     b.Property<int>("TotalHours")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("EmployeeId");
 
                     b.ToTable("AttendanceModel");
                 });
@@ -336,6 +341,17 @@ namespace Database.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers", (string)null);
+                });
+
+            modelBuilder.Entity("DomainLayer.Models.Attendance.AttendanceModel", b =>
+                {
+                    b.HasOne("DomainLayer.Models.Employee.EmployeeModel", "Employee")
+                        .WithMany()
+                        .HasForeignKey("EmployeeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Employee");
                 });
 
             modelBuilder.Entity("DomainLayer.Models.Employee.EmployeeModel", b =>

@@ -8,7 +8,7 @@ namespace DomainLayer.Models.Employee
         decimal BasicRate { get; set; }
         string ContactNumber { get; set; }
         DateTime DateOfBirth { get; set; }
-        IDepartmentModel Department { get; set; }
+        DepartmentModel Department { get; set; }
         int DepartmentId { get; set; }
         DateTime EmployementDate { get; set; }
         string FirstName { get; set; }

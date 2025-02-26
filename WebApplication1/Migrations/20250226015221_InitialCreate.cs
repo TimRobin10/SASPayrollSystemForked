@@ -51,23 +51,6 @@ namespace Database.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "AttendanceModel",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Date = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    TimeIn = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    TimeOut = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    TotalHours = table.Column<int>(type: "int", nullable: false),
-                    Status = table.Column<string>(type: "nvarchar(max)", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_AttendanceModel", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "DepartmentModel",
                 columns: table => new
                 {
@@ -223,6 +206,30 @@ namespace Database.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "AttendanceModel",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Date = table.Column<DateTime>(type: "date", nullable: false),
+                    TimeIn = table.Column<TimeOnly>(type: "time", nullable: false),
+                    TimeOut = table.Column<TimeOnly>(type: "time", nullable: false),
+                    TotalHours = table.Column<int>(type: "int", nullable: false),
+                    Status = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    EmployeeId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_AttendanceModel", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_AttendanceModel_EmployeeModel_EmployeeId",
+                        column: x => x.EmployeeId,
+                        principalTable: "EmployeeModel",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
                 table: "AspNetRoleClaims",
@@ -263,6 +270,11 @@ namespace Database.Migrations
                 filter: "[NormalizedUserName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
+                name: "IX_AttendanceModel_EmployeeId",
+                table: "AttendanceModel",
+                column: "EmployeeId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_EmployeeModel_AppUserId",
                 table: "EmployeeModel",
                 column: "AppUserId");
@@ -295,10 +307,10 @@ namespace Database.Migrations
                 name: "AttendanceModel");
 
             migrationBuilder.DropTable(
-                name: "EmployeeModel");
+                name: "AspNetRoles");
 
             migrationBuilder.DropTable(
-                name: "AspNetRoles");
+                name: "EmployeeModel");
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");

@@ -33,7 +33,7 @@ namespace DomainLayer.Models.Employee
 
         [ForeignKey(nameof(DepartmentId))]
         public int DepartmentId { get; set; }
-        public IDepartmentModel Department { get; set; } = null!;
+        public DepartmentModel Department { get; set; } = null!;
 
     }
 }
