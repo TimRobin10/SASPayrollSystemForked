@@ -1,20 +1,24 @@
 ﻿using DomainLayer.Models.Attendance;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using WebApplication1.Areas.Identity.Data;
 
-namespace WebApplication1.Data;
+namespace InfrastructureLayer.DataAccess;
 
 public class AppDbContext : IdentityDbContext<AppUser>
 {
-    public AppDbContext(DbContextOptions<AppDbContext> options)
-        : base(options)
+    public AppDbContext()
     {
     }
 
     protected override void OnModelCreating(ModelBuilder builder)
     {
         base.OnModelCreating(builder);
+    }
+
+    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+    {
+        optionsBuilder.UseSqlServer(".");
+        base.OnConfiguring(optionsBuilder);
     }
 
     public DbSet<AttendanceModel> Attendances { get; set; }

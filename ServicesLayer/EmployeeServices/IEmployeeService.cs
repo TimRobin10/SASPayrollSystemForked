@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ServicesLayer.EmployeeServices
 {
-    interface IEmployeeRepository
+    interface IEmployeeService
     {
     }
 }
