@@ -28,31 +28,31 @@
         /// </summary>
         private void InitializeComponent()
         {
-            textBox1 = new TextBox();
-            textBox2 = new TextBox();
+            Login_Username = new TextBox();
+            Login_Pass = new TextBox();
             label1 = new Label();
             label2 = new Label();
             button1 = new Button();
-            button2 = new Button();
-            checkBox1 = new CheckBox();
-            button3 = new Button();
+            Login_Register = new Button();
+            Login_ShowPassword = new CheckBox();
+            Login_ForgotPassword = new Button();
             SuspendLayout();
             // 
-            // textBox1
+            // Login_Username
             // 
-            textBox1.Location = new Point(284, 82);
-            textBox1.Multiline = true;
-            textBox1.Name = "textBox1";
-            textBox1.Size = new Size(211, 23);
-            textBox1.TabIndex = 0;
+            Login_Username.Location = new Point(284, 82);
+            Login_Username.Multiline = true;
+            Login_Username.Name = "Login_Username";
+            Login_Username.Size = new Size(211, 23);
+            Login_Username.TabIndex = 0;
             // 
-            // textBox2
+            // Login_Pass
             // 
-            textBox2.Location = new Point(284, 122);
-            textBox2.Multiline = true;
-            textBox2.Name = "textBox2";
-            textBox2.Size = new Size(211, 23);
-            textBox2.TabIndex = 1;
+            Login_Pass.Location = new Point(284, 122);
+            Login_Pass.Multiline = true;
+            Login_Pass.Name = "Login_Pass";
+            Login_Pass.Size = new Size(211, 23);
+            Login_Pass.TabIndex = 1;
             // 
             // label1
             // 
@@ -81,47 +81,47 @@
             button1.Text = "Log In";
             button1.UseVisualStyleBackColor = true;
             // 
-            // button2
+            // Login_Register
             // 
-            button2.Location = new Point(420, 176);
-            button2.Name = "button2";
-            button2.Size = new Size(75, 23);
-            button2.TabIndex = 5;
-            button2.Text = "Register";
-            button2.UseVisualStyleBackColor = true;
+            Login_Register.Location = new Point(420, 176);
+            Login_Register.Name = "Login_Register";
+            Login_Register.Size = new Size(75, 23);
+            Login_Register.TabIndex = 5;
+            Login_Register.Text = "Register";
+            Login_Register.UseVisualStyleBackColor = true;
             // 
-            // checkBox1
+            // Login_ShowPassword
             // 
-            checkBox1.AutoSize = true;
-            checkBox1.Location = new Point(334, 151);
-            checkBox1.Name = "checkBox1";
-            checkBox1.Size = new Size(108, 19);
-            checkBox1.TabIndex = 6;
-            checkBox1.Text = "Show Password";
-            checkBox1.UseVisualStyleBackColor = true;
+            Login_ShowPassword.AutoSize = true;
+            Login_ShowPassword.Location = new Point(334, 151);
+            Login_ShowPassword.Name = "Login_ShowPassword";
+            Login_ShowPassword.Size = new Size(108, 19);
+            Login_ShowPassword.TabIndex = 6;
+            Login_ShowPassword.Text = "Show Password";
+            Login_ShowPassword.UseVisualStyleBackColor = true;
             // 
-            // button3
+            // Login_ForgotPassword
             // 
-            button3.Location = new Point(334, 205);
-            button3.Name = "button3";
-            button3.Size = new Size(108, 23);
-            button3.TabIndex = 7;
-            button3.Text = "Forgot Password";
-            button3.UseVisualStyleBackColor = true;
+            Login_ForgotPassword.Location = new Point(334, 205);
+            Login_ForgotPassword.Name = "Login_ForgotPassword";
+            Login_ForgotPassword.Size = new Size(108, 23);
+            Login_ForgotPassword.TabIndex = 7;
+            Login_ForgotPassword.Text = "Forgot Password";
+            Login_ForgotPassword.UseVisualStyleBackColor = true;
             // 
             // Login_Form
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
-            Controls.Add(button3);
-            Controls.Add(checkBox1);
-            Controls.Add(button2);
+            Controls.Add(Login_ForgotPassword);
+            Controls.Add(Login_ShowPassword);
+            Controls.Add(Login_Register);
             Controls.Add(button1);
             Controls.Add(label2);
             Controls.Add(label1);
-            Controls.Add(textBox2);
-            Controls.Add(textBox1);
+            Controls.Add(Login_Pass);
+            Controls.Add(Login_Username);
             Name = "Login_Form";
             Text = "Login_Form";
             ResumeLayout(false);
@@ -130,13 +130,13 @@
 
         #endregion
 
-        private TextBox textBox1;
-        private TextBox textBox2;
+        private TextBox Login_Username;
+        private TextBox Login_Pass;
         private Label label1;
         private Label label2;
         private Button button1;
-        private Button button2;
-        private CheckBox checkBox1;
-        private Button button3;
+        private Button Login_Register;
+        private CheckBox Login_ShowPassword;
+        private Button Login_ForgotPassword;
     }
 }
