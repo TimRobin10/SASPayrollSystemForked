@@ -7,8 +7,12 @@ using System.Threading.Tasks;
 
 namespace ServicesLayer.AttendanceServices
 {
-    interface IAttendanceService
+    public interface IAttendanceService
     {
-        void ValidateModel(AttendanceModel attendanceModel);
+        void ValidateModel(IAttendanceModel attendanceModel);
+        void Add(IAttendanceModel attendanceModel);
+        void Update(IAttendanceModel attendanceModel);
+        void Delete(int attendanceId);
+        ICollection<IAttendanceModel> GetAttendanceModel();
     }
 }

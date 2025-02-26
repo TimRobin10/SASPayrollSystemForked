@@ -13,6 +13,6 @@ namespace DomainLayer.Models.Department
         public int Id { get; set; }
         public string Name { get; set; } = null!;
         public string? Decription { get; set; }
-        public ICollection<EmployeeModel>? Employees { get; set; }
+        public ICollection<IEmployeeModel>? Employees { get; set; }
     }
 }
