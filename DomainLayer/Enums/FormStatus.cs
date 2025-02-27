@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DomainLayer.Enums
 {
-    public enum Status
+    public enum FormStatus
     {
         Pending,
         Approved,

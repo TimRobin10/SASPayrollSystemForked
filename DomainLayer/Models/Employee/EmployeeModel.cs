@@ -47,6 +47,8 @@ namespace DomainLayer.Models.Employee
 
         public string BankDetails { get; set; } = null!;
 
+        public int LeaveCredits { get; set; }
+
 
         [ForeignKey(nameof(DepartmentId))]
         public int DepartmentId { get; set; }
