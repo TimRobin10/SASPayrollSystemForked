@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-namespace Database.Migrations
+namespace InfrastructureLayer.Migrations
 {
     /// <inheritdoc />
     public partial class InitialCreate : Migration
@@ -51,7 +51,7 @@ namespace Database.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "DepartmentModel",
+                name: "Departments",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -61,7 +61,23 @@ namespace Database.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_DepartmentModel", x => x.Id);
+                    table.PrimaryKey("PK_Departments", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Leaves",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    DateOfFiling = table.Column<DateOnly>(type: "date", nullable: false),
+                    DateOfAbsence = table.Column<DateOnly>(type: "date", nullable: false),
+                    Duration = table.Column<int>(type: "int", nullable: false),
+                    Status = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Leaves", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -178,8 +194,8 @@ namespace Database.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     FirstName = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     LastName = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    DateOfBirth = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    EmployementDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    DateOfBirth = table.Column<DateOnly>(type: "date", nullable: false),
+                    EmployementDate = table.Column<DateOnly>(type: "date", nullable: false),
                     JobTitle = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     BasicRate = table.Column<decimal>(type: "money", nullable: false),
                     ContactNumber = table.Column<string>(type: "nvarchar(max)", nullable: false),
@@ -187,21 +203,15 @@ namespace Database.Migrations
                     TINId = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     PhilHealthNumber = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     BankDetails = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    DepartmentId = table.Column<int>(type: "int", nullable: false),
-                    AppUserId = table.Column<string>(type: "nvarchar(450)", nullable: true)
+                    DepartmentId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_EmployeeModel", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_EmployeeModel_AspNetUsers_AppUserId",
-                        column: x => x.AppUserId,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "Id");
-                    table.ForeignKey(
-                        name: "FK_EmployeeModel_DepartmentModel_DepartmentId",
+                        name: "FK_EmployeeModel_Departments_DepartmentId",
                         column: x => x.DepartmentId,
-                        principalTable: "DepartmentModel",
+                        principalTable: "Departments",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -212,11 +222,11 @@ namespace Database.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Date = table.Column<DateTime>(type: "date", nullable: false),
+                    Date = table.Column<DateOnly>(type: "date", nullable: false),
                     TimeIn = table.Column<TimeOnly>(type: "time", nullable: false),
                     TimeOut = table.Column<TimeOnly>(type: "time", nullable: false),
                     TotalHours = table.Column<int>(type: "int", nullable: false),
-                    Status = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Status = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     EmployeeId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
@@ -275,11 +285,6 @@ namespace Database.Migrations
                 column: "EmployeeId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_EmployeeModel_AppUserId",
-                table: "EmployeeModel",
-                column: "AppUserId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_EmployeeModel_DepartmentId",
                 table: "EmployeeModel",
                 column: "DepartmentId");
@@ -307,16 +312,19 @@ namespace Database.Migrations
                 name: "AttendanceModel");
 
             migrationBuilder.DropTable(
-                name: "AspNetRoles");
+                name: "Leaves");
 
             migrationBuilder.DropTable(
-                name: "EmployeeModel");
+                name: "AspNetRoles");
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");
 
             migrationBuilder.DropTable(
-                name: "DepartmentModel");
+                name: "EmployeeModel");
+
+            migrationBuilder.DropTable(
+                name: "Departments");
         }
     }
 }

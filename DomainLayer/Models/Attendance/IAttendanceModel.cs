@@ -5,10 +5,10 @@ namespace DomainLayer.Models.Attendance
 {
     public interface IAttendanceModel : IEntityModel
     {
-        DateTime Date { get; set; }
+        DateOnly Date { get; set; }
         EmployeeModel Employee { get; set; }
         int EmployeeId { get; set; }
-        string? Status { get; set; }
+        string Status { get; set; }
         TimeOnly TimeIn { get; set; }
         TimeOnly TimeOut { get; set; }
         int TotalHours { get; set; }
