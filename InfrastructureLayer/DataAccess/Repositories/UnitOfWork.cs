@@ -1,9 +1,5 @@
 ﻿using InfrastructureLayer.DataAccess.Repositories.Attendance;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using InfrastructureLayer.DataAccess.Repositories.Employee;
 
 namespace InfrastructureLayer.DataAccess.Repositories
 {
@@ -18,6 +14,8 @@ namespace InfrastructureLayer.DataAccess.Repositories
         }
 
         public IAttendanceRepository attendanceRepository { get; private set; }
+
+        public IEmployeeRepository employeeRepository { get; private set; }
 
         public void SaveChanges()
         {

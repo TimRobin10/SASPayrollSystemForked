@@ -1,5 +1,6 @@
 ﻿using DomainLayer.Models.Attendance;
 using InfrastructureLayer.DataAccess.Repositories;
+using ServicesLayer.CommonServices;
 
 namespace ServicesLayer.AttendanceServices
 {

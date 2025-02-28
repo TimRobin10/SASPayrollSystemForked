@@ -45,7 +45,7 @@ namespace DomainLayer.Models.Employee
         public string PhilHealthNumber { get; set; } = null!;
 
 
-        public string BankDetails { get; set; } = null!;
+        public string? BankDetails { get; set; }
 
         public int LeaveCredits { get; set; }
 

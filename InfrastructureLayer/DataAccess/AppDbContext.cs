@@ -1,5 +1,6 @@
 ﻿using DomainLayer.Models.Attendance;
 using DomainLayer.Models.Department;
+using DomainLayer.Models.Employee;
 using DomainLayer.Models.Leave;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
@@ -25,6 +26,6 @@ public class AppDbContext : IdentityDbContext<AppUser>
 
     public DbSet<AttendanceModel> Attendances { get; set; }
     public DbSet<DepartmentModel> Departments { get; set; }
-    public DbSet<AttendanceModel> Employees { get; set; }
+    public DbSet<EmployeeModel> Employees { get; set; }
     public DbSet<LeaveModel> Leaves { get; set; }
 }
