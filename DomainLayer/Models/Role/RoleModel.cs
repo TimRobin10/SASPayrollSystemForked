@@ -9,10 +9,8 @@ using System.Threading.Tasks;
 
 namespace DomainLayer.Models.Role
 {
-    public class RoleModel
+    public class RoleModel : IRoleModel
     {
-        private string _normalizedString = string.Empty;
-
         [Key]
         public Guid Id { get; set; }
 
@@ -20,12 +18,16 @@ namespace DomainLayer.Models.Role
         [StringLength(20, MinimumLength = 2, ErrorMessage = "Must be between 2 - 20 characters only")]
         public string Name { get; set; } = null!;
 
-        [Required]
-        [StringLength(20)]
-        public string NormalizedName
+        public string NormalizedName => NormalizeString(Name);
+
+        private string NormalizeString(string input)
         {
-            get => _normalizedString;
-            set => _normalizedString = value.ToUpperInvariant().Trim();
+            if (string.IsNullOrEmpty(input))
+            {
+                return input;
+            }
+
+            return input.ToUpperInvariant().Trim();
         }
 
         public virtual ICollection<UserRoleModel> UserRoles { get; } = [];

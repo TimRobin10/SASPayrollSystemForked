@@ -1,0 +1,46 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace DomainLayer.Models.EmployeeDetail
+{
+    public class EmployeeDetailModel
+    {
+        private string _firstName = string.Empty;
+        private string _middleInitial = string.Empty;
+        private string _lastname = string.Empty;
+
+        [Key]
+        public Guid Id { get; set; }
+
+        [Required(ErrorMessage = "First name is required")]
+        [StringLength(50, MinimumLength = 2, ErrorMessage = "Must be between 2 - 50 characters")]
+        public string FirstName 
+        { 
+            get => _firstName;
+            set => _firstName = value.Trim(); 
+        }
+
+        [Required(ErrorMessage = "Middle initial is required")]
+        [StringLength(1, ErrorMessage = "Must be one character only")]
+        public string? MiddleInitial 
+        { 
+            get => _middleInitial; 
+            set => _middleInitial = value.ToUpperInvariant().Trim(); 
+        }
+
+        [Required(ErrorMessage = "Last name is required")]
+        [StringLength(50, MinimumLength = 2, ErrorMessage = "Must be between 2 - 50 characters")]
+        public string LastName { get; set; } = null!;
+
+        [Required(ErrorMessage = "Employment date is required")]
+        public DateOnly EmployementDate { get; set; }
+
+        [Required(ErrorMessage = "Job title is required")]
+        [StringLength(20, MinimumLength = 2, ErrorMessage = "Must be between 2 - 50 characters")]
+        public string JobTitle { get; set; } = null!;
+    }
+}

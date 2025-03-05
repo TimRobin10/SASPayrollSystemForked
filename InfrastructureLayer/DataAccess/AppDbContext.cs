@@ -1,4 +1,5 @@
-﻿using DomainLayer.Models.Role;
+﻿using DomainLayer.Models.EmployeeDetail;
+using DomainLayer.Models.Role;
 using DomainLayer.Models.User;
 using DomainLayer.Models.UserRole;
 using Microsoft.EntityFrameworkCore;
@@ -30,5 +31,6 @@ namespace InfrastructureLayer.DataAccess
         public DbSet<UserModel> Users { get; set; }
         public DbSet<RoleModel> Roles { get; set; }
         public DbSet<UserRoleModel> UserRoles { get; set; }
+        public DbSet<EmployeeDetailModel> EmployeeDetails { get; set; }
     }
 }

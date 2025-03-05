@@ -10,7 +10,7 @@ using DomainLayer.Models.Role;
 
 namespace DomainLayer.Models.UserRole
 {
-    public class UserRoleModel
+    public class UserRoleModel : IUserRoleModel
     {
         [Key, Column(Order = 0)]
         public Guid UsersId { get; set; }

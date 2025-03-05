@@ -18,15 +18,23 @@ namespace DomainLayer.Models.User
         [StringLength(20, MinimumLength = 2, ErrorMessage = "Username must be 2 - 20 characters only")]
         public string UserName { get; set; } = null!;
 
-        [Required(ErrorMessage = "Salt is empty")]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "Salt is empty")]
         public string Salt { get; set; } = null!;
 
-        [Required(ErrorMessage = "Password Hash is empty")]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "Password Hash is empty")]
         public string PasswordHash { get; set; } = null!;
 
-        [Required(AllowEmptyStrings = false, ErrorMessage = "Email is required")]
+        [Required(ErrorMessage = "Email is required")]
         [EmailAddress(ErrorMessage = "Must be a valid email address")]
         public string Email { get; set; } = null!;
+
+        [Required(ErrorMessage = "Phone number is required")]
+        [RegularExpression(@"^\+639\d{9}")]
+        [StringLength(12, MinimumLength = 12, ErrorMessage = "Must be exactly 12 characters")]
+        public string PhoneNumber { get; set; } = null!;
+
+        [Url(ErrorMessage = "Must be a valid Url")]
+        public string? Url { get; set; }
 
         public virtual ICollection<UserRoleModel> UserRoles { get; } = [];
         public virtual ICollection<RoleModel> Roles { get; } = null!;
