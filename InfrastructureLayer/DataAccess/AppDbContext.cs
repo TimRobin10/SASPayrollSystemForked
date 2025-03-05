@@ -1,31 +1,34 @@
-﻿using DomainLayer.Models.Attendance;
-using DomainLayer.Models.Department;
-using DomainLayer.Models.Employee;
-using DomainLayer.Models.Leave;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+﻿using DomainLayer.Models.Role;
+using DomainLayer.Models.User;
+using DomainLayer.Models.UserRole;
 using Microsoft.EntityFrameworkCore;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace InfrastructureLayer.DataAccess;
-
-public class AppDbContext : IdentityDbContext<AppUser>
+namespace InfrastructureLayer.DataAccess
 {
-    public AppDbContext(DbContextOptions options) : base(options)
+    public class AppDbContext : DbContext
     {
-    }
+        private const string connectionStringHome = "Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=FinalPracticeDb;Integrated Security=True;Connect Timeout=30;Encrypt=False;Trust Server Certificate=False;Application Intent=ReadWrite;Multi Subnet Failover=False";
+        private const string connectionStringLab = "Data Source=(localdb)\\ProjectModels;Initial Catalog=FinalPracticeDb;Integrated Security=True;Connect Timeout=30;Encrypt=False;Trust Server Certificate=False;Application Intent=ReadWrite;Multi Subnet Failover=False";
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            optionsBuilder.UseSqlServer(connectionStringLab);
+            base.OnConfiguring(optionsBuilder);
+        }
 
-    protected override void OnModelCreating(ModelBuilder builder)
-    {
-        base.OnModelCreating(builder);
-    }
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<UserRoleModel>()
+                .HasKey(m => new { m.UsersId, m.RolesId });
+            base.OnModelCreating(modelBuilder);
+        }
 
-    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-    {
-        optionsBuilder.UseSqlServer("Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=SASPayRollDb;Integrated Security=True;Connect Timeout=30;Encrypt=False;Trust Server Certificate=False;Application Intent=ReadWrite;Multi Subnet Failover=False");
-        base.OnConfiguring(optionsBuilder);
+        public DbSet<UserModel> Users { get; set; }
+        public DbSet<RoleModel> Roles { get; set; }
+        public DbSet<UserRoleModel> UserRoles { get; set; }
     }
-
-    public DbSet<AttendanceModel> Attendances { get; set; }
-    public DbSet<DepartmentModel> Departments { get; set; }
-    public DbSet<EmployeeModel> Employees { get; set; }
-    public DbSet<LeaveModel> Leaves { get; set; }
 }

@@ -11,8 +11,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "InfrastructureLayer", "Infr
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ServicesLayer", "ServicesLayer\ServicesLayer.csproj", "{73679738-F08A-4EDA-8B83-5F45BBFFB71B}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Database", "WebApplication1\Database.csproj", "{7073AC2E-07C8-425C-980D-B86D719C45FC}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -35,10 +33,6 @@ Global
 		{73679738-F08A-4EDA-8B83-5F45BBFFB71B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{73679738-F08A-4EDA-8B83-5F45BBFFB71B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{73679738-F08A-4EDA-8B83-5F45BBFFB71B}.Release|Any CPU.Build.0 = Release|Any CPU
-		{7073AC2E-07C8-425C-980D-B86D719C45FC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{7073AC2E-07C8-425C-980D-B86D719C45FC}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{7073AC2E-07C8-425C-980D-B86D719C45FC}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{7073AC2E-07C8-425C-980D-B86D719C45FC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
