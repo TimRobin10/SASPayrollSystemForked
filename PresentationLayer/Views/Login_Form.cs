@@ -1,4 +1,6 @@
 ﻿using DomainLayer.Models.User;
+using InfrastructureLayer.DataAccess.UnitOfWork;
+using ServicesLayer.User;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -24,6 +26,14 @@ namespace PresentationLayer.Views
         private void Login_Form_Load(object sender, EventArgs e)
         {
             
+        }
+
+        private byte[] EncryptSha256(byte[] input)
+        {
+            using (SHA256 sha256 = SHA256.Create())
+            {
+                return sha256.ComputeHash(input);
+            }
         }
     }
 }

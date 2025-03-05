@@ -1,5 +1,4 @@
 ﻿using DomainLayer.Models.User;
-using DomainLayer.Models.UserRole;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -11,16 +10,31 @@ namespace DomainLayer.Models.Role
 {
     public class RoleModel : IRoleModel
     {
+        private string _name = string.Empty;
+
         [Key]
         public Guid Id { get; set; }
 
         [Required(AllowEmptyStrings = false, ErrorMessage = "Name is required")]
         [StringLength(20, MinimumLength = 2, ErrorMessage = "Must be between 2 - 20 characters only")]
-        public string Name { get; set; } = null!;
+        public string Name 
+        {
+            get
+            {
+                return _name;
+            }
+            set
+            {
+                _name = value;
+                NormalizedName = NormalizeString(Name);
+            }
+        }
 
         [Required]
         [StringLength(20)]
-        public string NormalizedName => NormalizeString(Name);
+        public string NormalizedName { get; private set; } = null!;
+
+        public virtual ICollection<UserModel> Users { get; } = null!;
 
         private string NormalizeString(string input)
         {
@@ -31,8 +45,5 @@ namespace DomainLayer.Models.Role
 
             return input.ToUpperInvariant().Trim();
         }
-
-        public virtual ICollection<UserRoleModel> UserRoles { get; } = [];
-        public virtual ICollection<UserModel> Users { get; } = null!;
     }
 }

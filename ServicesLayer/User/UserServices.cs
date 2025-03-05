@@ -18,11 +18,15 @@ namespace ServicesLayer.User
         private IUserRepository _userRepository;
         private IModelDataAnnotationsCheck _modelDataAnnotationsCheck;
 
-        public UserServices(IUnitOfWork unitOfWork, IModelDataAnnotationsCheck modelDataAnnotationsCheck)
+        public UserServices(IUnitOfWork unitOfWork, IModelDataAnnotationsCheck modelDataAnnotationsCheck = null)
         {
             _userRepository = unitOfWork.UserRepository;
             _modelDataAnnotationsCheck = modelDataAnnotationsCheck;
         }
 
+        public async Task AddUser(IUserModel userModel)
+        {
+            await _userRepository.AddAsync((UserModel)userModel);
+        }
     }
 }

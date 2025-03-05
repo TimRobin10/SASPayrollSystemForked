@@ -1,5 +1,4 @@
 ﻿using DomainLayer.Models.Role;
-using DomainLayer.Models.UserRole;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -36,13 +35,16 @@ namespace DomainLayer.Models.User
             {
                 _password = value;
                 Salt = GenerateSalt(saltSize);
-                PasswordHash = EncryptSha256(EncryptSha256(Password) + Salt);
+                var passwordBytes = Encoding.UTF8.GetBytes(Password);
+                var encryptedPasswordBytes = EncryptSha256(passwordBytes);
+                var saltedPassword = Salt.Concat(encryptedPasswordBytes).ToArray();
+                PasswordHash = EncryptSha256(saltedPassword);
             }
         }
 
         [Required(AllowEmptyStrings = false, ErrorMessage = "Salt is empty")]
         [Column(TypeName = "binary(32)")]
-        public string Salt { get; private set; } = string.Empty;
+        public byte[] Salt { get; private set; } = [];
 
         [Required(ErrorMessage = "Password Hash is empty")]
         [Column(TypeName = "binary(32)")]
@@ -54,16 +56,16 @@ namespace DomainLayer.Models.User
 
         [Required(ErrorMessage = "Phone number is required")]
         [RegularExpression(@"^\+639\d{9}")]
-        [StringLength(12, MinimumLength = 12, ErrorMessage = "Must be exactly 12 characters")]
+        [StringLength(13, MinimumLength = 12, ErrorMessage = "Must be exactly 12 characters")]
         public string PhoneNumber { get; set; } = null!;
 
         [Url(ErrorMessage = "Must be a valid Url")]
         public string? Url { get; set; }
 
-        public virtual ICollection<UserRoleModel> UserRoles { get; } = [];
+        //public virtual ICollection<UserRoleModel> UserRoles { get; } = [];
         public virtual ICollection<RoleModel> Roles { get; } = [];
 
-        private string GenerateSalt(int size)
+        private byte[] GenerateSalt(int size)
         {
             byte[] saltBytes = new byte[size];
 
@@ -72,14 +74,14 @@ namespace DomainLayer.Models.User
                 generator.GetBytes(saltBytes);
             }
 
-            return Convert.ToBase64String(saltBytes);
+            return saltBytes;
         }
 
-        private byte[] EncryptSha256(string input)
+        private byte[] EncryptSha256(byte[] input)
         {
             using (SHA256 sha256 = SHA256.Create())
             {
-                return sha256.ComputeHash(Encoding.UTF8.GetBytes(input));
+                return sha256.ComputeHash(input);
             }
         }
     }
