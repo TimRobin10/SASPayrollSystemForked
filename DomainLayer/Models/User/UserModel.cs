@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace DomainLayer.Models.User
 {
-    public class UserModel
+    public class UserModel : IUserModel
     {
         [Key]
         public Guid Id { get; set; }
@@ -23,6 +23,10 @@ namespace DomainLayer.Models.User
 
         [Required(ErrorMessage = "Password Hash is empty")]
         public string PasswordHash { get; set; } = null!;
+
+        [Required(AllowEmptyStrings = false, ErrorMessage = "Email is required")]
+        [EmailAddress(ErrorMessage = "Must be a valid email address")]
+        public string Email { get; set; } = null!;
 
         public virtual ICollection<UserRoleModel> UserRoles { get; } = [];
         public virtual ICollection<RoleModel> Roles { get; } = null!;
