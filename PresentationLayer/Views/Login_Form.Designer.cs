@@ -124,6 +124,7 @@
             Controls.Add(Login_Username);
             Name = "Login_Form";
             Text = "Login_Form";
+            Load += Login_Form_Load;
             ResumeLayout(false);
             PerformLayout();
         }

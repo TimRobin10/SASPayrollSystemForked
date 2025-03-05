@@ -18,6 +18,8 @@ namespace DomainLayer.Models.Role
         [StringLength(20, MinimumLength = 2, ErrorMessage = "Must be between 2 - 20 characters only")]
         public string Name { get; set; } = null!;
 
+        [Required]
+        [StringLength(20)]
         public string NormalizedName => NormalizeString(Name);
 
         private string NormalizeString(string input)

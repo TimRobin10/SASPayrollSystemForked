@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace DomainLayer.Models.EmployeeDetail
 {
-    public class EmployeeDetailModel
+    public class EmployeeDetailModel : IEmployeeDetailModel
     {
         private string _firstName = string.Empty;
         private string _middleInitial = string.Empty;
@@ -18,23 +18,27 @@ namespace DomainLayer.Models.EmployeeDetail
 
         [Required(ErrorMessage = "First name is required")]
         [StringLength(50, MinimumLength = 2, ErrorMessage = "Must be between 2 - 50 characters")]
-        public string FirstName 
-        { 
+        public string FirstName
+        {
             get => _firstName;
-            set => _firstName = value.Trim(); 
+            set => _firstName = value.Trim();
         }
 
         [Required(ErrorMessage = "Middle initial is required")]
         [StringLength(1, ErrorMessage = "Must be one character only")]
-        public string? MiddleInitial 
-        { 
-            get => _middleInitial; 
-            set => _middleInitial = value.ToUpperInvariant().Trim(); 
+        public string MiddleInitial
+        {
+            get => _middleInitial;
+            set => _middleInitial = value.ToUpperInvariant().Trim();
         }
 
         [Required(ErrorMessage = "Last name is required")]
         [StringLength(50, MinimumLength = 2, ErrorMessage = "Must be between 2 - 50 characters")]
-        public string LastName { get; set; } = null!;
+        public string LastName
+        {
+            get => _lastname;
+            set => _lastname = value.Trim();
+        }
 
         [Required(ErrorMessage = "Employment date is required")]
         public DateOnly EmployementDate { get; set; }

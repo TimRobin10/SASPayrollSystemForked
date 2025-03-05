@@ -5,7 +5,9 @@ using ServicesLayer.Common;
 using ServicesLayer.Exceptions;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -22,19 +24,5 @@ namespace ServicesLayer.User
             _modelDataAnnotationsCheck = modelDataAnnotationsCheck;
         }
 
-        public async Task AddAsync(IUserModel userModel)
-        {
-            var registeredUser = await _userRepository
-                .GetAsync(u => u.UserName == userModel.UserName || u.Email == userModel.Email);
-
-            if (registeredUser != null)
-            {
-                throw new UserNameOrEmailTaken();
-            }
-            else
-            {
-                await _userRepository.AddAsync((UserModel)userModel);
-            }
-        }
     }
 }
