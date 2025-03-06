@@ -11,9 +11,9 @@ internal static class Program
     static void Main()
     {
         IUnityContainer UnityC = new UnityContainer();
-        UnityC.RegisterType<IServicesManager, ServicesManager>(new HierarchicalLifetimeManager());
+        UnityC.RegisterType<IServicesMesh, ServicesMesh>(new HierarchicalLifetimeManager());
 
-        var servicesManager = UnityC.Resolve<IServicesManager>();
+        var servicesManager = UnityC.Resolve<IServicesMesh>();
 
         ApplicationConfiguration.Initialize();
 

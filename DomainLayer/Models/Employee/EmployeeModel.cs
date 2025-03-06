@@ -1,13 +1,14 @@
-﻿using System;
+﻿using DomainLayer.Models.Attendance;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DomainLayer.Models.EmployeeDetail
+namespace DomainLayer.Models.Employee
 {
-    public class EmployeeDetailModel : IEmployeeDetailModel
+    public class EmployeeModel : IEmployeeModel
     {
         private string _firstName = string.Empty;
         private string _middleInitial = string.Empty;
@@ -46,5 +47,7 @@ namespace DomainLayer.Models.EmployeeDetail
         [Required(ErrorMessage = "Job title is required")]
         [StringLength(20, MinimumLength = 2, ErrorMessage = "Must be between 2 - 50 characters")]
         public string JobTitle { get; set; } = null!;
+
+        public virtual ICollection<AttendanceModel> Attendances { get; set; } = new List<AttendanceModel>();
     }
 }

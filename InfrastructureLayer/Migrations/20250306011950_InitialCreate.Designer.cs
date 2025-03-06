@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace InfrastructureLayer.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20250305090825_InitialCreate")]
+    [Migration("20250306011950_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -25,7 +25,40 @@ namespace InfrastructureLayer.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("DomainLayer.Models.EmployeeDetail.EmployeeDetailModel", b =>
+            modelBuilder.Entity("DomainLayer.Models.Attendance.AttendanceModel", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateOnly>("Date")
+                        .HasColumnType("date");
+
+                    b.Property<Guid>("EmployeeId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Status")
+                        .IsRequired()
+                        .HasMaxLength(8)
+                        .HasColumnType("nvarchar(8)");
+
+                    b.Property<TimeOnly>("TimeIn")
+                        .HasColumnType("time");
+
+                    b.Property<TimeOnly?>("TimeOut")
+                        .HasColumnType("time");
+
+                    b.Property<long>("TotalHours")
+                        .HasColumnType("bigint");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("EmployeeId");
+
+                    b.ToTable("Attendances");
+                });
+
+            modelBuilder.Entity("DomainLayer.Models.Employee.EmployeeModel", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -56,7 +89,7 @@ namespace InfrastructureLayer.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("EmployeeDetails");
+                    b.ToTable("Employees");
                 });
 
             modelBuilder.Entity("DomainLayer.Models.Role.RoleModel", b =>
@@ -131,6 +164,17 @@ namespace InfrastructureLayer.Migrations
                     b.ToTable("RoleModelUserModel");
                 });
 
+            modelBuilder.Entity("DomainLayer.Models.Attendance.AttendanceModel", b =>
+                {
+                    b.HasOne("DomainLayer.Models.Employee.EmployeeModel", "Employee")
+                        .WithMany("Attendances")
+                        .HasForeignKey("EmployeeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Employee");
+                });
+
             modelBuilder.Entity("RoleModelUserModel", b =>
                 {
                     b.HasOne("DomainLayer.Models.Role.RoleModel", null)
@@ -144,6 +188,11 @@ namespace InfrastructureLayer.Migrations
                         .HasForeignKey("UsersId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("DomainLayer.Models.Employee.EmployeeModel", b =>
+                {
+                    b.Navigation("Attendances");
                 });
 #pragma warning restore 612, 618
         }

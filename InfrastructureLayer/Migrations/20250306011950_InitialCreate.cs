@@ -12,7 +12,7 @@ namespace InfrastructureLayer.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "EmployeeDetails",
+                name: "Employees",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
@@ -24,7 +24,7 @@ namespace InfrastructureLayer.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_EmployeeDetails", x => x.Id);
+                    table.PrimaryKey("PK_Employees", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -58,6 +58,29 @@ namespace InfrastructureLayer.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Attendances",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Date = table.Column<DateOnly>(type: "date", nullable: false),
+                    TimeIn = table.Column<TimeOnly>(type: "time", nullable: false),
+                    TimeOut = table.Column<TimeOnly>(type: "time", nullable: true),
+                    TotalHours = table.Column<long>(type: "bigint", nullable: false),
+                    Status = table.Column<string>(type: "nvarchar(8)", maxLength: 8, nullable: false),
+                    EmployeeId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Attendances", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Attendances_Employees_EmployeeId",
+                        column: x => x.EmployeeId,
+                        principalTable: "Employees",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "RoleModelUserModel",
                 columns: table => new
                 {
@@ -82,6 +105,11 @@ namespace InfrastructureLayer.Migrations
                 });
 
             migrationBuilder.CreateIndex(
+                name: "IX_Attendances_EmployeeId",
+                table: "Attendances",
+                column: "EmployeeId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_RoleModelUserModel_UsersId",
                 table: "RoleModelUserModel",
                 column: "UsersId");
@@ -91,10 +119,13 @@ namespace InfrastructureLayer.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "EmployeeDetails");
+                name: "Attendances");
 
             migrationBuilder.DropTable(
                 name: "RoleModelUserModel");
+
+            migrationBuilder.DropTable(
+                name: "Employees");
 
             migrationBuilder.DropTable(
                 name: "Roles");

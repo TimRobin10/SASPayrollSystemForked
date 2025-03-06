@@ -16,8 +16,8 @@ namespace PresentationLayer.Views
     public partial class Employee_Dashboard : Form
     {
         private IUserModel _currentUser;
-        private IServicesManager _servicesManager;
-        public Employee_Dashboard(IUserModel currentUser, IServicesManager servicesManager)
+        private IServicesMesh _servicesManager;
+        public Employee_Dashboard(IUserModel currentUser, IServicesMesh servicesManager)
         {
             _currentUser = currentUser;
             _servicesManager = servicesManager;

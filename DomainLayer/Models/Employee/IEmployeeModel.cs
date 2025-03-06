@@ -1,7 +1,7 @@
 ﻿
-namespace DomainLayer.Models.EmployeeDetail
+namespace DomainLayer.Models.Employee
 {
-    public interface IEmployeeDetailModel
+    public interface IEmployeeModel
     {
         DateOnly EmployementDate { get; set; }
         string FirstName { get; set; }

@@ -1,11 +1,11 @@
 ﻿using DomainLayer.Models.User;
-using System.Threading.Tasks;
+using InfrastructureLayer.DataAccess.Repositories.User;
+
 
 namespace ServicesLayer.User
 {
-    public interface IUserServices
+    public interface IUserServices : IUserRepository
     {
-        Task AddNewUser(IUserModel userModel);
-        Task<UserModel> Login(string userName, string password);
+        void ValidateModelDataAnnotations(IUserModel userModel);
     }
 }

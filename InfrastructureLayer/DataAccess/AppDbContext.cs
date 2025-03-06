@@ -1,4 +1,5 @@
-﻿using DomainLayer.Models.EmployeeDetail;
+﻿using DomainLayer.Models.Attendance;
+using DomainLayer.Models.Employee;
 using DomainLayer.Models.Role;
 using DomainLayer.Models.User;
 using Microsoft.EntityFrameworkCore;
@@ -16,7 +17,7 @@ namespace InfrastructureLayer.DataAccess
         private const string connectionStringLab = "Data Source=(localdb)\\ProjectModels;Initial Catalog=SASPayrollDb;Integrated Security=True;Connect Timeout=30;Encrypt=False;Trust Server Certificate=False;Application Intent=ReadWrite;Multi Subnet Failover=False";
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer(connectionStringHome);
+            optionsBuilder.UseSqlServer(connectionStringLab);
             base.OnConfiguring(optionsBuilder);
         }
 
@@ -26,6 +27,7 @@ namespace InfrastructureLayer.DataAccess
         }
         public DbSet<UserModel> Users { get; set; }
         public DbSet<RoleModel> Roles { get; set; }
-        public DbSet<EmployeeDetailModel> EmployeeDetails { get; set; }
+        public DbSet<EmployeeModel> Employees { get; set; }
+        public DbSet<AttendanceModel> Attendances { get; set; }
     }
 }

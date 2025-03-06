@@ -62,8 +62,8 @@ namespace DomainLayer.Models.User
         [Url(ErrorMessage = "Must be a valid Url")]
         public string? Url { get; set; }
 
-        //public virtual ICollection<UserRoleModel> UserRoles { get; } = [];
         public virtual ICollection<RoleModel> Roles { get; } = [];
+
 
         private byte[] GenerateSalt(int size)
         {

@@ -18,8 +18,8 @@ namespace PresentationLayer.Views
 {
     public partial class Login_Form : Form
     {
-        private IServicesManager _servicesManager;
-        public Login_Form(IServicesManager servicesManager)
+        private IServicesMesh _servicesManager;
+        public Login_Form(IServicesMesh servicesManager)
         {
             _servicesManager = servicesManager;
             InitializeComponent();
