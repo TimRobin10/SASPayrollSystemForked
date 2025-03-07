@@ -9,15 +9,31 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Presenters\" />
+    <EmbeddedResource Remove="Properties\Resources.resx" />
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Syncfusion.Core.WinForms" Version="28.2.9" />
+    <PackageReference Include="Syncfusion.Pdf.WinForms" Version="28.2.9" />
+    <PackageReference Include="Syncfusion.SfInput.WinForms" Version="28.2.9" />
+    <PackageReference Include="Syncfusion.Shared.Base" Version="28.2.9" />
+    <PackageReference Include="Syncfusion.Tools.Windows" Version="28.2.9" />
     <PackageReference Include="Unity" Version="5.11.10" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\ServicesLayer\ServicesLayer.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Resources\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </None>
   </ItemGroup>
 
 </Project>

@@ -40,6 +40,11 @@ namespace ServicesLayer.User
             return user;
         }
 
+        public Task<IUserModel> Login(string text1, string text2)
+        {
+            throw new NotImplementedException();
+        }
+
         public async Task RemoveAsync(UserModel entity)
         {
             await _userRepository.RemoveAsync(entity);
