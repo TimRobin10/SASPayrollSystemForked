@@ -77,7 +77,13 @@ namespace ServicesLayer
             }
         }
 
-        public async Task SeedRoles()
+
+        public async Task InitialSeeding()
+        {
+            await SeedRoles();
+            await SeedAdmin();
+        }
+        private async Task SeedRoles()
         {
             string[] defaultRoles =
             {
@@ -86,7 +92,8 @@ namespace ServicesLayer
                 "Contractor"
             };
             var roles = await RoleServices.GetAllAsync();
-            if (roles == null)
+            var rolemodels = new List<RoleModel>();
+            if (roles.Count() == 0)
             {
                 foreach (var defaultRole in defaultRoles)
                 {
@@ -94,8 +101,27 @@ namespace ServicesLayer
                     {
                         Name = defaultRole,
                     };
-                    await RoleServices.AddAsync(role);
+                    rolemodels.Add(role);
                 }
+            }
+            await RoleServices.AddRangeAsync(rolemodels);
+        }
+
+        private async Task SeedAdmin()
+        {
+            var adminRole = await RoleServices.GetAsync(r => r.NormalizedName == "admin".ToUpperInvariant(), includeProperties: "Users");
+            if (adminRole.Users.Count() == 0)
+            {
+                var adminUser = new UserModel()
+                {
+                    UserName = "admin",
+                    Password = "password"
+                };
+                await UserServices.AddAsync(adminUser);
+                adminUser.Roles.Add(adminRole);
+                adminRole.Users.Add(adminUser);
+                await UserServices.UpdateAsync(adminUser);
+                await RoleServices.UpdateAsync(adminRole);
             }
         }
     }

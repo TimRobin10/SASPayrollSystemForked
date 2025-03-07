@@ -48,8 +48,8 @@ namespace InfrastructureLayer.Migrations
                     UserName = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
                     Salt = table.Column<byte[]>(type: "binary(32)", nullable: false),
                     PasswordHash = table.Column<byte[]>(type: "binary(32)", nullable: false),
-                    Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    PhoneNumber = table.Column<string>(type: "nvarchar(13)", maxLength: 13, nullable: false),
+                    Email = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    PhoneNumber = table.Column<string>(type: "nvarchar(13)", maxLength: 13, nullable: true),
                     Url = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>

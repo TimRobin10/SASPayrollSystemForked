@@ -33,6 +33,8 @@ namespace PresentationLayer.Views
             _initCloseBtnProperties();
             _initForgotPassBtnProperties();
             _initSignInButtonProperties();
+
+            _servicesManager.InitialSeeding();
         }
 
         public void _initCloseBtnProperties()

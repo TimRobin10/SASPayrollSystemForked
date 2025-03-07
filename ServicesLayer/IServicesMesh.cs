@@ -13,6 +13,6 @@ namespace ServicesLayer
 
         Task AddNewUserWithRoleAsync(IUserModel newUser, string roleName);
 
-        Task SeedRoles();
+        Task InitialSeeding();
     }
 }

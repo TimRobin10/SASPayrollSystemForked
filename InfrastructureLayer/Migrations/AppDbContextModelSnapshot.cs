@@ -117,7 +117,6 @@ namespace InfrastructureLayer.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Email")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<byte[]>("PasswordHash")
@@ -125,7 +124,6 @@ namespace InfrastructureLayer.Migrations
                         .HasColumnType("binary(32)");
 
                     b.Property<string>("PhoneNumber")
-                        .IsRequired()
                         .HasMaxLength(13)
                         .HasColumnType("nvarchar(13)");
 

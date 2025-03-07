@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace InfrastructureLayer.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20250307103350_InitialCreate")]
+    [Migration("20250307113736_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -120,7 +120,6 @@ namespace InfrastructureLayer.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Email")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<byte[]>("PasswordHash")
@@ -128,7 +127,6 @@ namespace InfrastructureLayer.Migrations
                         .HasColumnType("binary(32)");
 
                     b.Property<string>("PhoneNumber")
-                        .IsRequired()
                         .HasMaxLength(13)
                         .HasColumnType("nvarchar(13)");
 

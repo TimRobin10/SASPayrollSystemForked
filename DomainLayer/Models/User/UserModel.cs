@@ -42,14 +42,12 @@ namespace DomainLayer.Models.User
         [Column(TypeName = "binary(32)")]
         public byte[] PasswordHash { get; private set; } = [];
 
-        [Required(ErrorMessage = "Email is required")]
         [EmailAddress(ErrorMessage = "Must be a valid email address")]
-        public string Email { get; set; } = null!;
+        public string? Email { get; set; }
 
-        [Required(ErrorMessage = "Phone number is required")]
         [RegularExpression(@"^\+639\d{9}")]
         [StringLength(13, MinimumLength = 12, ErrorMessage = "Must be exactly 12 characters")]
-        public string PhoneNumber { get; set; } = null!;
+        public string? PhoneNumber { get; set; } = null!;
 
         [Url(ErrorMessage = "Must be a valid Url")]
         public string? Url { get; set; }
