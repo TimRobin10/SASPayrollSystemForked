@@ -76,5 +76,27 @@ namespace ServicesLayer
                 return true;
             }
         }
+
+        public async Task SeedRoles()
+        {
+            string[] defaultRoles =
+            {
+                "Admin",
+                "Employee",
+                "Contractor"
+            };
+            var roles = await RoleServices.GetAllAsync();
+            if (roles == null)
+            {
+                foreach (var defaultRole in defaultRoles)
+                {
+                    var role = new RoleModel()
+                    {
+                        Name = defaultRole,
+                    };
+                    await RoleServices.AddAsync(role);
+                }
+            }
+        }
     }
 }

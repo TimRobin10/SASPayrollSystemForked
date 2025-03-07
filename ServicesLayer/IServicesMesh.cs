@@ -12,5 +12,7 @@ namespace ServicesLayer
         Task<bool> LoginUser(string username, string password);
 
         Task AddNewUserWithRoleAsync(IUserModel newUser, string roleName);
+
+        Task SeedRoles();
     }
 }
