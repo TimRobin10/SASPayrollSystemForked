@@ -1,4 +1,5 @@
 ﻿using DomainLayer.Models.User;
+using InfrastructureLayer.DataAccess.Repositories.Common;
 using InfrastructureLayer.DataAccess.Repositories.User;
 using ServicesLayer.Common;
 using System.Linq.Expressions;
@@ -8,10 +9,10 @@ namespace ServicesLayer.User
 {
     public class UserServices : IUserServices
     {
-        private IUserRepository _userRepository;
+        private IBaseRepository<UserModel> _userRepository;
         private IModelDataAnnotationsCheck _modelDataAnnotationsCheck;
 
-        public UserServices(IUserRepository userRepository, IModelDataAnnotationsCheck modelDataAnnotationsCheck)
+        public UserServices(IBaseRepository<UserModel> userRepository, IModelDataAnnotationsCheck modelDataAnnotationsCheck)
         {
             _userRepository = userRepository;
             _modelDataAnnotationsCheck = modelDataAnnotationsCheck;

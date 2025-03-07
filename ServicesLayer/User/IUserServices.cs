@@ -1,10 +1,10 @@
 ﻿using DomainLayer.Models.User;
-using InfrastructureLayer.DataAccess.Repositories.User;
+using InfrastructureLayer.DataAccess.Repositories.Common;
 
 
 namespace ServicesLayer.User
 {
-    public interface IUserServices : IUserRepository
+    public interface IUserServices : IBaseRepository<UserModel>
     {
         void ValidateModelDataAnnotations(IUserModel userModel);
     }

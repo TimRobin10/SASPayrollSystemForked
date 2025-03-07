@@ -1,21 +1,17 @@
 ﻿using DomainLayer.Models.Role;
-using InfrastructureLayer.DataAccess.Repositories.Role;
+using InfrastructureLayer.DataAccess.Repositories.Common;
 using ServicesLayer.Common;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace ServicesLayer.Role
 {
     public class RoleServices : IRoleServices
     {
-        private IRoleRepository _roleRepository;
+        private IBaseRepository<RoleModel> _roleRepository;
         private IModelDataAnnotationsCheck _modelDataAnnotationsCheck;
 
-        public RoleServices(IRoleRepository roleRepository, IModelDataAnnotationsCheck modelDataAnnotationsCheck)
+        public RoleServices(IBaseRepository<RoleModel> roleRepository, IModelDataAnnotationsCheck modelDataAnnotationsCheck)
         {
             _roleRepository = roleRepository;
             _modelDataAnnotationsCheck = modelDataAnnotationsCheck;
