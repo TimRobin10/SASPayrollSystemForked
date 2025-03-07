@@ -51,12 +51,17 @@ namespace ServicesLayer
         public async Task AddNewUserWithRoleAsync(IUserModel newUser, string roleName)
         {
             this.UserServices.ValidateModelDataAnnotations((UserModel)newUser);
-            var role = await RoleServices.GetAsync(r => r.NormalizedName == roleName.ToUpperInvariant().Trim()) 
+            var role = await RoleServices.GetAsync(r => r.NormalizedName == roleName.ToUpperInvariant().Trim(), includeProperties: "Users") 
                 ?? throw new RoleNotFoundException();
-            newUser.Roles.Add(role);
-            role.Users.Add((UserModel)newUser);
             await UserServices.AddAsync((UserModel)newUser);
-            await RoleServices.UpdateAsync(role);
+            role.Users.Add((UserModel)newUser);
+            newUser.Roles.Add(role);
+            Task[] tasks =
+            {
+                UserServices.UpdateAsync((UserModel)newUser),
+                RoleServices.UpdateAsync(role)
+            };
+            await Task.WhenAll(tasks);
         }
 
         public async Task<bool> LoginUser(string username, string password)
@@ -120,8 +125,12 @@ namespace ServicesLayer
                 await UserServices.AddAsync(adminUser);
                 adminUser.Roles.Add(adminRole);
                 adminRole.Users.Add(adminUser);
-                await UserServices.UpdateAsync(adminUser);
-                await RoleServices.UpdateAsync(adminRole);
+                Task[] tasks =
+                {
+                    UserServices.UpdateAsync(adminUser),
+                    RoleServices.UpdateAsync(adminRole)
+                };
+                await Task.WhenAll(tasks);
             }
         }
     }

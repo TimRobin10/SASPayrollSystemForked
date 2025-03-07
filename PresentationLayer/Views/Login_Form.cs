@@ -34,6 +34,7 @@ namespace PresentationLayer.Views
             _initForgotPassBtnProperties();
             _initSignInButtonProperties();
 
+            //Sets default values on initial runtime instance
             _servicesManager.InitialSeeding();
         }
 
@@ -111,7 +112,7 @@ namespace PresentationLayer.Views
 
             catch (UserNotFoundException)
             {
-                MessageBox.Show($"User does not exist!");
+                MessageBox.Show("User does not exist!");
             }
             catch (IncorrectPasswordException)
             {
