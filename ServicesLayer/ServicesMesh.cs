@@ -1,12 +1,11 @@
-﻿using DomainLayer;
-using DomainLayer.Models.Role;
+﻿using DomainLayer.Models.Role;
 using DomainLayer.Models.User;
 using InfrastructureLayer.DataAccess.Repositories.Common;
 using ServicesLayer.Common;
+using ServicesLayer.Exceptions;
 using ServicesLayer.Role;
 using ServicesLayer.User;
 
-using System.Security.Cryptography;
 
 
 namespace ServicesLayer
@@ -32,6 +31,16 @@ namespace ServicesLayer
             ModelDataAnnotationsCheck ??= new ModelDataAnnotationsCheck();
             UserServices ??= new UserServices(UserRepository, ModelDataAnnotationsCheck);
             RoleServices ??= new RoleServices(RoleRepository, ModelDataAnnotationsCheck);
+        }
+
+        public async Task AddNewUserWithRole(IUserModel newUser, string roleName)
+        {
+            var role = await RoleServices.GetAsync(r => r.NormalizedName == roleName.ToUpperInvariant().Trim()) 
+                ?? throw new RoleNotFoundException();
+            newUser.Roles.Add(role);
+            role.Users.Add((UserModel)newUser);
+            await UserServices.AddAsync((UserModel)newUser);
+            await RoleServices.UpdateAsync(role);
         }
     }
 }
