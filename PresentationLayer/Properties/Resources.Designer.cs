@@ -59,5 +59,15 @@ namespace PresentationLayer.Properties {
                 resourceCulture = value;
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] LoginBGImage {
+            get {
+                object obj = ResourceManager.GetObject("LoginBGImage", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
     }
 }

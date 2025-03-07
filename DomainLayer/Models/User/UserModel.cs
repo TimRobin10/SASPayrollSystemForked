@@ -1,6 +1,7 @@
 ﻿using DomainLayer.Models.Role;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Security.Cryptography;
 using System.Text;
 
 namespace DomainLayer.Models.User
@@ -28,11 +29,8 @@ namespace DomainLayer.Models.User
             set
             {
                 _password = value;
-                Salt = Encryption.GenerateSalt(saltSize);
-                var passwordBytes = Encoding.UTF8.GetBytes(Password);
-                var encryptedPasswordBytes = Encryption.EncryptSha256(passwordBytes);
-                var saltedPassword = Salt.Concat(encryptedPasswordBytes).ToArray();
-                PasswordHash = Encryption.EncryptSha256(saltedPassword);
+                Salt = GenerateSalt(saltSize);
+                PasswordHash = Encryption.GenerateHash(Password, Salt);
             }
         }
 
@@ -57,5 +55,17 @@ namespace DomainLayer.Models.User
         public string? Url { get; set; }
 
         public virtual ICollection<RoleModel> Roles { get; } = [];
+
+        private byte[] GenerateSalt(int size)
+        {
+            byte[] saltBytes = new byte[size];
+
+            using (var generator = RandomNumberGenerator.Create())
+            {
+                generator.GetBytes(saltBytes);
+            }
+
+            return saltBytes;
+        }
     }
 }

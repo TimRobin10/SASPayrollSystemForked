@@ -7,13 +7,6 @@ namespace InfrastructureLayer.DataAccess.Repositories.Common
 {
     public class BaseRepository<T> : IBaseRepository<T> where T : class
     {
-        private AppDbContext _db;
-
-        public BaseRepository(AppDbContext db)
-        {
-            _db = db;
-        }
-
         public async Task AddAsync(T entity)
         {
             try

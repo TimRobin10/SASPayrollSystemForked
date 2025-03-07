@@ -1,23 +1,22 @@
 ﻿using System.Security.Cryptography;
+using System.Text;
 
 
 namespace DomainLayer
 {
     public class Encryption
     {
-        public static byte[] GenerateSalt(int size)
+        public static byte[] GenerateHash(string password, byte[] saltBytes)
         {
-            byte[] saltBytes = new byte[size];
+            var passwordBytes = Encoding.UTF8.GetBytes(password);
+            var encryptedPasswordBytes = Encryption.EncryptSha256(passwordBytes);
+            var saltedPasswordBytes = saltBytes.Concat(encryptedPasswordBytes).ToArray();
+            var finalHash = Encryption.EncryptSha256(saltedPasswordBytes);
 
-            using (var generator = RandomNumberGenerator.Create())
-            {
-                generator.GetBytes(saltBytes);
-            }
-
-            return saltBytes;
+            return finalHash;
         }
 
-        public static byte[] EncryptSha256(byte[] input)
+        private static byte[] EncryptSha256(byte[] input)
         {
             using (SHA256 sha256 = SHA256.Create())
             {
