@@ -28,6 +28,8 @@ namespace ServicesLayer
         //Services List
         public IBaseServices<UserModel> UserServices { get; private set; }
         public IBaseServices<RoleModel> RoleServices { get; private set; }
+        public IBaseServices<EmployeeModel> EmployeeServices { get; private set; }
+        public IBaseServices<AttendanceModel> AttendanceServices { get; private set; }
 
         public ServicesMesh()
         {
@@ -37,8 +39,11 @@ namespace ServicesLayer
             AttendanceRepository ??= new BaseRepository<AttendanceModel>();
 
             _modelDataAnnotationsCheck ??= new ModelDataAnnotationsCheck();
+
             UserServices ??= new BaseServices<UserModel>(UserRepository, _modelDataAnnotationsCheck);
             RoleServices ??= new BaseServices<RoleModel>(RoleRepository, _modelDataAnnotationsCheck);
+            EmployeeServices ??= new BaseServices<EmployeeModel>(EmployeeRepository, _modelDataAnnotationsCheck);
+            AttendanceServices ??= new BaseServices<AttendanceModel>(AttendanceRepository, _modelDataAnnotationsCheck);
         }
 
 
@@ -63,7 +68,7 @@ namespace ServicesLayer
 
             if (!saltedHashedPassword.SequenceEqual(user.PasswordHash))
             {
-                throw new UserNotFoundException();
+                throw new IncorrectPasswordException();
             }
             else
             {
