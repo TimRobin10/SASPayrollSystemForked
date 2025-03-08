@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace InfrastructureLayer.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20250308000816_InitialCreate")]
+    [Migration("20250308011119_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -37,10 +37,8 @@ namespace InfrastructureLayer.Migrations
                     b.Property<Guid>("EmployeeId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("Status")
-                        .IsRequired()
-                        .HasMaxLength(8)
-                        .HasColumnType("nvarchar(8)");
+                    b.Property<byte>("Status")
+                        .HasColumnType("tinyint");
 
                     b.Property<TimeOnly>("TimeIn")
                         .HasColumnType("time");
@@ -111,6 +109,34 @@ namespace InfrastructureLayer.Migrations
                     b.HasIndex("DepartmentId");
 
                     b.ToTable("Employees");
+                });
+
+            modelBuilder.Entity("DomainLayer.Models.Leave.LeaveModel", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateOnly>("DateOfAbsence")
+                        .HasColumnType("date");
+
+                    b.Property<DateOnly>("DateOfFiling")
+                        .HasColumnType("date");
+
+                    b.Property<short>("Duration")
+                        .HasColumnType("smallint");
+
+                    b.Property<Guid>("EmployeeId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<byte>("Status")
+                        .HasColumnType("tinyint");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("EmployeeId");
+
+                    b.ToTable("Leaves");
                 });
 
             modelBuilder.Entity("DomainLayer.Models.Role.RoleModel", b =>
@@ -186,7 +212,7 @@ namespace InfrastructureLayer.Migrations
             modelBuilder.Entity("DomainLayer.Models.Attendance.AttendanceModel", b =>
                 {
                     b.HasOne("DomainLayer.Models.Employee.EmployeeModel", "Employee")
-                        .WithMany()
+                        .WithMany("Attendances")
                         .HasForeignKey("EmployeeId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -203,6 +229,17 @@ namespace InfrastructureLayer.Migrations
                         .IsRequired();
 
                     b.Navigation("Department");
+                });
+
+            modelBuilder.Entity("DomainLayer.Models.Leave.LeaveModel", b =>
+                {
+                    b.HasOne("DomainLayer.Models.Employee.EmployeeModel", "Employee")
+                        .WithMany("Leaves")
+                        .HasForeignKey("EmployeeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Employee");
                 });
 
             modelBuilder.Entity("RoleModelUserModel", b =>
@@ -223,6 +260,13 @@ namespace InfrastructureLayer.Migrations
             modelBuilder.Entity("DomainLayer.Models.Department.DepartmentModel", b =>
                 {
                     b.Navigation("Employees");
+                });
+
+            modelBuilder.Entity("DomainLayer.Models.Employee.EmployeeModel", b =>
+                {
+                    b.Navigation("Attendances");
+
+                    b.Navigation("Leaves");
                 });
 #pragma warning restore 612, 618
         }

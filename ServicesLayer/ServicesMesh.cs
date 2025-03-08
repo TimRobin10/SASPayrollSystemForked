@@ -2,6 +2,7 @@
 using DomainLayer.Models.Attendance;
 using DomainLayer.Models.Department;
 using DomainLayer.Models.Employee;
+using DomainLayer.Models.Leave;
 using DomainLayer.Models.Role;
 using DomainLayer.Models.User;
 using InfrastructureLayer.DataAccess.Repositories.Common;
@@ -18,37 +19,41 @@ namespace ServicesLayer
         public IUserModel? CurrentUser { get; private set; } = null;
 
         //Repositories
-        private readonly IBaseRepository<UserModel> UserRepository;
-        private readonly IBaseRepository<RoleModel> RoleRepository;
-        private readonly IBaseRepository<EmployeeModel> EmployeeRepository;
-        private readonly IBaseRepository<DepartmentModel> DepartmentRepository;
         private readonly IBaseRepository<AttendanceModel> AttendanceRepository;
+        private readonly IBaseRepository<DepartmentModel> DepartmentRepository;
+        private readonly IBaseRepository<EmployeeModel> EmployeeRepository;
+        private readonly IBaseRepository<LeaveModel> LeaveRepository;
+        private readonly IBaseRepository<RoleModel> RoleRepository;
+        private readonly IBaseRepository<UserModel> UserRepository;
 
         //Common Services
         private IModelDataAnnotationsCheck _modelDataAnnotationsCheck;
 
         //Services List
-        public IBaseServices<UserModel> UserServices { get; private set; }
-        public IBaseServices<RoleModel> RoleServices { get; private set; }
-        public IBaseServices<EmployeeModel> EmployeeServices { get; private set; }
-        public IBaseServices<DepartmentModel> DepartmentServices { get; private set; }
         public IBaseServices<AttendanceModel> AttendanceServices { get; private set; }
+        public IBaseServices<DepartmentModel> DepartmentServices { get; private set; }
+        public IBaseServices<EmployeeModel> EmployeeServices { get; private set; }
+        public IBaseServices<LeaveModel> LeaveServices { get; private set; }
+        public IBaseServices<RoleModel> RoleServices { get; private set; }
+        public IBaseServices<UserModel> UserServices { get; private set; }
 
         public ServicesMesh()
         {
-            UserRepository ??= new BaseRepository<UserModel>();
-            RoleRepository ??= new BaseRepository<RoleModel>();
-            EmployeeRepository ??= new BaseRepository<EmployeeModel>();
             AttendanceRepository ??= new BaseRepository<AttendanceModel>();
             DepartmentRepository ??= new BaseRepository<DepartmentModel>();
+            EmployeeRepository ??= new BaseRepository<EmployeeModel>();
+            LeaveRepository ??= new BaseRepository<LeaveModel>();
+            RoleRepository ??= new BaseRepository<RoleModel>();
+            UserRepository ??= new BaseRepository<UserModel>();
 
             _modelDataAnnotationsCheck ??= new ModelDataAnnotationsCheck();
 
-            UserServices ??= new BaseServices<UserModel>(UserRepository, _modelDataAnnotationsCheck);
-            RoleServices ??= new BaseServices<RoleModel>(RoleRepository, _modelDataAnnotationsCheck);
-            EmployeeServices ??= new BaseServices<EmployeeModel>(EmployeeRepository, _modelDataAnnotationsCheck);
             AttendanceServices ??= new BaseServices<AttendanceModel>(AttendanceRepository, _modelDataAnnotationsCheck);
             DepartmentServices ??= new BaseServices<DepartmentModel>(DepartmentRepository, _modelDataAnnotationsCheck);
+            EmployeeServices ??= new BaseServices<EmployeeModel>(EmployeeRepository, _modelDataAnnotationsCheck);
+            LeaveServices ??= new BaseServices<LeaveModel>(LeaveRepository, _modelDataAnnotationsCheck);
+            RoleServices ??= new BaseServices<RoleModel>(RoleRepository, _modelDataAnnotationsCheck);
+            UserServices ??= new BaseServices<UserModel>(UserRepository, _modelDataAnnotationsCheck);
         }
 
 
@@ -56,7 +61,7 @@ namespace ServicesLayer
         public async Task AddNewUserWithRoleAsync(IUserModel newUser, string roleName)
         {
             this.UserServices.ValidateModelDataAnnotations((UserModel)newUser);
-            var role = await RoleServices.GetAsync(r => r.NormalizedName == roleName.Trim().ToUpperInvariant(), includeProperties: "Users") 
+            var role = await RoleServices.GetAsync(r => r.NormalizedName == roleName.Trim().ToUpperInvariant(), includeProperties: "Users")
                 ?? throw new RoleNotFoundException();
             await UserServices.AddAsync((UserModel)newUser);
             role.Users.Add((UserModel)newUser);

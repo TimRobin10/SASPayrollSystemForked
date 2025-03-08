@@ -109,7 +109,7 @@ namespace InfrastructureLayer.Migrations
                     TimeIn = table.Column<TimeOnly>(type: "time", nullable: false),
                     TimeOut = table.Column<TimeOnly>(type: "time", nullable: true),
                     TotalHours = table.Column<byte>(type: "tinyint", nullable: false),
-                    Status = table.Column<string>(type: "nvarchar(8)", maxLength: 8, nullable: false),
+                    Status = table.Column<byte>(type: "tinyint", nullable: false),
                     EmployeeId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
                 },
                 constraints: table =>
@@ -117,6 +117,28 @@ namespace InfrastructureLayer.Migrations
                     table.PrimaryKey("PK_Attendances", x => x.Id);
                     table.ForeignKey(
                         name: "FK_Attendances_Employees_EmployeeId",
+                        column: x => x.EmployeeId,
+                        principalTable: "Employees",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Leaves",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    DateOfFiling = table.Column<DateOnly>(type: "date", nullable: false),
+                    DateOfAbsence = table.Column<DateOnly>(type: "date", nullable: false),
+                    Duration = table.Column<short>(type: "smallint", nullable: false),
+                    Status = table.Column<byte>(type: "tinyint", nullable: false),
+                    EmployeeId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Leaves", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Leaves_Employees_EmployeeId",
                         column: x => x.EmployeeId,
                         principalTable: "Employees",
                         principalColumn: "Id",
@@ -134,6 +156,11 @@ namespace InfrastructureLayer.Migrations
                 column: "DepartmentId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Leaves_EmployeeId",
+                table: "Leaves",
+                column: "EmployeeId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_RoleModelUserModel_UsersId",
                 table: "RoleModelUserModel",
                 column: "UsersId");
@@ -144,6 +171,9 @@ namespace InfrastructureLayer.Migrations
         {
             migrationBuilder.DropTable(
                 name: "Attendances");
+
+            migrationBuilder.DropTable(
+                name: "Leaves");
 
             migrationBuilder.DropTable(
                 name: "RoleModelUserModel");

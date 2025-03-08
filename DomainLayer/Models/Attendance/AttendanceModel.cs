@@ -51,8 +51,8 @@ namespace DomainLayer.Models.Attendance
         { get; private set; } = 0;
 
         [Required]
-        [StringLength(8)]
-        public string Status { get; set; } = FormStatus.PENDING.ToString();
+        [Column(TypeName = "tinyint")]
+        public FormStatus Status { get; set; } = FormStatus.PENDING;
 
         public virtual required EmployeeModel Employee { get; set; }
     }
