@@ -38,17 +38,21 @@ namespace DomainLayer.Models.Attendance
             {
                 _timeOut = value;
                 var totalHoursSpan = TimeOut - TimeIn;
-                TotalHours = (uint)Math.Round(totalHoursSpan.Value.TotalHours);
+                if (totalHoursSpan != null)
+                {
+                    TotalHours = (uint)Math.Round(totalHoursSpan.Value.TotalHours);
+                }
             }
         }
 
         [Required]
+        [Column(TypeName = "tinyint")]
         public uint TotalHours
         { get; private set; } = 0;
 
         [Required]
-        [StringLength(8)]
-        public string Status { get; set; } = FormStatus.PENDING.ToString();
+        [Column(TypeName = "tinyint")]
+        public FormStatus Status { get; set; } = FormStatus.PENDING;
 
         public virtual required EmployeeModel Employee { get; set; }
     }

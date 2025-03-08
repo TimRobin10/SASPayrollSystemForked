@@ -1,4 +1,5 @@
 ﻿using ServicesLayer;
+using ServicesLayer.Exceptions;
 using System.Runtime.InteropServices;
 
 namespace PresentationLayer.Views
@@ -21,11 +22,9 @@ namespace PresentationLayer.Views
         {
             _servicesManager = servicesManager;
             InitializeComponent();
-
             //For Runding Form COrners
             this.FormBorderStyle = FormBorderStyle.None;
             Region = System.Drawing.Region.FromHrgn(CreateRoundRectRgn(0, 0, Width, Height, 20, 20));
-
 
         }
 
@@ -34,6 +33,9 @@ namespace PresentationLayer.Views
             _initCloseBtnProperties();
             _initForgotPassBtnProperties();
             _initSignInButtonProperties();
+
+            //Sets default values on initial runtime instance
+            _servicesManager.InitialSeeding();
         }
 
         public void _initCloseBtnProperties()
@@ -67,7 +69,7 @@ namespace PresentationLayer.Views
 
             btnForgotPass.Style.FocusedBorder = new Pen(Color.FromArgb(242, 242, 242));
             btnForgotPass.Style.FocusedBackColor = Color.FromArgb(242, 242, 242);
-            btnForgotPass.Style.FocusedForeColor = Color.FromArgb(51,51,51);
+            btnForgotPass.Style.FocusedForeColor = Color.FromArgb(51, 51, 51);
 
             btnForgotPass.Style.HoverBorder = new Pen(Color.FromArgb(242, 242, 242));
             btnForgotPass.Style.HoverBackColor = Color.FromArgb(242, 242, 242);
@@ -83,10 +85,10 @@ namespace PresentationLayer.Views
         public void _initSignInButtonProperties()
         {
             btnSignIn.Style.FocusedBackColor = Color.FromArgb(0, 122, 225);
-            btnSignIn.Style.FocusedBorder = new Pen(Color.FromArgb(0,122,225));
+            btnSignIn.Style.FocusedBorder = new Pen(Color.FromArgb(0, 122, 225));
             btnSignIn.Style.FocusedForeColor = Color.White;
 
-            btnSignIn.Style.HoverBorder = new Pen(Color.FromArgb(242,242,242));
+            btnSignIn.Style.HoverBorder = new Pen(Color.FromArgb(242, 242, 242));
 
             RoundedElements.rounded(btnSignIn, 10);
         }
@@ -96,6 +98,23 @@ namespace PresentationLayer.Views
             this.Close();
         }
 
-        
+        //Async Login Example
+        private async void btnSignIn_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                await _servicesManager.LoginUser(txtBoxUsername.Text, textBoxExt1.Text);
+                MessageBox.Show("Success!");
+            }
+
+            catch (UserNotFoundException)
+            {
+                MessageBox.Show("User does not exist!");
+            }
+            catch (IncorrectPasswordException)
+            {
+                MessageBox.Show("Wrong password!");
+            }
+        }
     }
 }

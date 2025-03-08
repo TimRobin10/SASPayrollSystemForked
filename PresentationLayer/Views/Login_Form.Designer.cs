@@ -109,7 +109,7 @@
             // btnCloseForm
             // 
             btnCloseForm.Dock = DockStyle.Right;
-            btnCloseForm.Font = new Font("Figtree Black", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnCloseForm.Font = new Font("Microsoft Sans Serif", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnCloseForm.Location = new Point(293, 0);
             btnCloseForm.Name = "btnCloseForm";
             btnCloseForm.Size = new Size(63, 35);
@@ -138,10 +138,10 @@
             // label1
             // 
             label1.AutoSize = true;
-            label1.Font = new Font("Poppins SemiBold", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label1.Font = new Font("Microsoft Sans Serif", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
             label1.Location = new Point(75, 12);
             label1.Name = "label1";
-            label1.Size = new Size(218, 37);
+            label1.Size = new Size(210, 25);
             label1.TabIndex = 1;
             label1.Text = "Strategic Assistant";
             // 
@@ -175,11 +175,11 @@
             // label3
             // 
             label3.AutoSize = true;
-            label3.Font = new Font("Poppins SemiBold", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label3.Font = new Font("Microsoft Sans Serif", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
             label3.Location = new Point(3, 0);
             label3.Margin = new Padding(0);
             label3.Name = "label3";
-            label3.Size = new Size(230, 34);
+            label3.Size = new Size(219, 24);
             label3.TabIndex = 2;
             label3.Text = "Nice to see you again!";
             // 
@@ -195,10 +195,10 @@
             // label2
             // 
             label2.AutoSize = true;
-            label2.Font = new Font("Poppins", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label2.Font = new Font("Microsoft Sans Serif", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
             label2.Location = new Point(3, 3);
             label2.Name = "label2";
-            label2.Size = new Size(42, 22);
+            label2.Size = new Size(38, 15);
             label2.TabIndex = 0;
             label2.Text = "Login";
             // 
@@ -214,16 +214,16 @@
             // 
             // txtBoxUsername
             // 
-            txtBoxUsername.BeforeTouchSize = new Size(299, 24);
+            txtBoxUsername.BeforeTouchSize = new Size(299, 20);
             txtBoxUsername.BorderStyle = BorderStyle.None;
             txtBoxUsername.CornerRadius = 5;
-            txtBoxUsername.Font = new Font("Poppins", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            txtBoxUsername.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             txtBoxUsername.Location = new Point(3, 9);
             txtBoxUsername.Margin = new Padding(5);
             txtBoxUsername.MinimumSize = new Size(24, 20);
             txtBoxUsername.Name = "txtBoxUsername";
             txtBoxUsername.PlaceholderText = "Enter Username";
-            txtBoxUsername.Size = new Size(299, 24);
+            txtBoxUsername.Size = new Size(299, 20);
             txtBoxUsername.TabIndex = 0;
             // 
             // panel7
@@ -238,10 +238,10 @@
             // label4
             // 
             label4.AutoSize = true;
-            label4.Font = new Font("Poppins", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label4.Font = new Font("Microsoft Sans Serif", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
             label4.Location = new Point(3, 10);
             label4.Name = "label4";
-            label4.Size = new Size(67, 22);
+            label4.Size = new Size(61, 15);
             label4.TabIndex = 0;
             label4.Text = "Password";
             // 
@@ -257,17 +257,17 @@
             // 
             // textBoxExt1
             // 
-            textBoxExt1.BeforeTouchSize = new Size(299, 24);
+            textBoxExt1.BeforeTouchSize = new Size(299, 20);
             textBoxExt1.BorderStyle = BorderStyle.None;
             textBoxExt1.CornerRadius = 5;
-            textBoxExt1.Font = new Font("Poppins", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            textBoxExt1.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             textBoxExt1.Location = new Point(3, 9);
             textBoxExt1.Margin = new Padding(5);
             textBoxExt1.MinimumSize = new Size(24, 20);
             textBoxExt1.Name = "textBoxExt1";
             textBoxExt1.PasswordChar = '●';
             textBoxExt1.PlaceholderText = "Enter Password";
-            textBoxExt1.Size = new Size(299, 24);
+            textBoxExt1.Size = new Size(299, 20);
             textBoxExt1.TabIndex = 0;
             // 
             // panel10
@@ -280,7 +280,7 @@
             // 
             // btnForgotPass
             // 
-            btnForgotPass.Font = new Font("Poppins SemiBold", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnForgotPass.Font = new Font("Microsoft Sans Serif", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnForgotPass.Location = new Point(188, 0);
             btnForgotPass.Name = "btnForgotPass";
             btnForgotPass.Size = new Size(121, 28);
@@ -298,7 +298,7 @@
             // btnSignIn
             // 
             btnSignIn.BackColor = Color.FromArgb(0, 122, 255);
-            btnSignIn.Font = new Font("Poppins SemiBold", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnSignIn.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnSignIn.ForeColor = Color.White;
             btnSignIn.Location = new Point(0, 18);
             btnSignIn.Name = "btnSignIn";
@@ -308,6 +308,7 @@
             btnSignIn.TabIndex = 0;
             btnSignIn.Text = "Sign In";
             btnSignIn.UseVisualStyleBackColor = false;
+            btnSignIn.Click += btnSignIn_Click;
             // 
             // Login_Form
             // 

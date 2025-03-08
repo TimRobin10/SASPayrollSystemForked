@@ -1,4 +1,5 @@
-﻿using DomainLayer.Models.Employee;
+﻿using DomainLayer.Enums;
+using DomainLayer.Models.Employee;
 
 namespace DomainLayer.Models.Attendance
 {
@@ -7,7 +8,7 @@ namespace DomainLayer.Models.Attendance
         DateOnly Date { get; set; }
         EmployeeModel Employee { get; set; }
         Guid Id { get; set; }
-        string Status { get; set; }
+        FormStatus Status { get; set; }
         TimeOnly TimeIn { get; set; }
         TimeOnly? TimeOut { get; set; }
         uint TotalHours { get; }
