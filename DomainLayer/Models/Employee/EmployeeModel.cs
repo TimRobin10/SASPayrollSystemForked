@@ -1,4 +1,5 @@
 ﻿using DomainLayer.Models.Attendance;
+using DomainLayer.Models.Department;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -48,6 +49,6 @@ namespace DomainLayer.Models.Employee
         [StringLength(20, MinimumLength = 2, ErrorMessage = "Must be between 2 - 50 characters")]
         public string JobTitle { get; set; } = null!;
 
-        public virtual ICollection<AttendanceModel> Attendances { get; set; } = new List<AttendanceModel>();
+        public virtual required DepartmentModel Department { get; set; }
     }
 }

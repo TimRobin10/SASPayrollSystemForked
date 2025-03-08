@@ -1,5 +1,6 @@
 ﻿using DomainLayer;
 using DomainLayer.Models.Attendance;
+using DomainLayer.Models.Department;
 using DomainLayer.Models.Employee;
 using DomainLayer.Models.Role;
 using DomainLayer.Models.User;
@@ -20,6 +21,7 @@ namespace ServicesLayer
         private readonly IBaseRepository<UserModel> UserRepository;
         private readonly IBaseRepository<RoleModel> RoleRepository;
         private readonly IBaseRepository<EmployeeModel> EmployeeRepository;
+        private readonly IBaseRepository<DepartmentModel> DepartmentRepository;
         private readonly IBaseRepository<AttendanceModel> AttendanceRepository;
 
         //Common Services
@@ -29,6 +31,7 @@ namespace ServicesLayer
         public IBaseServices<UserModel> UserServices { get; private set; }
         public IBaseServices<RoleModel> RoleServices { get; private set; }
         public IBaseServices<EmployeeModel> EmployeeServices { get; private set; }
+        public IBaseServices<DepartmentModel> DepartmentServices { get; private set; }
         public IBaseServices<AttendanceModel> AttendanceServices { get; private set; }
 
         public ServicesMesh()
@@ -37,6 +40,7 @@ namespace ServicesLayer
             RoleRepository ??= new BaseRepository<RoleModel>();
             EmployeeRepository ??= new BaseRepository<EmployeeModel>();
             AttendanceRepository ??= new BaseRepository<AttendanceModel>();
+            DepartmentRepository ??= new BaseRepository<DepartmentModel>();
 
             _modelDataAnnotationsCheck ??= new ModelDataAnnotationsCheck();
 
@@ -44,6 +48,7 @@ namespace ServicesLayer
             RoleServices ??= new BaseServices<RoleModel>(RoleRepository, _modelDataAnnotationsCheck);
             EmployeeServices ??= new BaseServices<EmployeeModel>(EmployeeRepository, _modelDataAnnotationsCheck);
             AttendanceServices ??= new BaseServices<AttendanceModel>(AttendanceRepository, _modelDataAnnotationsCheck);
+            DepartmentServices ??= new BaseServices<DepartmentModel>(DepartmentRepository, _modelDataAnnotationsCheck);
         }
 
 
@@ -51,7 +56,7 @@ namespace ServicesLayer
         public async Task AddNewUserWithRoleAsync(IUserModel newUser, string roleName)
         {
             this.UserServices.ValidateModelDataAnnotations((UserModel)newUser);
-            var role = await RoleServices.GetAsync(r => r.NormalizedName == roleName.ToUpperInvariant().Trim(), includeProperties: "Users") 
+            var role = await RoleServices.GetAsync(r => r.NormalizedName == roleName.Trim().ToUpperInvariant(), includeProperties: "Users") 
                 ?? throw new RoleNotFoundException();
             await UserServices.AddAsync((UserModel)newUser);
             role.Users.Add((UserModel)newUser);
@@ -64,12 +69,12 @@ namespace ServicesLayer
             await Task.WhenAll(tasks);
         }
 
-        public async Task<bool> LoginUser(string username, string password)
+        public async Task LoginUser(string username, string password)
         {
             var user = await UserServices.GetAsync(u => u.UserName == username.Trim(), includeProperties: "Roles")
                 ?? throw new UserNotFoundException();
-
-            var saltedHashedPassword = Encryption.GenerateHash(password, user.Salt);
+            var encryption = new Encryption();
+            var saltedHashedPassword = encryption.GenerateHash(password, user.Salt);
 
             if (!saltedHashedPassword.SequenceEqual(user.PasswordHash))
             {
@@ -78,7 +83,6 @@ namespace ServicesLayer
             else
             {
                 CurrentUser = user;
-                return true;
             }
         }
 

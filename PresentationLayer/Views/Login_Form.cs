@@ -103,11 +103,8 @@ namespace PresentationLayer.Views
         {
             try
             {
-                var login = await _servicesManager.LoginUser(txtBoxUsername.Text, textBoxExt1.Text);
-                if (login)
-                {
-                    MessageBox.Show("Success!");
-                }
+                await _servicesManager.LoginUser(txtBoxUsername.Text, textBoxExt1.Text);
+                MessageBox.Show("Success!");
             }
 
             catch (UserNotFoundException)

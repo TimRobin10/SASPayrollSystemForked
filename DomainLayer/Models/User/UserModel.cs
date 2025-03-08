@@ -30,7 +30,8 @@ namespace DomainLayer.Models.User
             {
                 _password = value;
                 Salt = GenerateSalt(saltSize);
-                PasswordHash = Encryption.GenerateHash(Password, Salt);
+                var encryption = new Encryption();
+                PasswordHash = encryption.GenerateHash(Password, Salt);
             }
         }
 

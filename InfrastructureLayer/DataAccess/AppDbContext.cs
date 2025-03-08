@@ -1,4 +1,5 @@
 ﻿using DomainLayer.Models.Attendance;
+using DomainLayer.Models.Department;
 using DomainLayer.Models.Employee;
 using DomainLayer.Models.Role;
 using DomainLayer.Models.User;
@@ -28,6 +29,7 @@ namespace InfrastructureLayer.DataAccess
         public DbSet<UserModel> Users { get; set; }
         public DbSet<RoleModel> Roles { get; set; }
         public DbSet<EmployeeModel> Employees { get; set; }
+        public DbSet<DepartmentModel> Departments { get; set; }
         public DbSet<AttendanceModel> Attendances { get; set; }
     }
 }
