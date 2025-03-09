@@ -9,7 +9,7 @@ namespace PresentationLayer.Views
 {
     internal class RoundedElements
     {
-        public static void rounded(Control control, int radius)
+        public async static void rounded(Control control, int radius)
         {
             if (control == null || radius < 1) return;
 
