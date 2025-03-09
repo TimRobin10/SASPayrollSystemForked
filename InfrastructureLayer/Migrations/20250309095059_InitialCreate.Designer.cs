@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace InfrastructureLayer.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20250309051227_InitialCreate")]
+    [Migration("20250309095059_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -78,10 +78,13 @@ namespace InfrastructureLayer.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<DateOnly>("BirthDay")
+                        .HasColumnType("date");
+
                     b.Property<Guid>("DepartmentId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<DateOnly>("EmployementDate")
+                    b.Property<DateOnly>("EmploymentDate")
                         .HasColumnType("date");
 
                     b.Property<string>("FirstName")

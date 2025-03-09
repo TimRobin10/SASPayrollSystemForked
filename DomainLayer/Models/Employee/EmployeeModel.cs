@@ -47,15 +47,18 @@ namespace DomainLayer.Models.Employee
             set => _lastname = formatter.ToProperCase(value);
         }
 
+        [Required(ErrorMessage = "Birthday is required")]
+        public DateOnly BirthDay { get; set; }
+
         [Required(ErrorMessage = "Employment date is required")]
-        public DateOnly EmployementDate { get; set; }
+        public DateOnly EmploymentDate { get; set; }
 
         [Required(ErrorMessage = "Job title is required")]
         [StringLength(20, MinimumLength = 2, ErrorMessage = "Must be between 2 - 50 characters")]
-        public string JobTitle 
-        { 
-            get => _jobTitle; 
-            set => _jobTitle = formatter.ToProperCase(value); 
+        public string JobTitle
+        {
+            get => _jobTitle;
+            set => _jobTitle = formatter.ToProperCase(value);
         }
 
         public ICollection<AttendanceModel> Attendances { get; set; } = [];

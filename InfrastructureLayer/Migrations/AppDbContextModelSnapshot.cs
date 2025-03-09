@@ -75,10 +75,13 @@ namespace InfrastructureLayer.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<DateOnly>("BirthDay")
+                        .HasColumnType("date");
+
                     b.Property<Guid>("DepartmentId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<DateOnly>("EmployementDate")
+                    b.Property<DateOnly>("EmploymentDate")
                         .HasColumnType("date");
 
                     b.Property<string>("FirstName")

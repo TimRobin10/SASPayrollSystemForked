@@ -61,7 +61,8 @@ namespace InfrastructureLayer.Migrations
                     FirstName = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     MiddleInitial = table.Column<string>(type: "nvarchar(1)", maxLength: 1, nullable: false),
                     LastName = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    EmployementDate = table.Column<DateOnly>(type: "date", nullable: false),
+                    BirthDay = table.Column<DateOnly>(type: "date", nullable: false),
+                    EmploymentDate = table.Column<DateOnly>(type: "date", nullable: false),
                     JobTitle = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
                     DepartmentId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
                 },
