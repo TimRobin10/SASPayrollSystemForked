@@ -1,4 +1,5 @@
-﻿using DomainLayer.Models.User;
+﻿using DomainLayer.Common;
+using DomainLayer.Models.User;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -25,7 +26,8 @@ namespace DomainLayer.Models.Role
             }
             set
             {
-                _name = value;
+                var formatter = new Formatter();
+                _name = formatter.ToProperCase(value);
                 NormalizedName = NormalizeString(Name);
             }
         }

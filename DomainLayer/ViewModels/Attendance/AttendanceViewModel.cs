@@ -11,7 +11,7 @@ namespace DomainLayer.ViewModels.Attendance
     {
         public AttendanceViewModel(IAttendanceModel attendanceModel)
         {
-            Date = attendanceModel.Date.ToString("MMM dd, yyyy");
+            Date = attendanceModel.Date.ToString("MM/dd/yyyy");
             TimeIn = attendanceModel.TimeIn.ToString("hh:mm:ss tt");
             if (attendanceModel.TimeOut != null)
             {

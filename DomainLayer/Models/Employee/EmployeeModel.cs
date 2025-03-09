@@ -1,4 +1,5 @@
-﻿using DomainLayer.Models.Attendance;
+﻿using DomainLayer.Common;
+using DomainLayer.Models.Attendance;
 using DomainLayer.Models.Department;
 using DomainLayer.Models.Leave;
 using System;
@@ -15,6 +16,9 @@ namespace DomainLayer.Models.Employee
         private string _firstName = string.Empty;
         private string _middleInitial = string.Empty;
         private string _lastname = string.Empty;
+        private string _jobTitle = string.Empty;
+
+        private Formatter formatter = new Formatter();
 
         [Key]
         public Guid Id { get; set; }
@@ -24,7 +28,7 @@ namespace DomainLayer.Models.Employee
         public string FirstName
         {
             get => _firstName;
-            set => _firstName = value.Trim();
+            set => _firstName = formatter.ToProperCase(value);
         }
 
         [Required(ErrorMessage = "Middle initial is required")]
@@ -32,7 +36,7 @@ namespace DomainLayer.Models.Employee
         public string MiddleInitial
         {
             get => _middleInitial;
-            set => _middleInitial = value.ToUpperInvariant().Trim();
+            set => _middleInitial = formatter.ToProperCase(value);
         }
 
         [Required(ErrorMessage = "Last name is required")]
@@ -40,7 +44,7 @@ namespace DomainLayer.Models.Employee
         public string LastName
         {
             get => _lastname;
-            set => _lastname = value.Trim();
+            set => _lastname = formatter.ToProperCase(value);
         }
 
         [Required(ErrorMessage = "Employment date is required")]
@@ -48,7 +52,11 @@ namespace DomainLayer.Models.Employee
 
         [Required(ErrorMessage = "Job title is required")]
         [StringLength(20, MinimumLength = 2, ErrorMessage = "Must be between 2 - 50 characters")]
-        public string JobTitle { get; set; } = null!;
+        public string JobTitle 
+        { 
+            get => _jobTitle; 
+            set => _jobTitle = formatter.ToProperCase(value); 
+        }
 
         public ICollection<AttendanceModel> Attendances { get; set; } = [];
         public virtual required DepartmentModel Department { get; set; }

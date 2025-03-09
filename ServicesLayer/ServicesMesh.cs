@@ -101,9 +101,9 @@ namespace ServicesLayer
         {
             string[] defaultRoles =
             {
-                "Admin",
-                "Employee",
-                "Contractor"
+                "admin",
+                "employee",
+                "contractor"
             };
             var roles = await RoleServices.GetAllAsync();
             var rolemodels = new List<RoleModel>();

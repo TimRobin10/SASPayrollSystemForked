@@ -1,4 +1,5 @@
-﻿using DomainLayer.Models.Employee;
+﻿using DomainLayer.Common;
+using DomainLayer.Models.Employee;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -27,7 +28,8 @@ namespace DomainLayer.Models.Department
             }
             set
             {
-                _name = textInfo.ToTitleCase(value.Trim().ToLower());
+                var formatter = new Formatter();
+                _name = formatter.ToProperCase(value);
             }
         }
 
