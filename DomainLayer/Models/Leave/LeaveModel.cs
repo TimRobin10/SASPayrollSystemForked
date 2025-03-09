@@ -29,7 +29,7 @@ namespace DomainLayer.Models.Leave
 
         [Required]
         [Column(TypeName = "tinyint")]
-        public FormStatus Status { get; set; } = FormStatus.PENDING;
+        public FormStatus Status { get; set; } = FormStatus.Pending;
 
         public virtual required EmployeeModel Employee { get; set; }
     }

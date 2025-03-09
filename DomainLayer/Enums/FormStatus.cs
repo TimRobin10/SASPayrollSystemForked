@@ -8,8 +8,8 @@ namespace DomainLayer.Enums
 {
     public enum FormStatus
     {
-        PENDING,
-        APPROVED,
-        DENIED
+        Pending,
+        Approved,
+        Denied
     }
 }

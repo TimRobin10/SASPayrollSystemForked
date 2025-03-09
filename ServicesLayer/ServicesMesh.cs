@@ -1,4 +1,4 @@
-﻿using DomainLayer;
+﻿using DomainLayer.Common;
 using DomainLayer.Models.Attendance;
 using DomainLayer.Models.Department;
 using DomainLayer.Models.Employee;

@@ -7,16 +7,16 @@ using System.Threading.Tasks;
 
 namespace DomainLayer.ViewModels.Attendance
 {
-    public class AttendanceViewModel
+    public class AttendanceViewModel : IAttendanceViewModel
     {
         public AttendanceViewModel(IAttendanceModel attendanceModel)
         {
             Date = attendanceModel.Date.ToString("MMM dd, yyyy");
-            TimeIn = attendanceModel.TimeIn.ToString("HH:mm:ss");
+            TimeIn = attendanceModel.TimeIn.ToString("hh:mm:ss tt");
             if (attendanceModel.TimeOut != null)
             {
                 var timeOut = (TimeOnly)attendanceModel.TimeOut;
-                TimeOut = timeOut.ToString("HH:mm:ss");
+                TimeOut = timeOut.ToString("hh:mm:ss tt");
             }
             else
                 TimeOut = "-";

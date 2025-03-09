@@ -1,4 +1,4 @@
-﻿namespace DomainLayer
+﻿namespace DomainLayer.Common
 {
     public interface IEncryption
     {

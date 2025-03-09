@@ -2,7 +2,7 @@
 using System.Text;
 
 
-namespace DomainLayer
+namespace DomainLayer.Common
 {
     public class Encryption : IEncryption
     {
