@@ -10,6 +10,10 @@ internal static class Program
     [STAThread]
     static void Main()
     {
+        Syncfusion.Licensing
+            .SyncfusionLicenseProvider
+            .RegisterLicense("Ngo9BigBOggjHTQxAR8/V1NMaF1cVGhIfEx1RHxQdld5ZFRHallYTnNWUj0eQnxTdEBjWn9ZcnRQQGNaU0xxXw==");
+
         IUnityContainer UnityC = new UnityContainer();
         UnityC.RegisterType<IServicesMesh, ServicesMesh>(new HierarchicalLifetimeManager());
 
