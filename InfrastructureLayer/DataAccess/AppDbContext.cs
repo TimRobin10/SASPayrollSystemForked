@@ -2,6 +2,7 @@
 using DomainLayer.Models.Department;
 using DomainLayer.Models.Employee;
 using DomainLayer.Models.Leave;
+using DomainLayer.Models.NewUserRequest;
 using DomainLayer.Models.Role;
 using DomainLayer.Models.User;
 using Microsoft.EntityFrameworkCore;
@@ -20,7 +21,7 @@ namespace InfrastructureLayer.DataAccess
         
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer(connectionStringLab);
+            optionsBuilder.UseSqlServer(connectionStringHome);
             base.OnConfiguring(optionsBuilder);
         }
 
@@ -32,6 +33,7 @@ namespace InfrastructureLayer.DataAccess
         public DbSet<DepartmentModel> Departments { get; set; }
         public DbSet<EmployeeModel> Employees { get; set; }
         public DbSet<LeaveModel> Leaves { get; set; }
+        public DbSet<NewUserRequestModel> NewUserRequests { get; set; }
         public DbSet<RoleModel> Roles { get; set; }
         public DbSet<UserModel> Users { get; set; }
     }

@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace InfrastructureLayer.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20250309095059_InitialCreate")]
+    [Migration("20250310084027_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -142,6 +142,40 @@ namespace InfrastructureLayer.Migrations
                     b.ToTable("Leaves");
                 });
 
+            modelBuilder.Entity("DomainLayer.Models.NewUserRequest.NewUserRequestModel", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateOnly>("DateOfRequest")
+                        .HasColumnType("date");
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<byte[]>("PasswordHash")
+                        .IsRequired()
+                        .HasColumnType("binary(32)");
+
+                    b.Property<byte[]>("Salt")
+                        .IsRequired()
+                        .HasColumnType("binary(32)");
+
+                    b.Property<TimeOnly>("TimeOfRequest")
+                        .HasColumnType("time");
+
+                    b.Property<string>("UserName")
+                        .IsRequired()
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("NewUserRequests");
+                });
+
             modelBuilder.Entity("DomainLayer.Models.Role.RoleModel", b =>
                 {
                     b.Property<Guid>("Id")
@@ -180,6 +214,9 @@ namespace InfrastructureLayer.Migrations
                         .HasMaxLength(13)
                         .HasColumnType("nvarchar(13)");
 
+                    b.Property<Guid>("RoleId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<byte[]>("Salt")
                         .IsRequired()
                         .HasColumnType("binary(32)");
@@ -194,22 +231,9 @@ namespace InfrastructureLayer.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("RoleId");
+
                     b.ToTable("Users");
-                });
-
-            modelBuilder.Entity("RoleModelUserModel", b =>
-                {
-                    b.Property<Guid>("RolesId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("UsersId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.HasKey("RolesId", "UsersId");
-
-                    b.HasIndex("UsersId");
-
-                    b.ToTable("RoleModelUserModel");
                 });
 
             modelBuilder.Entity("DomainLayer.Models.Attendance.AttendanceModel", b =>
@@ -245,19 +269,15 @@ namespace InfrastructureLayer.Migrations
                     b.Navigation("Employee");
                 });
 
-            modelBuilder.Entity("RoleModelUserModel", b =>
+            modelBuilder.Entity("DomainLayer.Models.User.UserModel", b =>
                 {
-                    b.HasOne("DomainLayer.Models.Role.RoleModel", null)
-                        .WithMany()
-                        .HasForeignKey("RolesId")
+                    b.HasOne("DomainLayer.Models.Role.RoleModel", "Role")
+                        .WithMany("Users")
+                        .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("DomainLayer.Models.User.UserModel", null)
-                        .WithMany()
-                        .HasForeignKey("UsersId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                    b.Navigation("Role");
                 });
 
             modelBuilder.Entity("DomainLayer.Models.Department.DepartmentModel", b =>
@@ -270,6 +290,11 @@ namespace InfrastructureLayer.Migrations
                     b.Navigation("Attendances");
 
                     b.Navigation("Leaves");
+                });
+
+            modelBuilder.Entity("DomainLayer.Models.Role.RoleModel", b =>
+                {
+                    b.Navigation("Users");
                 });
 #pragma warning restore 612, 618
         }
