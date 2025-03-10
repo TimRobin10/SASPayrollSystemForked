@@ -1,4 +1,5 @@
 ﻿using DomainLayer.Common;
+using DomainLayer.Models.User;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -11,9 +12,11 @@ namespace DomainLayer.Models.NewUserRequest
 {
     public class NewUserRequestModel : INewUserRequestModel
     {
-        private string _password = string.Empty;
         private const int saltSize = 32;
+
         private readonly DateTime _currentDateTime;
+
+        private string _password = string.Empty;
 
         public NewUserRequestModel()
         {
@@ -27,7 +30,13 @@ namespace DomainLayer.Models.NewUserRequest
 
         [Required(AllowEmptyStrings = false, ErrorMessage = "Username is required")]
         [StringLength(20, MinimumLength = 2, ErrorMessage = "Username must be 2 - 20 characters only")]
-        public string UserName { get; set; } = null!;
+        public string UserName
+        { get; set; } = null!;
+
+        [Required(ErrorMessage = "Email is required")]
+        [EmailAddress(ErrorMessage = "Must be a valid email address")]
+        public string Email
+        { get; set; } = null!;
 
         [NotMapped]
         public string Password

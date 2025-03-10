@@ -29,6 +29,7 @@ namespace InfrastructureLayer.Migrations
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     UserName = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
+                    Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Salt = table.Column<byte[]>(type: "binary(32)", nullable: false),
                     PasswordHash = table.Column<byte[]>(type: "binary(32)", nullable: false),
                     DateOfRequest = table.Column<DateOnly>(type: "date", nullable: false),
@@ -50,23 +51,6 @@ namespace InfrastructureLayer.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Roles", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Users",
-                columns: table => new
-                {
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    UserName = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
-                    Salt = table.Column<byte[]>(type: "binary(32)", nullable: false),
-                    PasswordHash = table.Column<byte[]>(type: "binary(32)", nullable: false),
-                    Email = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    PhoneNumber = table.Column<string>(type: "nvarchar(13)", maxLength: 13, nullable: true),
-                    Url = table.Column<string>(type: "nvarchar(max)", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Users", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -94,25 +78,25 @@ namespace InfrastructureLayer.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "RoleModelUserModel",
+                name: "Users",
                 columns: table => new
                 {
-                    RolesId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    UsersId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    UserName = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
+                    Salt = table.Column<byte[]>(type: "binary(32)", nullable: false),
+                    PasswordHash = table.Column<byte[]>(type: "binary(32)", nullable: false),
+                    Email = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    PhoneNumber = table.Column<string>(type: "nvarchar(13)", maxLength: 13, nullable: true),
+                    Url = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    RoleId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_RoleModelUserModel", x => new { x.RolesId, x.UsersId });
+                    table.PrimaryKey("PK_Users", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_RoleModelUserModel_Roles_RolesId",
-                        column: x => x.RolesId,
+                        name: "FK_Users_Roles_RoleId",
+                        column: x => x.RoleId,
                         principalTable: "Roles",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_RoleModelUserModel_Users_UsersId",
-                        column: x => x.UsersId,
-                        principalTable: "Users",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -178,9 +162,9 @@ namespace InfrastructureLayer.Migrations
                 column: "EmployeeId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_RoleModelUserModel_UsersId",
-                table: "RoleModelUserModel",
-                column: "UsersId");
+                name: "IX_Users_RoleId",
+                table: "Users",
+                column: "RoleId");
         }
 
         /// <inheritdoc />
@@ -196,16 +180,13 @@ namespace InfrastructureLayer.Migrations
                 name: "NewUserRequests");
 
             migrationBuilder.DropTable(
-                name: "RoleModelUserModel");
+                name: "Users");
 
             migrationBuilder.DropTable(
                 name: "Employees");
 
             migrationBuilder.DropTable(
                 name: "Roles");
-
-            migrationBuilder.DropTable(
-                name: "Users");
 
             migrationBuilder.DropTable(
                 name: "Departments");

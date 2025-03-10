@@ -1,4 +1,5 @@
 ﻿using DomainLayer.Common;
+using DomainLayer.Models.NewUserRequest;
 using DomainLayer.Models.Role;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -12,6 +13,19 @@ namespace DomainLayer.Models.User
         private const int saltSize = 32;
 
         private string _password = string.Empty;
+
+        public UserModel()
+        { }
+
+        public UserModel(INewUserRequestModel requestModel, IRoleModel roleModel)
+        {
+            UserName = requestModel.UserName;
+            Salt = requestModel.Salt;
+            PasswordHash = requestModel.PasswordHash;
+            Email = requestModel.Email;
+            RoleId = roleModel.Id;
+            Role = (RoleModel)roleModel;
+        }
 
         [Key]
         public Guid Id { get; set; }
@@ -54,6 +68,9 @@ namespace DomainLayer.Models.User
         [Url(ErrorMessage = "Must be a valid Url")]
         public string? Url { get; set; }
 
-        public virtual ICollection<RoleModel> Roles { get; } = [];
+        //Navigation
+        [ForeignKey(nameof(RoleId))]
+        public Guid RoleId { get; set; }
+        public virtual RoleModel Role { get; set; } = null!;
     }
 }

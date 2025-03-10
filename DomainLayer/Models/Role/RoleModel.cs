@@ -36,8 +36,10 @@ namespace DomainLayer.Models.Role
         [StringLength(20)]
         public string NormalizedName { get; private set; } = null!;
 
-        public virtual ICollection<UserModel> Users { get; } = null!;
+        //Navigation
+        public virtual ICollection<UserModel> Users { get; } = new List<UserModel>();
 
+        //Internal operations
         private string NormalizeString(string input)
         {
             if (string.IsNullOrEmpty(input))

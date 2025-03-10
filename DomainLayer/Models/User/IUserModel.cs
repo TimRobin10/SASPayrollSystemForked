@@ -9,7 +9,8 @@ namespace DomainLayer.Models.User
         string Password { set; }
         byte[] PasswordHash { get; }
         string? PhoneNumber { get; set; }
-        ICollection<RoleModel> Roles { get; }
+        RoleModel Role { get; set; }
+        Guid RoleId { get; set; }
         byte[] Salt { get; }
         string? Url { get; set; }
         string UserName { get; set; }
