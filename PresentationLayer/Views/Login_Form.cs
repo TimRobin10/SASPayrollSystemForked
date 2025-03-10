@@ -5,7 +5,7 @@ using static System.Windows.Forms.VisualStyles.VisualStyleElement.ToolTip;
 
 namespace PresentationLayer.Views
 {
-    public partial class Login_Form : Form
+    public partial class Login_Form : Form, ILogin_Form
     {
         private IServicesMesh _servicesManager;
 
