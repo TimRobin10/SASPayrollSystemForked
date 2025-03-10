@@ -18,7 +18,7 @@ namespace PresentationLayer.Presenters
         public bool AuthenticateUser(string email, string password)
         {
             var user = _userRepository.GetUserByEmail(email);
-            if (user == null || user.Password != password) // In real-world apps, use hashed passwords
+            if (user == null || user.Password != password)
             {
                 return false; // Authentication failed
             }
