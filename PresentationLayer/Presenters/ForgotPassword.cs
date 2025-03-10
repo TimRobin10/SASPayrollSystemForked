@@ -23,7 +23,7 @@ namespace PresentationLayer.Presenters
                 return false; // User not found
             }
 
-            // Logic to send a password reset link (e.g., via email)
+            // Logic to send a password reset link
             return true;
         }
     }
