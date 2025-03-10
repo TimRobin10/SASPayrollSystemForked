@@ -16,6 +16,18 @@ namespace DomainLayer.Common
             return finalHash;
         }
 
+        public byte[] GenerateSalt(int size)
+        {
+            byte[] saltBytes = new byte[size];
+
+            using (var generator = RandomNumberGenerator.Create())
+            {
+                generator.GetBytes(saltBytes);
+            }
+
+            return saltBytes;
+        }
+
         private byte[] EncryptSha256(byte[] input)
         {
             using (SHA256 sha256 = SHA256.Create())

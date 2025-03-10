@@ -22,6 +22,6 @@ namespace ServicesLayer
         Task AddNewUserWithRoleAsync(IUserModel newUser, string roleName);
         Task InitialSeeding();
         Task LoginUser(string username, string password);
-        Task SignUpUser(string username, string password);
+        Task SignUpNewUser(string username, string password);
     }
 }

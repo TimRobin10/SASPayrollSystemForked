@@ -3,6 +3,7 @@ using DomainLayer.Models.Attendance;
 using DomainLayer.Models.Department;
 using DomainLayer.Models.Employee;
 using DomainLayer.Models.Leave;
+using DomainLayer.Models.NewUserRequest;
 using DomainLayer.Models.Role;
 using DomainLayer.Models.User;
 using InfrastructureLayer.DataAccess.Repositories.Common;
@@ -23,6 +24,7 @@ namespace ServicesLayer
         private readonly IBaseRepository<DepartmentModel> DepartmentRepository;
         private readonly IBaseRepository<EmployeeModel> EmployeeRepository;
         private readonly IBaseRepository<LeaveModel> LeaveRepository;
+        private readonly IBaseRepository<NewUserRequestModel> NewUserRequestRepository;
         private readonly IBaseRepository<RoleModel> RoleRepository;
         private readonly IBaseRepository<UserModel> UserRepository;
 
@@ -34,6 +36,7 @@ namespace ServicesLayer
         public IBaseServices<DepartmentModel> DepartmentServices { get; private set; }
         public IBaseServices<EmployeeModel> EmployeeServices { get; private set; }
         public IBaseServices<LeaveModel> LeaveServices { get; private set; }
+        public IBaseServices<NewUserRequestModel> NewUserRequestServices { get; private set; }
         public IBaseServices<RoleModel> RoleServices { get; private set; }
         public IBaseServices<UserModel> UserServices { get; private set; }
 
@@ -43,6 +46,7 @@ namespace ServicesLayer
             DepartmentRepository ??= new BaseRepository<DepartmentModel>();
             EmployeeRepository ??= new BaseRepository<EmployeeModel>();
             LeaveRepository ??= new BaseRepository<LeaveModel>();
+            NewUserRequestRepository ??= new BaseRepository<NewUserRequestModel>();
             RoleRepository ??= new BaseRepository<RoleModel>();
             UserRepository ??= new BaseRepository<UserModel>();
 
@@ -52,6 +56,7 @@ namespace ServicesLayer
             DepartmentServices ??= new BaseServices<DepartmentModel>(DepartmentRepository, _modelDataAnnotationsCheck);
             EmployeeServices ??= new BaseServices<EmployeeModel>(EmployeeRepository, _modelDataAnnotationsCheck);
             LeaveServices ??= new BaseServices<LeaveModel>(LeaveRepository, _modelDataAnnotationsCheck);
+            NewUserRequestServices ??= new BaseServices<NewUserRequestModel>(NewUserRequestRepository, _modelDataAnnotationsCheck);
             RoleServices ??= new BaseServices<RoleModel>(RoleRepository, _modelDataAnnotationsCheck);
             UserServices ??= new BaseServices<UserModel>(UserRepository, _modelDataAnnotationsCheck);
         }
@@ -141,18 +146,19 @@ namespace ServicesLayer
                 };
                 await Task.WhenAll(tasks);
             }
+
+            //Testing New User Requests
+            
         }
 
-        public async Task SignUpUser(string username, string password)
+        public async Task SignUpNewUser(string username, string password)
         {
-            var user = new UserModel()
+            var userRequest = new NewUserRequestModel()
             {
                 UserName = username,
                 Password = password
             };
-            var defaultRole = await RoleServices.GetAsync(r => r.NormalizedName == "employee".ToUpperInvariant());
-            user.Roles.Add(defaultRole);
-            await UserServices.AddAsync(user);
+            await NewUserRequestServices.AddAsync(userRequest);
         }
     }
 }

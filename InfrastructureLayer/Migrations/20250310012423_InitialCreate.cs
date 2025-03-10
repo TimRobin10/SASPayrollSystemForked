@@ -24,6 +24,22 @@ namespace InfrastructureLayer.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "NewUserRequests",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    UserName = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
+                    Salt = table.Column<byte[]>(type: "binary(32)", nullable: false),
+                    PasswordHash = table.Column<byte[]>(type: "binary(32)", nullable: false),
+                    DateOfRequest = table.Column<DateOnly>(type: "date", nullable: false),
+                    TimeOfRequest = table.Column<TimeOnly>(type: "time", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_NewUserRequests", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Roles",
                 columns: table => new
                 {
@@ -175,6 +191,9 @@ namespace InfrastructureLayer.Migrations
 
             migrationBuilder.DropTable(
                 name: "Leaves");
+
+            migrationBuilder.DropTable(
+                name: "NewUserRequests");
 
             migrationBuilder.DropTable(
                 name: "RoleModelUserModel");

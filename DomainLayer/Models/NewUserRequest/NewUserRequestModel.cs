@@ -1,17 +1,26 @@
 ﻿using DomainLayer.Common;
-using DomainLayer.Models.Role;
+using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Security.Cryptography;
+using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 
-namespace DomainLayer.Models.User
+namespace DomainLayer.Models.NewUserRequest
 {
-    public class UserModel : IUserModel
+    public class NewUserRequestModel : INewUserRequestModel
     {
-        private const int saltSize = 32;
-
         private string _password = string.Empty;
+        private const int saltSize = 32;
+        private readonly DateTime _currentDateTime;
+
+        public NewUserRequestModel()
+        {
+            _currentDateTime = DateTime.Now;
+            DateOfRequest = DateOnly.FromDateTime(_currentDateTime);
+            TimeOfRequest = TimeOnly.FromDateTime(_currentDateTime);
+        }
 
         [Key]
         public Guid Id { get; set; }
@@ -44,16 +53,12 @@ namespace DomainLayer.Models.User
         [Column(TypeName = "binary(32)")]
         public byte[] PasswordHash { get; private set; } = [];
 
-        [EmailAddress(ErrorMessage = "Must be a valid email address")]
-        public string? Email { get; set; }
+        [Required]
+        [Column(TypeName = "date")]
+        public DateOnly DateOfRequest { get; private set; }
 
-        [RegularExpression(@"^\+639\d{9}")]
-        [StringLength(13, MinimumLength = 12, ErrorMessage = "Must be exactly 12 characters")]
-        public string? PhoneNumber { get; set; } = null!;
-
-        [Url(ErrorMessage = "Must be a valid Url")]
-        public string? Url { get; set; }
-
-        public virtual ICollection<RoleModel> Roles { get; } = [];
+        [Required]
+        [Column(TypeName = "time")]
+        public TimeOnly TimeOfRequest { get; private set; }
     }
 }
