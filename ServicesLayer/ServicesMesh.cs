@@ -142,5 +142,17 @@ namespace ServicesLayer
                 await Task.WhenAll(tasks);
             }
         }
+
+        public async Task SignUpUser(string username, string password)
+        {
+            var user = new UserModel()
+            {
+                UserName = username,
+                Password = password
+            };
+            var defaultRole = await RoleServices.GetAsync(r => r.NormalizedName == "employee".ToUpperInvariant());
+            user.Roles.Add(defaultRole);
+            await UserServices.AddAsync(user);
+        }
     }
 }
