@@ -22,7 +22,7 @@ namespace InfrastructureLayer.DataAccess
         
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer(connectionStringHome);
+            optionsBuilder.UseSqlServer(connectionStringLab);
             base.OnConfiguring(optionsBuilder);
         }
 
