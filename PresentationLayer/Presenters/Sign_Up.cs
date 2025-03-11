@@ -1,4 +1,5 @@
 ﻿using Microsoft.VisualBasic.ApplicationServices;
+using ServicesLayer;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,22 +10,15 @@ namespace PresentationLayer.Presenters
 {
     public class SignUpPresenter : BasePresenter, ISignUpPresenter
     {
-        private readonly IUserRepository _userRepository;
+        private readonly IServicesMesh _servicesMesh;
 
-        public SignUpPresenter(IUserRepository userRepository)
+        public SignUpPresenter(IServicesMesh servicesMesh)
         {
-            _userRepository = userRepository ?? throw new ArgumentNullException(nameof(userRepository));
+            _servicesMesh = servicesMesh;
         }
-
-        public bool RegisterUser(User newUser)
+        public async Task NewUserRequest(string username, string password, string email)
         {
-            if (_userRepository.GetUserByEmail(newUser.Email) != null)
-            {
-                return false; // User already exists
-            }
-
-            _userRepository.AddUser(newUser);
-            return true; // Registration successful
+            await _servicesMesh.NewUserRequest(username, password, email);
         }
     }
 }
