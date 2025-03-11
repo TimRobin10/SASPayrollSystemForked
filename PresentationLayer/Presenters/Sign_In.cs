@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ServicesLayer;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,22 +9,16 @@ namespace PresentationLayer.Presenters
 {
     public class SignInPresenter : BasePresenter, ISignInPresenter
     {
-        private readonly IUserRepository _userRepository;
+        private readonly IServicesMesh _serviceMesh;
 
-        public SignInPresenter(IUserRepository userRepository)
+        public SignInPresenter(IServicesMesh servicesMesh)
         {
-            _userRepository = userRepository ?? throw new ArgumentNullException(nameof(userRepository));
+            _serviceMesh = servicesMesh;
         }
 
-        public bool AuthenticateUser(string email, string password)
+        public async Task AuthenticateUser(string userName, string password)
         {
-            var user = _userRepository.GetUserByEmail(email);
-            if (user == null || user.Password != password)
-            {
-                return false; // Authentication failed
-            }
-
-            return true; // Authentication successful
+            await _serviceMesh.LoginUser(userName, password);
         }
     }
 }
