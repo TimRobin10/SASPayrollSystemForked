@@ -130,7 +130,7 @@ namespace DomainLayer.Models.Salary
 
         [ForeignKey(nameof(EmployeeId))]
         public Guid EmployeeId { get; set; }
-        public required EmployeeModel Employee;
+        public EmployeeModel Employee;
 
         public void CalculateTotalSalary(IEnumerable<AttendanceModel> attendances, IEnumerable<LeaveModel> leaves)
         {

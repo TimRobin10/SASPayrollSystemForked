@@ -4,6 +4,7 @@ using DomainLayer.Models.Employee;
 using DomainLayer.Models.Leave;
 using DomainLayer.Models.NewUserRequest;
 using DomainLayer.Models.Role;
+using DomainLayer.Models.Salary;
 using DomainLayer.Models.User;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -35,6 +36,7 @@ namespace InfrastructureLayer.DataAccess
         public DbSet<LeaveModel> Leaves { get; set; }
         public DbSet<NewUserRequestModel> NewUserRequests { get; set; }
         public DbSet<RoleModel> Roles { get; set; }
+        public DbSet<SalaryModel> Salaries { get; set; }
         public DbSet<UserModel> Users { get; set; }
     }
 }

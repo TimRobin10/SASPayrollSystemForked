@@ -1,5 +1,4 @@
 ﻿using DomainLayer.Enums;
-using DomainLayer.Models.Employee;
 
 namespace DomainLayer.Models.Leave
 {
@@ -8,7 +7,7 @@ namespace DomainLayer.Models.Leave
         DateOnly DateOfAbsence { get; set; }
         DateOnly DateOfFiling { get; set; }
         uint Duration { get; set; }
-        EmployeeModel Employee { get; set; }
+        Guid EmployeeId { get; set; }
         Guid Id { get; set; }
         FormStatus Status { get; set; }
     }

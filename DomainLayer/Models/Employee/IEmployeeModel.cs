@@ -1,6 +1,7 @@
 ﻿using DomainLayer.Models.Attendance;
 using DomainLayer.Models.Department;
 using DomainLayer.Models.Leave;
+using DomainLayer.Models.Salary;
 
 namespace DomainLayer.Models.Employee
 {
@@ -18,5 +19,6 @@ namespace DomainLayer.Models.Employee
         uint LeaveCredits { get; set; }
         ICollection<LeaveModel> Leaves { get; set; }
         string MiddleInitial { get; set; }
+        ICollection<SalaryModel> Salaries { get; set; }
     }
 }
