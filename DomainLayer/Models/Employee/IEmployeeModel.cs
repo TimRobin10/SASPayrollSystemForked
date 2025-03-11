@@ -7,6 +7,7 @@ namespace DomainLayer.Models.Employee
     public interface IEmployeeModel
     {
         ICollection<AttendanceModel> Attendances { get; set; }
+        decimal BasicDailyRate { get; set; }
         DateOnly BirthDay { get; set; }
         DepartmentModel Department { get; set; }
         DateOnly EmploymentDate { get; set; }
@@ -14,6 +15,7 @@ namespace DomainLayer.Models.Employee
         Guid Id { get; set; }
         string JobTitle { get; set; }
         string LastName { get; set; }
+        uint LeaveCredits { get; set; }
         ICollection<LeaveModel> Leaves { get; set; }
         string MiddleInitial { get; set; }
     }
