@@ -61,13 +61,6 @@ namespace ServicesLayer
             UserServices ??= new BaseServices<UserModel>(UserRepository, _modelDataAnnotationsCheck);
         }
 
-
-        //To be refactored!
-        public async Task AddNewUserWithRoleAsync(IUserModel newUser, string roleName)
-        {
-
-        }
-
         public async Task LoginUser(string username, string password)
         {
             var user = await UserServices.GetAsync(u => u.UserName == username.Trim(), includeProperties: "Role")

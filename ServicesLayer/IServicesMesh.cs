@@ -20,7 +20,6 @@ namespace ServicesLayer
         IBaseServices<RoleModel> RoleServices { get; }
         IBaseServices<UserModel> UserServices { get; }
 
-        Task AddNewUserWithRoleAsync(IUserModel newUser, string roleName);
         Task ApproveNewUserRequest(string requestEmail, string roleName = null);
         Task InitialSeeding();
         Task LoginUser(string username, string password);
