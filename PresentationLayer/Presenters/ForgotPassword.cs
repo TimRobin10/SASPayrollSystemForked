@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ServicesLayer;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,25 +7,18 @@ using System.Threading.Tasks;
 
 namespace PresentationLayer.Presenters
 {
-    public class ForgotPasswordPresenter : BasePresenter, IForgotPasswordPresenter
+    public class ForgotPasswordPresenter : BasePresenter
     {
-        private readonly IUserRepository _userRepository;
+        private readonly IServicesMesh _servicesMesh;
 
-        public ForgotPasswordPresenter(IUserRepository userRepository)
+        public ForgotPasswordPresenter(IServicesMesh servicesMesh)
         {
-            _userRepository = userRepository ?? throw new ArgumentNullException(nameof(userRepository));
+            _servicesMesh = servicesMesh;   
         }
 
-        public bool SendPasswordResetLink(string email)
+        /*public async bool SendPasswordResetLink(string email)
         {
-            var user = _userRepository.GetUserByEmail(email);
-            if (user == null)
-            {
-                return false; // User not found
-            }
-
-            // Logic to send a password reset link
-            return true;
-        }
+            await 
+        }*/
     }
 }
