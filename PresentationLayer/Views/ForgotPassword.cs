@@ -17,7 +17,7 @@ namespace PresentationLayer.Views
     public partial class ForgotPassword : Form
     {
 
-        private IServicesMesh _servicesManager;
+        private IUnitOfWork _unitOfWork;
 
         [DllImport("Gdi32.dll", EntryPoint = "CreateRoundRectRgn")]
         private static extern IntPtr CreateRoundRectRgn
@@ -30,9 +30,9 @@ namespace PresentationLayer.Views
             int nHeightEllipse // height of ellipse
         );
 
-        public ForgotPassword(IServicesMesh servicesManager)
+        public ForgotPassword(IUnitOfWork unitOfWork)
         {
-            _servicesManager = servicesManager;
+            _unitOfWork = unitOfWork;
             InitializeComponent();
 
             //Init Buttons

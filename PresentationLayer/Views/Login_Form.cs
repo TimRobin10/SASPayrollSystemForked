@@ -201,7 +201,7 @@ namespace PresentationLayer.Views
         private void btnForgotPass_Click(object sender, EventArgs e)
         {
             this.Hide();
-            var forgotPasswordForm = new ForgotPassword(_servicesManager);
+            var forgotPasswordForm = new ForgotPassword(_unitOfWork);
             forgotPasswordForm.ShowDialog();
             this.Show();
         }
