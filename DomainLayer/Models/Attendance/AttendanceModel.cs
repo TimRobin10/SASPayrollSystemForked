@@ -14,7 +14,7 @@ namespace DomainLayer.Models.Attendance
 {
     public class AttendanceModel : IAttendanceModel
     {
-        private TimeOnly? _timeOut;
+        private TimeOnly _timeOut;
 
         [Key]
         public Guid Id { get; set; }
@@ -28,7 +28,7 @@ namespace DomainLayer.Models.Attendance
         public TimeOnly TimeIn { get; set; }
 
         [Column(TypeName = "time")]
-        public TimeOnly? TimeOut
+        public TimeOnly TimeOut
         {
             get
             {
@@ -37,11 +37,7 @@ namespace DomainLayer.Models.Attendance
             set
             {
                 _timeOut = value;
-                var totalHoursSpan = TimeOut - TimeIn;
-                if (totalHoursSpan != null)
-                {
-                    TotalHours = (uint)Math.Round(totalHoursSpan.Value.TotalHours);
-                }
+                TotalHours = CalculateTotalHours(TimeIn, TimeOut);
             }
         }
 
@@ -54,6 +50,14 @@ namespace DomainLayer.Models.Attendance
         [Column(TypeName = "tinyint")]
         public FormStatus Status { get; set; } = FormStatus.Pending;
 
-        public virtual required EmployeeModel Employee { get; set; }
+        [ForeignKey(nameof(EmployeeId))]
+        public Guid EmployeeId { get; set; }
+        public required EmployeeModel Employee { get; set; }
+
+        private uint CalculateTotalHours(TimeOnly timeIn, TimeOnly timeOut)
+        {
+            var totalHoursSpan = timeIn - timeOut;
+            return TotalHours = (uint)Math.Round(totalHoursSpan.TotalHours);
+        }
     }
 }

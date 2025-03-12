@@ -7,7 +7,7 @@ namespace PresentationLayer.Views
 {
     public partial class Login_Form : Form
     {
-        private IServicesMesh _servicesManager;
+        private IUnitOfWork _unitOfWork;
 
         private System.Windows.Forms.Timer timer;
         private int targetX;
@@ -24,9 +24,9 @@ namespace PresentationLayer.Views
             int nWidthEllipse, // width of ellipse
             int nHeightEllipse // height of ellipse
         );
-        public Login_Form(IServicesMesh servicesManager)
+        public Login_Form(IUnitOfWork unitOfWork)
         {
-            _servicesManager = servicesManager;
+            _unitOfWork = unitOfWork;
             InitializeComponent();
 
             //Initializing Transtiion Timer
@@ -38,6 +38,7 @@ namespace PresentationLayer.Views
             this.FormBorderStyle = FormBorderStyle.None;
             Region = System.Drawing.Region.FromHrgn(CreateRoundRectRgn(0, 0, Width, Height, 20, 20));
 
+            _unitOfWork.InitialSeeding();
         }
 
         private void Login_Form_Load(object sender, EventArgs e)
@@ -52,7 +53,6 @@ namespace PresentationLayer.Views
             InitForgotPassButton();
 
             //Sets default values on initial runtime instance
-            _servicesManager.InitialSeeding();
         }
 
         private async void Timer_Tick(object sender, EventArgs e)
@@ -150,7 +150,7 @@ namespace PresentationLayer.Views
         {
             try
             {
-                await _servicesManager.LoginUser(txtBoxUsername.Text, textBoxExt1.Text);
+                await _unitOfWork.LoginUser(txtBoxUsername.Text, textBoxExt1.Text);
                 MessageBox.Show("Success!");
             }
 

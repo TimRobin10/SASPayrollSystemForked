@@ -16,11 +16,11 @@ namespace PresentationLayer.Views
     public partial class Employee_Dashboard : Form
     {
         private IUserModel _currentUser;
-        private IServicesMesh _servicesManager;
-        public Employee_Dashboard(IUserModel currentUser, IServicesMesh servicesManager)
+        private IUnitOfWork _unitOfWork;
+        public Employee_Dashboard(IUserModel currentUser, IUnitOfWork servicesManager)
         {
             _currentUser = currentUser;
-            _servicesManager = servicesManager;
+            _unitOfWork = servicesManager;
             InitializeComponent();
         }
 

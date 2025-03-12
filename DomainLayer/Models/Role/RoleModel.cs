@@ -18,7 +18,7 @@ namespace DomainLayer.Models.Role
 
         [Required(AllowEmptyStrings = false, ErrorMessage = "Name is required")]
         [StringLength(20, MinimumLength = 2, ErrorMessage = "Must be between 2 - 20 characters only")]
-        public string Name 
+        public string Name
         {
             get
             {
@@ -36,7 +36,7 @@ namespace DomainLayer.Models.Role
         [StringLength(20)]
         public string NormalizedName { get; private set; } = null!;
 
-        public virtual ICollection<UserModel> Users { get; } = null!;
+        public ICollection<UserModel> Users { get; } = [];
 
         private string NormalizeString(string input)
         {

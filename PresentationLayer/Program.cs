@@ -15,9 +15,9 @@ internal static class Program
             .RegisterLicense("Ngo9BigBOggjHTQxAR8/V1NMaF1cVGhIfEx1RHxQdld5ZFRHallYTnNWUj0eQnxTdEBjWn9ZcnRQQGNaU0xxXw==");
 
         IUnityContainer UnityC = new UnityContainer();
-        UnityC.RegisterType<IServicesMesh, ServicesMesh>(new HierarchicalLifetimeManager());
+        UnityC.RegisterType<IUnitOfWork, UnitOfWork>(new HierarchicalLifetimeManager());
 
-        var servicesManager = UnityC.Resolve<IServicesMesh>();
+        var servicesManager = UnityC.Resolve<IUnitOfWork>();
 
         ApplicationConfiguration.Initialize();
 
