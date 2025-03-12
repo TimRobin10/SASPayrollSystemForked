@@ -1,7 +1,7 @@
 ﻿using DomainLayer.Common;
 using DomainLayer.Exceptions;
 using DomainLayer.Models.Attendance;
-using DomainLayer.Models.ChangePasswordRequest;
+using DomainLayer.Models.ForgotPasswordRequest;
 using DomainLayer.Models.Department;
 using DomainLayer.Models.Employee;
 using DomainLayer.Models.Leave;
