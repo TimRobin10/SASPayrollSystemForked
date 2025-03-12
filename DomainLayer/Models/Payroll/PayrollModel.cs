@@ -34,9 +34,11 @@ namespace DomainLayer.Models.Payroll
         private decimal _latesMinutes = 0;
         private uint _totalDays = 0;
 
-        private TimeOnly DayStart = new TimeOnly(6, 0, 0);
-        private TimeOnly DayEnd = new TimeOnly(22, 0, 0);
-        private TimeOnly DayWorkShiftStart = new TimeOnly(9, 0, 0);
+        private readonly TimeOnly DayStart = new TimeOnly(6, 0, 0);
+        private readonly TimeOnly DayEnd = new TimeOnly(22, 0, 0);
+
+        private readonly TimeOnly DayWorkShiftStart = new TimeOnly(8, 0, 0);
+        private readonly TimeOnly DayWorkShiftEnd = new TimeOnly(17, 0, 0);
 
         [Key]
         public int Id { get; set; }
