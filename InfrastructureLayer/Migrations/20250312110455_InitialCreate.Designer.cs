@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace InfrastructureLayer.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20250312103036_InitialCreate")]
+    [Migration("20250312110455_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -253,13 +253,13 @@ namespace InfrastructureLayer.Migrations
                         .HasColumnType("tinyint");
 
                     b.Property<decimal>("NightsAmount")
-                        .HasColumnType("decimal(18,2)");
+                        .HasColumnType("money");
 
                     b.Property<byte>("NightsOT")
                         .HasColumnType("tinyint");
 
                     b.Property<decimal>("NightsOTAmount")
-                        .HasColumnType("decimal(18,2)");
+                        .HasColumnType("money");
 
                     b.Property<decimal>("PagIbigAmount")
                         .HasColumnType("money");
@@ -277,7 +277,7 @@ namespace InfrastructureLayer.Migrations
                         .HasColumnType("tinyint");
 
                     b.Property<decimal>("RegularOTAmount")
-                        .HasColumnType("decimal(18,2)");
+                        .HasColumnType("money");
 
                     b.Property<decimal>("SSSAmount")
                         .HasColumnType("money");
