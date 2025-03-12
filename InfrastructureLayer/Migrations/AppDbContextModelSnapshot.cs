@@ -231,10 +231,7 @@ namespace InfrastructureLayer.Migrations
                     b.Property<decimal>("DisposableIncome")
                         .HasColumnType("money");
 
-                    b.Property<int>("EmployeeId")
-                        .HasColumnType("int");
-
-                    b.Property<Guid>("EmployeeId1")
+                    b.Property<Guid>("EmployeeId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<decimal>("IncomeNetOfTax")
@@ -314,7 +311,7 @@ namespace InfrastructureLayer.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("EmployeeId1");
+                    b.HasIndex("EmployeeId");
 
                     b.ToTable("Payrolls");
                 });
@@ -415,8 +412,8 @@ namespace InfrastructureLayer.Migrations
             modelBuilder.Entity("DomainLayer.Models.Payroll.PayrollModel", b =>
                 {
                     b.HasOne("DomainLayer.Models.Employee.EmployeeModel", "Employee")
-                        .WithMany()
-                        .HasForeignKey("EmployeeId1")
+                        .WithMany("Payrolls")
+                        .HasForeignKey("EmployeeId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -444,6 +441,8 @@ namespace InfrastructureLayer.Migrations
                     b.Navigation("Attendances");
 
                     b.Navigation("Leaves");
+
+                    b.Navigation("Payrolls");
                 });
 
             modelBuilder.Entity("DomainLayer.Models.Role.RoleModel", b =>

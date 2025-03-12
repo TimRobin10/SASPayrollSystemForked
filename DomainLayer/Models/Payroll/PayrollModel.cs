@@ -187,7 +187,7 @@ namespace DomainLayer.Models.Payroll
 
 
         [ForeignKey(nameof(EmployeeId))]
-        public int EmployeeId { get; set; }
+        public Guid EmployeeId { get; set; }
         public EmployeeModel Employee { get; set; } = null!;
 
         public void UpdatePayroll(bool skipAttendancesAndLeaves = false)

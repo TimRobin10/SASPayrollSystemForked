@@ -12,7 +12,7 @@ namespace DomainLayer.Models.Payroll
         decimal DaysAmount { get; set; }
         decimal DisposableIncome { get; set; }
         EmployeeModel Employee { get; set; }
-        int EmployeeId { get; set; }
+        Guid EmployeeId { get; set; }
         int Id { get; set; }
         decimal IncomeNetOfTax { get; set; }
         decimal LatesDeductionAmount { get; set; }

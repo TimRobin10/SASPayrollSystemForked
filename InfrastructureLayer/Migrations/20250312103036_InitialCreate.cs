@@ -201,15 +201,14 @@ namespace InfrastructureLayer.Migrations
                     AddAdjustments = table.Column<decimal>(type: "money", nullable: false),
                     SubtractAdjustments = table.Column<decimal>(type: "money", nullable: false),
                     NetPay = table.Column<decimal>(type: "money", nullable: false),
-                    EmployeeId = table.Column<int>(type: "int", nullable: false),
-                    EmployeeId1 = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
+                    EmployeeId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Payrolls", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Payrolls_Employees_EmployeeId1",
-                        column: x => x.EmployeeId1,
+                        name: "FK_Payrolls_Employees_EmployeeId",
+                        column: x => x.EmployeeId,
                         principalTable: "Employees",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
@@ -231,9 +230,9 @@ namespace InfrastructureLayer.Migrations
                 column: "EmployeeId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Payrolls_EmployeeId1",
+                name: "IX_Payrolls_EmployeeId",
                 table: "Payrolls",
-                column: "EmployeeId1");
+                column: "EmployeeId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Users_RoleId",
