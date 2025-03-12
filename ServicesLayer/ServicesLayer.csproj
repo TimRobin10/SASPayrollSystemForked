@@ -7,7 +7,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\InfrastructureLayer\InfrastructureLayer.csproj" />
+    <Compile Remove="d\**" />
+    <EmbeddedResource Remove="d\**" />
+    <None Remove="d\**" />
   </ItemGroup>
 
 </Project>

@@ -31,6 +31,8 @@ namespace DomainLayer.Models.Leave
         [Column(TypeName = "tinyint")]
         public FormStatus Status { get; set; } = FormStatus.Pending;
 
-        public virtual required EmployeeModel Employee { get; set; }
+        [ForeignKey(nameof(EmployeeId))]
+        public Guid EmployeeId { get; set; }
+        public required EmployeeModel Employee;
     }
 }

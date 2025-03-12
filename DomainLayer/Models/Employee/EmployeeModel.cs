@@ -2,9 +2,11 @@
 using DomainLayer.Models.Attendance;
 using DomainLayer.Models.Department;
 using DomainLayer.Models.Leave;
+using DomainLayer.Models.Salary;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -43,8 +45,16 @@ namespace DomainLayer.Models.Employee
             set => _jobTitle = formatter.ToProperCase(value);
         }
 
+        [Required]
+        [Column(TypeName = "money")]
+        public decimal BasicDailyRate { get; set; }
+
+        [Column(TypeName = "tinyint")]
+        public uint LeaveCredits { get; set; } = 0;
+
         public ICollection<AttendanceModel> Attendances { get; set; } = [];
         public virtual required DepartmentModel Department { get; set; }
         public ICollection<LeaveModel> Leaves { get; set; } = [];
+        public ICollection<SalaryModel> Salaries { get; set; } = [];
     }
 }
