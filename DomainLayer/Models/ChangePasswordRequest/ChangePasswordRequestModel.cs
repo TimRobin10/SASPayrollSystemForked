@@ -1,4 +1,5 @@
 ﻿using DomainLayer.Common;
+using DomainLayer.Enums;
 using DomainLayer.Models.User;
 using System;
 using System.Collections.Generic;
@@ -8,15 +9,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DomainLayer.Models.NewUserRequest
+namespace DomainLayer.Models.ChangePasswordRequest
 {
-    public class NewUserRequestModel : INewUserRequestModel
+    public class ChangePasswordRequestModel : IChangePasswordRequestModel
     {
         private const int saltSize = 32;
-
         private string _password = string.Empty;
 
-        public NewUserRequestModel()
+        public ChangePasswordRequestModel()
         {
             var currentDateTime = DateTime.Now;
             DateOfRequest = DateOnly.FromDateTime(currentDateTime);
@@ -25,16 +25,6 @@ namespace DomainLayer.Models.NewUserRequest
 
         [Key]
         public Guid Id { get; set; }
-
-        [Required(AllowEmptyStrings = false, ErrorMessage = "Username is required")]
-        [StringLength(20, MinimumLength = 2, ErrorMessage = "Username must be 2 - 20 characters only")]
-        public string UserName
-        { get; set; } = null!;
-
-        [Required(ErrorMessage = "Email is required")]
-        [EmailAddress(ErrorMessage = "Must be a valid email address")]
-        public string Email
-        { get; set; } = null!;
 
         [NotMapped]
         public string Password
@@ -60,6 +50,7 @@ namespace DomainLayer.Models.NewUserRequest
         [Column(TypeName = "binary(32)")]
         public byte[] PasswordHash { get; private set; } = [];
 
+
         [Required]
         [Column(TypeName = "date")]
         public DateOnly DateOfRequest { get; private set; }
@@ -67,5 +58,9 @@ namespace DomainLayer.Models.NewUserRequest
         [Required]
         [Column(TypeName = "time")]
         public TimeOnly TimeOfRequest { get; private set; }
+
+        [Required]
+        [Column(TypeName = "tinyint")]
+        public FormStatus Status { get; set; } = FormStatus.Pending;
     }
 }

@@ -9,16 +9,16 @@ namespace PresentationLayer.Presenters
 {
     public class SignInPresenter : BasePresenter, ISignInPresenter
     {
-        private readonly IServicesMesh _serviceMesh;
+        private readonly IUnitOfWork _unitOfWork;
 
-        public SignInPresenter(IServicesMesh servicesMesh)
+        public SignInPresenter(IUnitOfWork servicesMesh)
         {
-            _serviceMesh = servicesMesh;
+            _unitOfWork = servicesMesh;
         }
 
         public async Task AuthenticateUser(string userName, string password)
         {
-            await _serviceMesh.LoginUser(userName, password);
+            await _unitOfWork.LoginUser(userName, password);
         }
     }
 }

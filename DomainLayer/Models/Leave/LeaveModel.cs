@@ -33,6 +33,6 @@ namespace DomainLayer.Models.Leave
 
         [ForeignKey(nameof(EmployeeId))]
         public Guid EmployeeId { get; set; }
-        public required EmployeeModel Employee;
+        public required EmployeeModel Employee { get; set; }
     }
 }

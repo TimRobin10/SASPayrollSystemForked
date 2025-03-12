@@ -12,4 +12,8 @@
     <None Remove="d\**" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\InfrastructureLayer\InfrastructureLayer.csproj" />
+  </ItemGroup>
+
 </Project>

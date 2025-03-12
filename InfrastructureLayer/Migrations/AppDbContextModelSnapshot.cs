@@ -34,16 +34,13 @@ namespace InfrastructureLayer.Migrations
                     b.Property<Guid>("EmployeeId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid?>("EmployeeModelId")
-                        .HasColumnType("uniqueidentifier");
-
                     b.Property<byte>("Status")
                         .HasColumnType("tinyint");
 
                     b.Property<TimeOnly>("TimeIn")
                         .HasColumnType("time");
 
-                    b.Property<TimeOnly?>("TimeOut")
+                    b.Property<TimeOnly>("TimeOut")
                         .HasColumnType("time");
 
                     b.Property<byte>("TotalHours")
@@ -51,9 +48,37 @@ namespace InfrastructureLayer.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("EmployeeModelId");
+                    b.HasIndex("EmployeeId");
 
                     b.ToTable("Attendances");
+                });
+
+            modelBuilder.Entity("DomainLayer.Models.ChangePasswordRequest.ChangePasswordRequestModel", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateOnly>("DateOfRequest")
+                        .HasColumnType("date");
+
+                    b.Property<byte[]>("PasswordHash")
+                        .IsRequired()
+                        .HasColumnType("binary(32)");
+
+                    b.Property<byte[]>("Salt")
+                        .IsRequired()
+                        .HasColumnType("binary(32)");
+
+                    b.Property<byte>("Status")
+                        .HasColumnType("tinyint");
+
+                    b.Property<TimeOnly>("TimeOfRequest")
+                        .HasColumnType("time");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("ChangePasswordRequests");
                 });
 
             modelBuilder.Entity("DomainLayer.Models.Department.DepartmentModel", b =>
@@ -63,6 +88,11 @@ namespace InfrastructureLayer.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
+
+                    b.Property<string>("NormalizedName")
                         .IsRequired()
                         .HasMaxLength(20)
                         .HasColumnType("nvarchar(20)");
@@ -78,7 +108,7 @@ namespace InfrastructureLayer.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<decimal>("BasicDailyRate")
+                    b.Property<decimal>("BasicSemiMonthlyRate")
                         .HasColumnType("money");
 
                     b.Property<DateOnly>("BirthDay")
@@ -90,28 +120,18 @@ namespace InfrastructureLayer.Migrations
                     b.Property<DateOnly>("EmploymentDate")
                         .HasColumnType("date");
 
-                    b.Property<string>("FirstName")
+                    b.Property<string>("FullName")
                         .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
+                        .HasMaxLength(70)
+                        .HasColumnType("nvarchar(70)");
 
                     b.Property<string>("JobTitle")
                         .IsRequired()
                         .HasMaxLength(20)
                         .HasColumnType("nvarchar(20)");
 
-                    b.Property<string>("LastName")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
                     b.Property<byte>("LeaveCredits")
                         .HasColumnType("tinyint");
-
-                    b.Property<string>("MiddleInitial")
-                        .IsRequired()
-                        .HasMaxLength(1)
-                        .HasColumnType("nvarchar(1)");
 
                     b.HasKey("Id");
 
@@ -138,15 +158,12 @@ namespace InfrastructureLayer.Migrations
                     b.Property<Guid>("EmployeeId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid?>("EmployeeModelId")
-                        .HasColumnType("uniqueidentifier");
-
                     b.Property<byte>("Status")
                         .HasColumnType("tinyint");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("EmployeeModelId");
+                    b.HasIndex("EmployeeId");
 
                     b.ToTable("Leaves");
                 });
@@ -185,6 +202,123 @@ namespace InfrastructureLayer.Migrations
                     b.ToTable("NewUserRequests");
                 });
 
+            modelBuilder.Entity("DomainLayer.Models.Payroll.PayrollModel", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<decimal>("AddAdjustments")
+                        .HasColumnType("money");
+
+                    b.Property<decimal>("CashAdvance")
+                        .HasColumnType("money");
+
+                    b.Property<DateOnly>("CutOffEnd")
+                        .HasColumnType("date");
+
+                    b.Property<DateOnly>("CutOffStart")
+                        .HasColumnType("date");
+
+                    b.Property<byte>("Days")
+                        .HasColumnType("tinyint");
+
+                    b.Property<decimal>("DaysAmount")
+                        .HasColumnType("money");
+
+                    b.Property<decimal>("DisposableIncome")
+                        .HasColumnType("money");
+
+                    b.Property<int>("EmployeeId")
+                        .HasColumnType("int");
+
+                    b.Property<Guid>("EmployeeId1")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<decimal>("IncomeNetOfTax")
+                        .HasColumnType("money");
+
+                    b.Property<decimal>("LatesDeductionAmount")
+                        .HasColumnType("money");
+
+                    b.Property<decimal>("LatesMinutes")
+                        .HasColumnType("decimal");
+
+                    b.Property<decimal>("NetPay")
+                        .HasColumnType("money");
+
+                    b.Property<byte>("Nights")
+                        .HasColumnType("tinyint");
+
+                    b.Property<decimal>("NightsAmount")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<byte>("NightsOT")
+                        .HasColumnType("tinyint");
+
+                    b.Property<decimal>("NightsOTAmount")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal>("PagIbigAmount")
+                        .HasColumnType("money");
+
+                    b.Property<decimal>("PagIbigLoanAmount")
+                        .HasColumnType("money");
+
+                    b.Property<DateOnly>("PayrollDate")
+                        .HasColumnType("date");
+
+                    b.Property<decimal>("PhilHealthAmount")
+                        .HasColumnType("money");
+
+                    b.Property<byte>("RegularOT")
+                        .HasColumnType("tinyint");
+
+                    b.Property<decimal>("RegularOTAmount")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal>("SSSAmount")
+                        .HasColumnType("money");
+
+                    b.Property<decimal>("SSSLoanAmount")
+                        .HasColumnType("money");
+
+                    b.Property<byte>("SkipAttendancesAndLeaves")
+                        .HasColumnType("tinyint");
+
+                    b.Property<decimal>("SubtractAdjustments")
+                        .HasColumnType("money");
+
+                    b.Property<decimal>("TaxWithholdings")
+                        .HasColumnType("money");
+
+                    b.Property<decimal>("TaxableIncome")
+                        .HasColumnType("money");
+
+                    b.Property<decimal>("TotalBasic")
+                        .HasColumnType("money");
+
+                    b.Property<decimal>("TotalCompanyLoans")
+                        .HasColumnType("money");
+
+                    b.Property<decimal>("TotalContributions")
+                        .HasColumnType("money");
+
+                    b.Property<decimal>("TotalOT")
+                        .HasColumnType("money");
+
+                    b.Property<decimal>("Vale")
+                        .HasColumnType("money");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("EmployeeId1");
+
+                    b.ToTable("Payrolls");
+                });
+
             modelBuilder.Entity("DomainLayer.Models.Role.RoleModel", b =>
                 {
                     b.Property<Guid>("Id")
@@ -204,57 +338,6 @@ namespace InfrastructureLayer.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Roles");
-                });
-
-            modelBuilder.Entity("DomainLayer.Models.Salary.SalaryModel", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<byte>("Days")
-                        .HasColumnType("tinyint");
-
-                    b.Property<decimal>("DaysAmount")
-                        .HasColumnType("money");
-
-                    b.Property<Guid>("EmployeeId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid?>("EmployeeModelId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<byte>("Nights")
-                        .HasColumnType("tinyint");
-
-                    b.Property<decimal>("NightsAmount")
-                        .HasColumnType("money");
-
-                    b.Property<byte>("NightsOT")
-                        .HasColumnType("tinyint");
-
-                    b.Property<decimal>("NightsOTAmount")
-                        .HasColumnType("money");
-
-                    b.Property<DateOnly>("PayDay")
-                        .HasColumnType("date");
-
-                    b.Property<byte>("RegularOT")
-                        .HasColumnType("tinyint");
-
-                    b.Property<decimal>("RegularOTAmount")
-                        .HasColumnType("money");
-
-                    b.Property<decimal>("TotalBasic")
-                        .HasColumnType("money");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("EmployeeModelId");
-
-                    b.ToTable("Salaries");
                 });
 
             modelBuilder.Entity("DomainLayer.Models.User.UserModel", b =>
@@ -298,9 +381,13 @@ namespace InfrastructureLayer.Migrations
 
             modelBuilder.Entity("DomainLayer.Models.Attendance.AttendanceModel", b =>
                 {
-                    b.HasOne("DomainLayer.Models.Employee.EmployeeModel", null)
+                    b.HasOne("DomainLayer.Models.Employee.EmployeeModel", "Employee")
                         .WithMany("Attendances")
-                        .HasForeignKey("EmployeeModelId");
+                        .HasForeignKey("EmployeeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Employee");
                 });
 
             modelBuilder.Entity("DomainLayer.Models.Employee.EmployeeModel", b =>
@@ -316,16 +403,24 @@ namespace InfrastructureLayer.Migrations
 
             modelBuilder.Entity("DomainLayer.Models.Leave.LeaveModel", b =>
                 {
-                    b.HasOne("DomainLayer.Models.Employee.EmployeeModel", null)
+                    b.HasOne("DomainLayer.Models.Employee.EmployeeModel", "Employee")
                         .WithMany("Leaves")
-                        .HasForeignKey("EmployeeModelId");
+                        .HasForeignKey("EmployeeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Employee");
                 });
 
-            modelBuilder.Entity("DomainLayer.Models.Salary.SalaryModel", b =>
+            modelBuilder.Entity("DomainLayer.Models.Payroll.PayrollModel", b =>
                 {
-                    b.HasOne("DomainLayer.Models.Employee.EmployeeModel", null)
-                        .WithMany("Salaries")
-                        .HasForeignKey("EmployeeModelId");
+                    b.HasOne("DomainLayer.Models.Employee.EmployeeModel", "Employee")
+                        .WithMany()
+                        .HasForeignKey("EmployeeId1")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Employee");
                 });
 
             modelBuilder.Entity("DomainLayer.Models.User.UserModel", b =>
@@ -349,8 +444,6 @@ namespace InfrastructureLayer.Migrations
                     b.Navigation("Attendances");
 
                     b.Navigation("Leaves");
-
-                    b.Navigation("Salaries");
                 });
 
             modelBuilder.Entity("DomainLayer.Models.Role.RoleModel", b =>

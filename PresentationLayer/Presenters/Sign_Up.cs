@@ -10,15 +10,15 @@ namespace PresentationLayer.Presenters
 {
     public class SignUpPresenter : BasePresenter, ISignUpPresenter
     {
-        private readonly IServicesMesh _servicesMesh;
+        private readonly IUnitOfWork _unitOfWork;
 
-        public SignUpPresenter(IServicesMesh servicesMesh)
+        public SignUpPresenter(IUnitOfWork servicesMesh)
         {
-            _servicesMesh = servicesMesh;
+            _unitOfWork = servicesMesh;
         }
         public async Task NewUserRequest(string username, string password, string email)
         {
-            await _servicesMesh.NewUserRequest(username, password, email);
+            await _unitOfWork.NewUserRequest(username, password, email);
         }
     }
 }

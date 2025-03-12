@@ -1,4 +1,5 @@
-﻿using DomainLayer.Models.Role;
+﻿using DomainLayer.Models.ChangePasswordRequest;
+using DomainLayer.Models.Role;
 
 namespace DomainLayer.Models.User
 {
@@ -14,5 +15,7 @@ namespace DomainLayer.Models.User
         byte[] Salt { get; }
         string? Url { get; set; }
         string UserName { get; set; }
+
+        void ConfirmPasswordChange(IChangePasswordRequestModel request);
     }
 }

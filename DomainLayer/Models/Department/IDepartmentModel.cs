@@ -7,5 +7,6 @@ namespace DomainLayer.Models.Department
         ICollection<EmployeeModel> Employees { get; set; }
         Guid Id { get; set; }
         string Name { get; set; }
+        string NormalizedName { get; }
     }
 }

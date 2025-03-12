@@ -1,4 +1,7 @@
 ﻿using DomainLayer.Common;
+using DomainLayer.Enums;
+using DomainLayer.Models.ChangePasswordRequest;
+using DomainLayer.Models.Employee;
 using DomainLayer.Models.NewUserRequest;
 using DomainLayer.Models.Role;
 using System.ComponentModel.DataAnnotations;
@@ -68,9 +71,17 @@ namespace DomainLayer.Models.User
         [Url(ErrorMessage = "Must be a valid Url")]
         public string? Url { get; set; }
 
-        //Navigation
         [ForeignKey(nameof(RoleId))]
         public Guid RoleId { get; set; }
-        public virtual RoleModel Role { get; set; } = null!;
+        public RoleModel Role { get; set; } = null!;
+
+        public void ConfirmPasswordChange(IChangePasswordRequestModel request)
+        {
+            if (request.Status == FormStatus.Approved)
+            {
+                Salt = request.Salt;
+                PasswordHash = request.PasswordHash;
+            }
+        }
     }
 }

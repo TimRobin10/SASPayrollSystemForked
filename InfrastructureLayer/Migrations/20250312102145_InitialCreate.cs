@@ -12,11 +12,28 @@ namespace InfrastructureLayer.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
+                name: "ChangePasswordRequests",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Salt = table.Column<byte[]>(type: "binary(32)", nullable: false),
+                    PasswordHash = table.Column<byte[]>(type: "binary(32)", nullable: false),
+                    DateOfRequest = table.Column<DateOnly>(type: "date", nullable: false),
+                    TimeOfRequest = table.Column<TimeOnly>(type: "time", nullable: false),
+                    Status = table.Column<byte>(type: "tinyint", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ChangePasswordRequests", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Departments",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Name = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false)
+                    Name = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
+                    NormalizedName = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false)
                 },
                 constraints: table =>
                 {
@@ -58,13 +75,11 @@ namespace InfrastructureLayer.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    FirstName = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    MiddleInitial = table.Column<string>(type: "nvarchar(1)", maxLength: 1, nullable: false),
-                    LastName = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    FullName = table.Column<string>(type: "nvarchar(70)", maxLength: 70, nullable: false),
                     BirthDay = table.Column<DateOnly>(type: "date", nullable: false),
                     EmploymentDate = table.Column<DateOnly>(type: "date", nullable: false),
                     JobTitle = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
-                    BasicDailyRate = table.Column<decimal>(type: "money", nullable: false),
+                    BasicSemiMonthlyRate = table.Column<decimal>(type: "money", nullable: false),
                     LeaveCredits = table.Column<byte>(type: "tinyint", nullable: false),
                     DepartmentId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
                 },
@@ -110,20 +125,20 @@ namespace InfrastructureLayer.Migrations
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Date = table.Column<DateOnly>(type: "date", nullable: false),
                     TimeIn = table.Column<TimeOnly>(type: "time", nullable: false),
-                    TimeOut = table.Column<TimeOnly>(type: "time", nullable: true),
+                    TimeOut = table.Column<TimeOnly>(type: "time", nullable: false),
                     TotalHours = table.Column<byte>(type: "tinyint", nullable: false),
                     Status = table.Column<byte>(type: "tinyint", nullable: false),
-                    EmployeeId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    EmployeeModelId = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
+                    EmployeeId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Attendances", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Attendances_Employees_EmployeeModelId",
-                        column: x => x.EmployeeModelId,
+                        name: "FK_Attendances_Employees_EmployeeId",
+                        column: x => x.EmployeeId,
                         principalTable: "Employees",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -135,52 +150,75 @@ namespace InfrastructureLayer.Migrations
                     DateOfAbsence = table.Column<DateOnly>(type: "date", nullable: false),
                     Duration = table.Column<short>(type: "smallint", nullable: false),
                     Status = table.Column<byte>(type: "tinyint", nullable: false),
-                    EmployeeId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    EmployeeModelId = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
+                    EmployeeId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Leaves", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Leaves_Employees_EmployeeModelId",
-                        column: x => x.EmployeeModelId,
+                        name: "FK_Leaves_Employees_EmployeeId",
+                        column: x => x.EmployeeId,
                         principalTable: "Employees",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Salaries",
+                name: "Payrolls",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    PayDay = table.Column<DateOnly>(type: "date", nullable: false),
+                    PayrollDate = table.Column<DateOnly>(type: "date", nullable: false),
+                    CutOffStart = table.Column<DateOnly>(type: "date", nullable: false),
+                    CutOffEnd = table.Column<DateOnly>(type: "date", nullable: false),
+                    SkipAttendancesAndLeaves = table.Column<byte>(type: "tinyint", nullable: false),
                     Days = table.Column<byte>(type: "tinyint", nullable: false),
                     DaysAmount = table.Column<decimal>(type: "money", nullable: false),
                     RegularOT = table.Column<byte>(type: "tinyint", nullable: false),
-                    RegularOTAmount = table.Column<decimal>(type: "money", nullable: false),
+                    RegularOTAmount = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     Nights = table.Column<byte>(type: "tinyint", nullable: false),
-                    NightsAmount = table.Column<decimal>(type: "money", nullable: false),
+                    NightsAmount = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     NightsOT = table.Column<byte>(type: "tinyint", nullable: false),
-                    NightsOTAmount = table.Column<decimal>(type: "money", nullable: false),
+                    NightsOTAmount = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    LatesMinutes = table.Column<decimal>(type: "decimal(18,0)", nullable: false),
+                    LatesDeductionAmount = table.Column<decimal>(type: "money", nullable: false),
                     TotalBasic = table.Column<decimal>(type: "money", nullable: false),
-                    EmployeeId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    EmployeeModelId = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
+                    TotalOT = table.Column<decimal>(type: "money", nullable: false),
+                    SSSAmount = table.Column<decimal>(type: "money", nullable: false),
+                    PagIbigAmount = table.Column<decimal>(type: "money", nullable: false),
+                    PhilHealthAmount = table.Column<decimal>(type: "money", nullable: false),
+                    TotalContributions = table.Column<decimal>(type: "money", nullable: false),
+                    TaxableIncome = table.Column<decimal>(type: "money", nullable: false),
+                    TaxWithholdings = table.Column<decimal>(type: "money", nullable: false),
+                    IncomeNetOfTax = table.Column<decimal>(type: "money", nullable: false),
+                    SSSLoanAmount = table.Column<decimal>(type: "money", nullable: false),
+                    PagIbigLoanAmount = table.Column<decimal>(type: "money", nullable: false),
+                    DisposableIncome = table.Column<decimal>(type: "money", nullable: false),
+                    CashAdvance = table.Column<decimal>(type: "money", nullable: false),
+                    Vale = table.Column<decimal>(type: "money", nullable: false),
+                    TotalCompanyLoans = table.Column<decimal>(type: "money", nullable: false),
+                    AddAdjustments = table.Column<decimal>(type: "money", nullable: false),
+                    SubtractAdjustments = table.Column<decimal>(type: "money", nullable: false),
+                    NetPay = table.Column<decimal>(type: "money", nullable: false),
+                    EmployeeId = table.Column<int>(type: "int", nullable: false),
+                    EmployeeId1 = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Salaries", x => x.Id);
+                    table.PrimaryKey("PK_Payrolls", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Salaries_Employees_EmployeeModelId",
-                        column: x => x.EmployeeModelId,
+                        name: "FK_Payrolls_Employees_EmployeeId1",
+                        column: x => x.EmployeeId1,
                         principalTable: "Employees",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Attendances_EmployeeModelId",
+                name: "IX_Attendances_EmployeeId",
                 table: "Attendances",
-                column: "EmployeeModelId");
+                column: "EmployeeId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Employees_DepartmentId",
@@ -188,14 +226,14 @@ namespace InfrastructureLayer.Migrations
                 column: "DepartmentId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Leaves_EmployeeModelId",
+                name: "IX_Leaves_EmployeeId",
                 table: "Leaves",
-                column: "EmployeeModelId");
+                column: "EmployeeId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Salaries_EmployeeModelId",
-                table: "Salaries",
-                column: "EmployeeModelId");
+                name: "IX_Payrolls_EmployeeId1",
+                table: "Payrolls",
+                column: "EmployeeId1");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Users_RoleId",
@@ -210,13 +248,16 @@ namespace InfrastructureLayer.Migrations
                 name: "Attendances");
 
             migrationBuilder.DropTable(
+                name: "ChangePasswordRequests");
+
+            migrationBuilder.DropTable(
                 name: "Leaves");
 
             migrationBuilder.DropTable(
                 name: "NewUserRequests");
 
             migrationBuilder.DropTable(
-                name: "Salaries");
+                name: "Payrolls");
 
             migrationBuilder.DropTable(
                 name: "Users");

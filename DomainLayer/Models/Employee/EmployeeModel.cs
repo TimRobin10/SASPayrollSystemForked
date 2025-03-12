@@ -2,7 +2,6 @@
 using DomainLayer.Models.Attendance;
 using DomainLayer.Models.Department;
 using DomainLayer.Models.Leave;
-using DomainLayer.Models.Salary;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -47,14 +46,13 @@ namespace DomainLayer.Models.Employee
 
         [Required]
         [Column(TypeName = "money")]
-        public decimal BasicDailyRate { get; set; }
+        public decimal BasicSemiMonthlyRate { get; set; }
 
         [Column(TypeName = "tinyint")]
         public uint LeaveCredits { get; set; } = 0;
 
-        public ICollection<AttendanceModel> Attendances { get; set; } = [];
         public virtual required DepartmentModel Department { get; set; }
-        public ICollection<LeaveModel> Leaves { get; set; } = [];
-        public ICollection<SalaryModel> Salaries { get; set; } = [];
+        public ICollection<AttendanceModel> Attendances { get; } = [];
+        public ICollection<LeaveModel> Leaves { get; } = [];
     }
 }

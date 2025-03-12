@@ -9,20 +9,21 @@ using ServicesLayer.Common;
 
 namespace ServicesLayer
 {
-    public interface IServicesMesh
+    public interface IUnitOfWork
     {
-        IBaseServices<AttendanceModel> AttendanceServices { get; }
+        IBaseServices<AttendanceModel> AttendanceRepository { get; }
         IUserModel? CurrentUser { get; }
-        IBaseServices<DepartmentModel> DepartmentServices { get; }
-        IBaseServices<EmployeeModel> EmployeeServices { get; }
-        IBaseServices<LeaveModel> LeaveServices { get; }
-        IBaseServices<NewUserRequestModel> NewUserRequestServices { get; }
-        IBaseServices<RoleModel> RoleServices { get; }
-        IBaseServices<UserModel> UserServices { get; }
+        IBaseServices<DepartmentModel> DepartmentRepository { get; }
+        IBaseServices<EmployeeModel> EmployeeRepository { get; }
+        IBaseServices<LeaveModel> LeaveRepository { get; }
+        IBaseServices<NewUserRequestModel> NewUserRequestRepository { get; }
+        IBaseServices<RoleModel> RoleRepository { get; }
+        IBaseServices<UserModel> UserRepository { get; }
 
         Task ApproveNewUserRequest(string requestEmail, string roleName = null);
         Task InitialSeeding();
         Task LoginUser(string username, string password);
         Task NewUserRequest(string username, string password, string email);
+        void Save();
     }
 }

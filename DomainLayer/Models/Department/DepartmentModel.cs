@@ -13,7 +13,7 @@ namespace DomainLayer.Models.Department
     public class DepartmentModel : IDepartmentModel
     {
         private string _name = string.Empty;
-        private TextInfo textInfo = new CultureInfo("en-US", false).TextInfo;
+        private Formatter formatter = new Formatter();
 
         [Key]
         public Guid Id { get; set; }
@@ -28,10 +28,14 @@ namespace DomainLayer.Models.Department
             }
             set
             {
-                var formatter = new Formatter();
-                _name = formatter.ToProperCase(value);
+                _name = formatter.ToProperCase(value.Trim().ToLowerInvariant());
+                NormalizedName = Name.ToUpperInvariant();
             }
         }
+
+        [Required]
+        [StringLength(20)]
+        public string NormalizedName { get; private set; } = null!;
 
         public virtual ICollection<EmployeeModel> Employees { get; set; } = [];
     }

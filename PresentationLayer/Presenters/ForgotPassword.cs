@@ -9,11 +9,11 @@ namespace PresentationLayer.Presenters
 {
     public class ForgotPasswordPresenter : BasePresenter
     {
-        private readonly IServicesMesh _servicesMesh;
+        private readonly IUnitOfWork _unitOfWork;
 
-        public ForgotPasswordPresenter(IServicesMesh servicesMesh)
+        public ForgotPasswordPresenter(IUnitOfWork servicesMesh)
         {
-            _servicesMesh = servicesMesh;   
+            _unitOfWork = servicesMesh;   
         }
 
         /*public async bool SendPasswordResetLink(string email)
