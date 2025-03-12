@@ -53,7 +53,7 @@ namespace InfrastructureLayer.Migrations
                     b.ToTable("Attendances");
                 });
 
-            modelBuilder.Entity("DomainLayer.Models.ChangePasswordRequest.ChangePasswordRequestModel", b =>
+            modelBuilder.Entity("DomainLayer.Models.ChangePasswordRequest.ForgotPasswordRequestModel", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -61,6 +61,10 @@ namespace InfrastructureLayer.Migrations
 
                     b.Property<DateOnly>("DateOfRequest")
                         .HasColumnType("date");
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<byte[]>("PasswordHash")
                         .IsRequired()
@@ -76,9 +80,14 @@ namespace InfrastructureLayer.Migrations
                     b.Property<TimeOnly>("TimeOfRequest")
                         .HasColumnType("time");
 
+                    b.Property<string>("UserName")
+                        .IsRequired()
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
+
                     b.HasKey("Id");
 
-                    b.ToTable("ChangePasswordRequests");
+                    b.ToTable("ForgotPasswordRequests");
                 });
 
             modelBuilder.Entity("DomainLayer.Models.Department.DepartmentModel", b =>

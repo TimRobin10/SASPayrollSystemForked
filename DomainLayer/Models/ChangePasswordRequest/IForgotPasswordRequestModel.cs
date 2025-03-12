@@ -2,7 +2,7 @@
 
 namespace DomainLayer.Models.ChangePasswordRequest
 {
-    public interface IChangePasswordRequestModel
+    public interface IForgotPasswordRequestModel
     {
         string ConfirmPassword { set; }
         DateOnly DateOfRequest { get; }

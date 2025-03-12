@@ -26,7 +26,7 @@ namespace ServicesLayer
 
         //Repositories
         private readonly IBaseRepository<AttendanceModel> _attendanceRepository;
-        private readonly IBaseRepository<ChangePasswordRequestModel> _changePasswordRequestRepository;
+        private readonly IBaseRepository<ForgotPasswordRequestModel> _forgotPasswordRequestRepository;
         private readonly IBaseRepository<DepartmentModel> _departmentRepository;
         private readonly IBaseRepository<EmployeeModel> _employeeRepository;
         private readonly IBaseRepository<LeaveModel> _leaveRepository;
@@ -40,7 +40,7 @@ namespace ServicesLayer
 
         //Services List
         public IBaseServices<AttendanceModel> AttendanceRepository { get; private set; }
-        public IBaseServices<ChangePasswordRequestModel> ChangePasswordRequestRepository { get; private set; }
+        public IBaseServices<ForgotPasswordRequestModel> ForgotPasswordRequestRepository { get; private set; }
         public IBaseServices<DepartmentModel> DepartmentRepository { get; private set; }
         public IBaseServices<EmployeeModel> EmployeeRepository { get; private set; }
         public IBaseServices<LeaveModel> LeaveRepository { get; private set; }
@@ -54,7 +54,7 @@ namespace ServicesLayer
             _db = new AppDbContext();
 
             _attendanceRepository ??= new BaseRepository<AttendanceModel>();
-            _changePasswordRequestRepository ??= new BaseRepository<ChangePasswordRequestModel>();
+            _forgotPasswordRequestRepository ??= new BaseRepository<ForgotPasswordRequestModel>();
             _departmentRepository ??= new BaseRepository<DepartmentModel>();
             _employeeRepository ??= new BaseRepository<EmployeeModel>();
             _leaveRepository ??= new BaseRepository<LeaveModel>();
@@ -66,7 +66,7 @@ namespace ServicesLayer
             _modelDataAnnotationsCheck ??= new ModelDataAnnotationsCheck();
 
             AttendanceRepository ??= new BaseServices<AttendanceModel>(_attendanceRepository, _modelDataAnnotationsCheck);
-            ChangePasswordRequestRepository ??= new BaseServices<ChangePasswordRequestModel>(_changePasswordRequestRepository, _modelDataAnnotationsCheck);
+            ForgotPasswordRequestRepository ??= new BaseServices<ForgotPasswordRequestModel>(_forgotPasswordRequestRepository, _modelDataAnnotationsCheck);
             DepartmentRepository ??= new BaseServices<DepartmentModel>(_departmentRepository, _modelDataAnnotationsCheck);
             EmployeeRepository ??= new BaseServices<EmployeeModel>(_employeeRepository, _modelDataAnnotationsCheck);
             LeaveRepository ??= new BaseServices<LeaveModel>(_leaveRepository, _modelDataAnnotationsCheck);
@@ -180,15 +180,15 @@ namespace ServicesLayer
         {
             var user = await UserRepository.GetAsync(u => u.UserName == username && u.Email == email)
                 ?? throw new UserNotFoundException();
-            var request = new ChangePasswordRequestModel()
+            var request = new ForgotPasswordRequestModel()
             {
                 UserName = username,
                 Email = email,
                 Password = password,
                 ConfirmPassword = confirmPassword
             };
-            ChangePasswordRequestRepository.ValidateModelDataAnnotations(request);
-            await ChangePasswordRequestRepository.AddAsync(request);
+            ForgotPasswordRequestRepository.ValidateModelDataAnnotations(request);
+            await ForgotPasswordRequestRepository.AddAsync(request);
         }
     }
 }

@@ -12,12 +12,12 @@ using System.Threading.Tasks;
 
 namespace DomainLayer.Models.ChangePasswordRequest
 {
-    public class ChangePasswordRequestModel : IChangePasswordRequestModel
+    public class ForgotPasswordRequestModel : IForgotPasswordRequestModel
     {
         private const int saltSize = 32;
         private string _password = string.Empty;
 
-        public ChangePasswordRequestModel()
+        public ForgotPasswordRequestModel()
         {
             var currentDateTime = DateTime.Now;
             DateOfRequest = DateOnly.FromDateTime(currentDateTime);
