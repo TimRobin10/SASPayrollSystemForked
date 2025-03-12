@@ -24,6 +24,7 @@ namespace ServicesLayer
         Task InitialSeeding();
         Task LoginUser(string username, string password);
         Task NewUserRequest(string username, string password, string email);
+        Task ForgotPasswordRequest(string username, string email, string password, string confirmPassword);
         void Save();
     }
 }

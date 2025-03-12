@@ -26,7 +26,7 @@ namespace ServicesLayer
 
         //Repositories
         private readonly IBaseRepository<AttendanceModel> _attendanceRepository;
-        private readonly IBaseRepository<ChangePasswordRequestModel> _changePassowrdRequestRepository;
+        private readonly IBaseRepository<ChangePasswordRequestModel> _changePasswordRequestRepository;
         private readonly IBaseRepository<DepartmentModel> _departmentRepository;
         private readonly IBaseRepository<EmployeeModel> _employeeRepository;
         private readonly IBaseRepository<LeaveModel> _leaveRepository;
@@ -40,10 +40,12 @@ namespace ServicesLayer
 
         //Services List
         public IBaseServices<AttendanceModel> AttendanceRepository { get; private set; }
+        public IBaseServices<ChangePasswordRequestModel> ChangePasswordRequestRepository { get; private set; }
         public IBaseServices<DepartmentModel> DepartmentRepository { get; private set; }
         public IBaseServices<EmployeeModel> EmployeeRepository { get; private set; }
         public IBaseServices<LeaveModel> LeaveRepository { get; private set; }
         public IBaseServices<NewUserRequestModel> NewUserRequestRepository { get; private set; }
+        public IBaseServices<PayrollModel> PayrollRepository { get; private set; }
         public IBaseServices<RoleModel> RoleRepository { get; private set; }
         public IBaseServices<UserModel> UserRepository { get; private set; }
 
@@ -52,7 +54,7 @@ namespace ServicesLayer
             _db = new AppDbContext();
 
             _attendanceRepository ??= new BaseRepository<AttendanceModel>();
-            _changePassowrdRequestRepository ??= new BaseRepository<ChangePasswordRequestModel>();
+            _changePasswordRequestRepository ??= new BaseRepository<ChangePasswordRequestModel>();
             _departmentRepository ??= new BaseRepository<DepartmentModel>();
             _employeeRepository ??= new BaseRepository<EmployeeModel>();
             _leaveRepository ??= new BaseRepository<LeaveModel>();
@@ -64,10 +66,12 @@ namespace ServicesLayer
             _modelDataAnnotationsCheck ??= new ModelDataAnnotationsCheck();
 
             AttendanceRepository ??= new BaseServices<AttendanceModel>(_attendanceRepository, _modelDataAnnotationsCheck);
+            ChangePasswordRequestRepository ??= new BaseServices<ChangePasswordRequestModel>(_changePasswordRequestRepository, _modelDataAnnotationsCheck);
             DepartmentRepository ??= new BaseServices<DepartmentModel>(_departmentRepository, _modelDataAnnotationsCheck);
             EmployeeRepository ??= new BaseServices<EmployeeModel>(_employeeRepository, _modelDataAnnotationsCheck);
             LeaveRepository ??= new BaseServices<LeaveModel>(_leaveRepository, _modelDataAnnotationsCheck);
             NewUserRequestRepository ??= new BaseServices<NewUserRequestModel>(_newUserRequestRepository, _modelDataAnnotationsCheck);
+            PayrollRepository ??= new BaseServices<PayrollModel>(_payrollRepository, _modelDataAnnotationsCheck);
             RoleRepository ??= new BaseServices<RoleModel>(_roleRepository, _modelDataAnnotationsCheck);
             UserRepository ??= new BaseServices<UserModel>(_userRepository, _modelDataAnnotationsCheck);
         }
@@ -170,6 +174,21 @@ namespace ServicesLayer
         public void Save()
         {
             _db.SaveChanges();
+        }
+
+        public async Task ForgotPasswordRequest(string username, string email, string password, string confirmPassword)
+        {
+            var user = await UserRepository.GetAsync(u => u.UserName == username && u.Email == email)
+                ?? throw new UserNotFoundException();
+            var request = new ChangePasswordRequestModel()
+            {
+                UserName = username,
+                Email = email,
+                Password = password,
+                ConfirmPassword = confirmPassword
+            };
+            ChangePasswordRequestRepository.ValidateModelDataAnnotations(request);
+            await ChangePasswordRequestRepository.AddAsync(request);
         }
     }
 }
