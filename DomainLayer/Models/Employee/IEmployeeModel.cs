@@ -10,11 +10,9 @@ namespace DomainLayer.Models.Employee
         DateOnly BirthDay { get; set; }
         DepartmentModel Department { get; set; }
         DateOnly EmploymentDate { get; set; }
-        string FirstName { get; set; }
+        string FullName { get; set; }
         Guid Id { get; set; }
         string JobTitle { get; set; }
-        string LastName { get; set; }
         ICollection<LeaveModel> Leaves { get; set; }
-        string MiddleInitial { get; set; }
     }
 }

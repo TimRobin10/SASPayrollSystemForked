@@ -10,8 +10,4 @@
     <ProjectReference Include="..\InfrastructureLayer\InfrastructureLayer.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="d\" />
-  </ItemGroup>
-
 </Project>

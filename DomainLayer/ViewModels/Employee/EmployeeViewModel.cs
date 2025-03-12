@@ -11,7 +11,7 @@ namespace DomainLayer.ViewModels.Employee
     {
         public EmployeeViewModel(IEmployeeModel employeeModel)
         {
-            EmployeeFullName = $"{employeeModel.LastName}, {employeeModel.FirstName} {employeeModel.MiddleInitial}.";
+            EmployeeFullName = employeeModel.FullName;
             BirthDay = employeeModel.BirthDay.ToString("MMM dd, yyyy");
             EmploymentDate = employeeModel.EmploymentDate.ToString("MM/dd/yyyy");
             JobTitle = employeeModel.JobTitle;
