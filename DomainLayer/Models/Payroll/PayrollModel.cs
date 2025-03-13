@@ -21,8 +21,8 @@ namespace DomainLayer.Models.Payroll
 
         private const decimal _minimumPhilHealthMonthlySalaryCap = 10000;
         private const decimal _maximumPhilHealthMonthlySalaryCap = 100000;
-        private const decimal _maximumPhilHealthMonthlyContribution = 500;
-        private const decimal _minimumPhilHealthMonthlyContribution = 5000;
+        private const decimal _minimumPhilHealthMonthlyContribution = 500;
+        private const decimal _maximumPhilHealthMonthlyContribution = 5000;
         private const decimal _currentPhilHealthMonthlyRate = 0.05m;
 
         private const decimal _minimumPagIbigMonthlyComp = 1500;
