@@ -189,12 +189,12 @@ namespace DomainLayer.Models.Payroll
         public decimal SubtractAdjustments { get; set; } = 0;
 
         [Column(TypeName = "money")]
-        public decimal NetPay { get; set; }
+        public decimal NetPay { get; set; } = 0;
 
 
         [ForeignKey(nameof(EmployeeId))]
-        public Guid EmployeeId { get; set; }
-        public EmployeeModel Employee { get; set; } = null!;
+        public required Guid EmployeeId { get; set; }
+        public required EmployeeModel Employee { get; set; }
 
         public void UpdatePayroll(bool skipAttendancesAndLeaves = false)
         {
@@ -303,7 +303,6 @@ namespace DomainLayer.Models.Payroll
             }
             return finalMonthlyAmount / 2;
         }
-
         private decimal CalculatePagIbigAmount(decimal basicMonthlySalary)
         {
             if (basicMonthlySalary <= _minimumPagIbigMonthlyComp)
