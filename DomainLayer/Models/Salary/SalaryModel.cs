@@ -8,7 +8,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace DomainLayer.Models.Salary
 {
-    public class SalaryModel
+    public class SalaryModel : ISalaryModel
     {
         private const decimal _minimumSSSMonthlyCompRange = 5250;
         private const decimal _maximumSSSMonthlyCompRange = 34750;
@@ -36,8 +36,8 @@ namespace DomainLayer.Models.Salary
         private readonly TimeOnly DayWorkShiftEnd = new TimeOnly(17, 0, 0);
 
         public SalaryModel()
-        { 
-            
+        {
+
         }
 
         [Key]
@@ -52,7 +52,7 @@ namespace DomainLayer.Models.Salary
         public required EmployeeModel Employee { get; set; }
 
         //Basic
-            //Normal Days and Nights Worked
+        //Normal Days and Nights Worked
         [Column(TypeName = "tinyint")]
         public uint DaysWorked
         {
@@ -83,11 +83,11 @@ namespace DomainLayer.Models.Salary
         }
         [Column(TypeName = "money")]
         public decimal NightsAmount { get; set; } = 0;
-        
-            //Regular Holidays Days and Nights Worked
+
+        //Regular Holidays Days and Nights Worked
         private uint _regularHolidaysWorked = 0;
         [Column(TypeName = "tinyint")]
-        public uint RegularHolidaysWorked 
+        public uint RegularHolidaysWorked
         {
             get
             {
@@ -121,10 +121,10 @@ namespace DomainLayer.Models.Salary
         [Column(TypeName = "money")]
         public decimal RegularHolidayNightsAmount { get; set; } = 0;
 
-            //Special Non Working Holidays Worked Days and Nights
+        //Special Non Working Holidays Worked Days and Nights
         private uint _specialDays = 0;
         [Column(TypeName = "tinyint")]
-        public uint SpecialHolidaysWorked 
+        public uint SpecialHolidaysWorked
         {
             get
             {
@@ -193,7 +193,7 @@ namespace DomainLayer.Models.Salary
         }
         [Column(TypeName = "money")]
         public decimal NightsOTAmount { get; set; } = 0;
-            //Regular Holiday OTs
+        //Regular Holiday OTs
         private uint _regularHolidayOT = 0;
         [Column(TypeName = "tinyint")]
         public uint RegularHolidayOT
@@ -226,7 +226,7 @@ namespace DomainLayer.Models.Salary
         }
         [Column(TypeName = "money")]
         public decimal RegularHolidayOTNightAmount { get; set; } = 0;
-            //Special Holiday OTs
+        //Special Holiday OTs
         private uint _specialHolidayOT = 0;
         [Column(TypeName = "tinyint")]
         public uint SpecialHolidayOT
@@ -277,11 +277,11 @@ namespace DomainLayer.Models.Salary
                 LatesDeductionAmount = GetLatesDeductionAmount(LatesMinutes, Employee.BasicSemiMonthlyRate, Payroll.TotalWorkingDays);
             }
         }
-        
+
         [Column(TypeName = "money")]
         public decimal LatesDeductionAmount { get; set; } = 0;
 
-        
+
 
         //Contributions
         [Column(TypeName = "money")]
@@ -358,7 +358,7 @@ namespace DomainLayer.Models.Salary
         }
 
         //Money Operations
-            //Basics
+        //Basics
         private decimal GetAmount(uint presents, decimal basicSemiMonthlyRate, uint totalDays, bool day = true, HolidayType holidayType = HolidayType.Not)
         {
             var normal = presents * basicSemiMonthlyRate / totalDays;
@@ -370,8 +370,8 @@ namespace DomainLayer.Models.Salary
                 normal = normal * 1.3m;
             return normal;
         }
-        
-            //OTs
+
+        //OTs
         private decimal GetOTAmount(uint OT, decimal basicSemiMonthlyRate, uint totalDays, bool day = true, HolidayType holidayType = HolidayType.Not)
         {
             var normal = OT * basicSemiMonthlyRate / totalDays / 8 * 1.3m;
@@ -383,14 +383,14 @@ namespace DomainLayer.Models.Salary
                 normal = normal * 1.3m;
             return normal;
         }
-        
-            //Deductions
+
+        //Deductions
         private decimal GetLatesDeductionAmount(decimal latesMinutes, decimal basicSemiMonthly, uint totalDays)
         {
             return latesMinutes * basicSemiMonthly / totalDays / 480;
         }
-        
-            //Contributions
+
+        //Contributions
         private void CalculateContributions(decimal basicMonthlySalary)
         {
             SSSAmount = CalculateSSSAmount(basicMonthlySalary);
@@ -631,7 +631,7 @@ namespace DomainLayer.Models.Salary
             LatesMinutes = totalMinutesLate;
         }
 
-        private void ApplyLeaves(IEnumerable<LeaveModel> leaves) 
+        private void ApplyLeaves(IEnumerable<LeaveModel> leaves)
         {
             uint totalLeaves = 0;
             var validLeaves = leaves.Where(l => IsDateBetween(l.DateOfAbsence, Payroll.CutOffStart, Payroll.CutOffEnd)).ToList();

@@ -5,8 +5,9 @@ using DomainLayer.Models.ForgotPasswordRequest;
 using DomainLayer.Models.Holiday;
 using DomainLayer.Models.Leave;
 using DomainLayer.Models.NewUserRequest;
-using DomainLayer.Models.Salary;
+using DomainLayer.Models.Payroll;
 using DomainLayer.Models.Role;
+using DomainLayer.Models.Salary;
 using DomainLayer.Models.User;
 using ServicesLayer.Common;
 
@@ -22,8 +23,9 @@ namespace ServicesLayer
         IBaseServices<HolidayModel> HolidayRepository { get; }
         IBaseServices<LeaveModel> LeaveRepository { get; }
         IBaseServices<NewUserRequestModel> NewUserRequestRepository { get; }
-        IBaseServices<SalaryModel> SalaryRepository { get; }
+        IBaseServices<PayrollModel> PayrollRepository { get; }
         IBaseServices<RoleModel> RoleRepository { get; }
+        IBaseServices<SalaryModel> SalaryRepository { get; }
         IBaseServices<UserModel> UserRepository { get; }
 
         Task ApproveNewUserRequest(string requestEmail, string roleName = null);

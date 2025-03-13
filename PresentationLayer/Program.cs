@@ -18,7 +18,7 @@ internal static class Program
         UnityC.RegisterType<IUnitOfWork, UnitOfWork>(new HierarchicalLifetimeManager());
 
         var servicesManager = UnityC.Resolve<IUnitOfWork>();
-
+        servicesManager.InitialSeeding();
         ApplicationConfiguration.Initialize();
 
         var form = new Login_Form(servicesManager);

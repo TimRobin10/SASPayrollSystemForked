@@ -14,6 +14,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using DomainLayer.Models.Holiday;
+using DomainLayer.Models.Payroll;
 
 namespace InfrastructureLayer.DataAccess
 {
@@ -39,8 +40,9 @@ namespace InfrastructureLayer.DataAccess
         public DbSet<HolidayModel> Holidays { get; set; }
         public DbSet<LeaveModel> Leaves { get; set; }
         public DbSet<NewUserRequestModel> NewUserRequests { get; set; }
-        public DbSet<SalaryModel> Salaries { get; set; }
+        public DbSet<PayrollModel> Payrolls { get; set; }
         public DbSet<RoleModel> Roles { get; set; }
+        public DbSet<SalaryModel> Salaries { get; set; }
         public DbSet<UserModel> Users { get; set; }
     }
 }
