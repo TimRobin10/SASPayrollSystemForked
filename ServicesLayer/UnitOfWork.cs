@@ -16,6 +16,7 @@ using ServicesLayer.Exceptions;
 using System.Text;
 using DomainLayer.Models.Holiday;
 using DomainLayer.Defaults;
+using DomainLayer.Models.Payroll;
 
 
 
@@ -35,8 +36,9 @@ namespace ServicesLayer
         private readonly IBaseRepository<HolidayModel> _holidayRepository;
         private readonly IBaseRepository<LeaveModel> _leaveRepository;
         private readonly IBaseRepository<NewUserRequestModel> _newUserRequestRepository;
-        private readonly IBaseRepository<SalaryModel> _salaryRepository;
+        private readonly IBaseRepository<PayrollModel> _payrollRepository;
         private readonly IBaseRepository<RoleModel> _roleRepository;
+        private readonly IBaseRepository<SalaryModel> _salaryRepository;
         private readonly IBaseRepository<UserModel> _userRepository;
 
         //Common Services
@@ -50,8 +52,9 @@ namespace ServicesLayer
         public IBaseServices<HolidayModel> HolidayRepository { get; private set; }
         public IBaseServices<LeaveModel> LeaveRepository { get; private set; }
         public IBaseServices<NewUserRequestModel> NewUserRequestRepository { get; private set; }
-        public IBaseServices<SalaryModel> SalaryRepository { get; private set; }
+        public IBaseServices<PayrollModel> PayrollRepository { get; private set; }
         public IBaseServices<RoleModel> RoleRepository { get; private set; }
+        public IBaseServices<SalaryModel> SalaryRepository { get; private set; }
         public IBaseServices<UserModel> UserRepository { get; private set; }
 
         public UnitOfWork()
@@ -65,8 +68,9 @@ namespace ServicesLayer
             _holidayRepository ??= new BaseRepository<HolidayModel>();
             _leaveRepository ??= new BaseRepository<LeaveModel>();
             _newUserRequestRepository ??= new BaseRepository<NewUserRequestModel>();
-            _salaryRepository ??= new BaseRepository<SalaryModel>();
+            _payrollRepository ??= new BaseRepository<PayrollModel>();
             _roleRepository ??= new BaseRepository<RoleModel>();
+            _salaryRepository ??= new BaseRepository<SalaryModel>();
             _userRepository ??= new BaseRepository<UserModel>();
 
             _modelDataAnnotationsCheck ??= new ModelDataAnnotationsCheck();
@@ -78,8 +82,9 @@ namespace ServicesLayer
             HolidayRepository ??= new BaseServices<HolidayModel>(_holidayRepository, _modelDataAnnotationsCheck);
             LeaveRepository ??= new BaseServices<LeaveModel>(_leaveRepository, _modelDataAnnotationsCheck);
             NewUserRequestRepository ??= new BaseServices<NewUserRequestModel>(_newUserRequestRepository, _modelDataAnnotationsCheck);
-            SalaryRepository ??= new BaseServices<SalaryModel>(_salaryRepository, _modelDataAnnotationsCheck);
+            PayrollRepository ??= new BaseServices<PayrollModel>(_payrollRepository, _modelDataAnnotationsCheck);
             RoleRepository ??= new BaseServices<RoleModel>(_roleRepository, _modelDataAnnotationsCheck);
+            SalaryRepository ??= new BaseServices<SalaryModel>(_salaryRepository, _modelDataAnnotationsCheck);
             UserRepository ??= new BaseServices<UserModel>(_userRepository, _modelDataAnnotationsCheck);
         }
 
