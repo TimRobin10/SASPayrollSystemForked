@@ -17,6 +17,9 @@ namespace PresentationLayer
     public partial class Dashboard_Employee : Form
     {
         private IUnitOfWork _unitOfWork;
+
+        private SfButton lastFocusedButton;
+
         public Dashboard_Employee(IUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
@@ -37,12 +40,26 @@ namespace PresentationLayer
             //Attendacne Log Properties
             InitAttendanceLogProperties();
 
+            //DataGrid Properties
+            InitDataGrid();
+
             _unitOfWork.InitialSeeding();
         }
 
         public void Dashboard_Employee_Load(object sender, EventArgs e)
         {
+
             this.MaximizeBox = false;
+            btnDashboard.Focus();
+            pnlDashboard.Show();
+            pnlJobDesk.Hide();
+
+            // Track the last focused button
+            lastFocusedButton = btnDashboard;
+
+            // Subscribe to LostFocus event
+            btnDashboard.LostFocus += Btn_LostFocus;
+            btnJobDesk.LostFocus += Btn_LostFocus;
         }
 
         private void Panel_Paint(object sender, PaintEventArgs e)
@@ -154,7 +171,7 @@ namespace PresentationLayer
             RoundedElements.rounded(pnlSummaryBase, 30);
             RoundedElements.rounded(pnlSummaryBase2, 27);
 
-            Panel[] mainSummaryCards = new Panel[] { pnlSummaryCard1, pnlSummaryCard2, pnlSummaryCard3, pnlSummaryCard4};
+            Panel[] mainSummaryCards = new Panel[] { pnlSummaryCard1, pnlSummaryCard2, pnlSummaryCard3, pnlSummaryCard4 };
             Panel[] subSummaryCards = new Panel[] { pnlSummarySubCard2, pnlSummarySubCard3, pnlSummarySubCard4 };
 
             foreach (Panel pnl in mainSummaryCards)
@@ -173,19 +190,47 @@ namespace PresentationLayer
             //Attendance Log
             RoundedElements.rounded(pnlAttendanceLogBase1, 30);
             RoundedElements.rounded(pnlAttendanceLogBase2, 27);
-            
+
         }
 
+        public void InitDataGrid()
+        {
+            RoundedElements.rounded(AttendanceDataGrid, 30);
+            RoundedElements.rounded(pnlDataGridBase, 30);
+        }
+
+        private void Btn_LostFocus(object sender, EventArgs e)
+        {
+            if (!(btnDashboard.Focused || btnJobDesk.Focused))
+            {
+                lastFocusedButton.Focus();
+            }
+        }
 
         private void btnDashboard_Click(object sender, EventArgs e)
         {
-
+            lastFocusedButton = btnDashboard;
+            btnDashboard.Focus();
+            pnlDashboard.Show();
+            pnlJobDesk.Hide();
         }
 
         private void btnJobDesk_Click(object sender, EventArgs e)
         {
+            lastFocusedButton = btnJobDesk;
+            btnJobDesk.Focus();
+            pnlDashboard.Hide();
+            pnlJobDesk.Show();
+        }
+
+        private void label13_Click(object sender, EventArgs e)
+        {
 
         }
 
+        private void label13_Click_1(object sender, EventArgs e)
+        {
+
+        }
     }
 }

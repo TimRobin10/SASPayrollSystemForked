@@ -37,7 +37,58 @@
             btnJobDesk = new Syncfusion.WinForms.Controls.SfButton();
             panelMain = new Panel();
             panelMainDashboard = new Panel();
+            pnlJobDesk = new FlowLayoutPanel();
+            panel3 = new Panel();
+            label8 = new Label();
+            panel5 = new Panel();
+            panel6 = new Panel();
             flowLayoutPanel2 = new FlowLayoutPanel();
+            panel4 = new Panel();
+            sfButton1 = new Syncfusion.WinForms.Controls.SfButton();
+            pictureBox8 = new PictureBox();
+            lblProfileName = new Label();
+            panel7 = new Panel();
+            label10 = new Label();
+            panel8 = new Panel();
+            label13 = new Label();
+            label12 = new Label();
+            panel9 = new Panel();
+            pictureBox9 = new PictureBox();
+            panel10 = new Panel();
+            label14 = new Label();
+            label15 = new Label();
+            panel11 = new Panel();
+            pictureBox10 = new PictureBox();
+            panel12 = new Panel();
+            label16 = new Label();
+            label17 = new Label();
+            panel13 = new Panel();
+            pictureBox11 = new PictureBox();
+            panel14 = new Panel();
+            label18 = new Label();
+            label19 = new Label();
+            panel15 = new Panel();
+            pictureBox12 = new PictureBox();
+            panel16 = new Panel();
+            label20 = new Label();
+            label21 = new Label();
+            panel17 = new Panel();
+            pictureBox13 = new PictureBox();
+            panel18 = new Panel();
+            label22 = new Label();
+            panel19 = new Panel();
+            pictureBox14 = new PictureBox();
+            label23 = new Label();
+            label24 = new Label();
+            panel21 = new Panel();
+            pictureBox15 = new PictureBox();
+            label25 = new Label();
+            label26 = new Label();
+            panel23 = new Panel();
+            pictureBox16 = new PictureBox();
+            label27 = new Label();
+            label28 = new Label();
+            pnlDashboard = new FlowLayoutPanel();
             panel1 = new Panel();
             lblDahsbaordTitle = new Label();
             panel = new FlowLayoutPanel();
@@ -82,14 +133,45 @@
             pnlAttendanceLogBase2 = new Panel();
             flowLayoutPanel4 = new FlowLayoutPanel();
             label5 = new Label();
-            flowLayout1 = new Syncfusion.Windows.Forms.Tools.FlowLayout(components);
+            pnlDataGridBase = new Panel();
             AttendanceDataGrid = new Syncfusion.WinForms.DataGrid.SfDataGrid();
+            flowLayout1 = new Syncfusion.Windows.Forms.Tools.FlowLayout(components);
             flowLayoutPanel1.SuspendLayout();
             panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             panelMain.SuspendLayout();
             panelMainDashboard.SuspendLayout();
+            pnlJobDesk.SuspendLayout();
+            panel3.SuspendLayout();
+            panel5.SuspendLayout();
+            panel6.SuspendLayout();
             flowLayoutPanel2.SuspendLayout();
+            panel4.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox8).BeginInit();
+            panel7.SuspendLayout();
+            panel8.SuspendLayout();
+            panel9.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox9).BeginInit();
+            panel10.SuspendLayout();
+            panel11.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox10).BeginInit();
+            panel12.SuspendLayout();
+            panel13.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox11).BeginInit();
+            panel14.SuspendLayout();
+            panel15.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox12).BeginInit();
+            panel16.SuspendLayout();
+            panel17.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox13).BeginInit();
+            panel18.SuspendLayout();
+            panel19.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox14).BeginInit();
+            panel21.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox15).BeginInit();
+            panel23.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox16).BeginInit();
+            pnlDashboard.SuspendLayout();
             panel1.SuspendLayout();
             panel.SuspendLayout();
             pnlDBMainCard1.SuspendLayout();
@@ -116,8 +198,9 @@
             pnlAttendanceLogBase1.SuspendLayout();
             pnlAttendanceLogBase2.SuspendLayout();
             flowLayoutPanel4.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)flowLayout1).BeginInit();
+            pnlDataGridBase.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)AttendanceDataGrid).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)flowLayout1).BeginInit();
             SuspendLayout();
             // 
             // flowLayoutPanel1
@@ -194,25 +277,575 @@
             // panelMainDashboard
             // 
             panelMainDashboard.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            panelMainDashboard.Controls.Add(flowLayoutPanel2);
+            panelMainDashboard.Controls.Add(pnlJobDesk);
+            panelMainDashboard.Controls.Add(pnlDashboard);
             panelMainDashboard.Location = new Point(273, 3);
             panelMainDashboard.Name = "panelMainDashboard";
             panelMainDashboard.Size = new Size(1628, 995);
             panelMainDashboard.TabIndex = 1;
             // 
+            // pnlJobDesk
+            // 
+            pnlJobDesk.Controls.Add(panel3);
+            pnlJobDesk.Controls.Add(panel5);
+            pnlJobDesk.Dock = DockStyle.Fill;
+            pnlJobDesk.Location = new Point(0, 0);
+            pnlJobDesk.Margin = new Padding(20);
+            pnlJobDesk.Name = "pnlJobDesk";
+            pnlJobDesk.Padding = new Padding(20);
+            pnlJobDesk.Size = new Size(1628, 995);
+            pnlJobDesk.TabIndex = 1;
+            // 
+            // panel3
+            // 
+            panel3.Controls.Add(label8);
+            panel3.Location = new Point(23, 23);
+            panel3.Name = "panel3";
+            panel3.Size = new Size(1576, 81);
+            panel3.TabIndex = 0;
+            // 
+            // label8
+            // 
+            label8.AutoSize = true;
+            label8.Dock = DockStyle.Left;
+            label8.Font = new Font("Poppins SemiBold", 36F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label8.Location = new Point(0, 0);
+            label8.Name = "label8";
+            label8.Size = new Size(257, 84);
+            label8.TabIndex = 0;
+            label8.Text = "Job Desk";
+            // 
+            // panel5
+            // 
+            panel5.BackColor = Color.Gray;
+            panel5.Controls.Add(panel6);
+            panel5.Location = new Point(30, 110);
+            panel5.Margin = new Padding(10, 3, 10, 3);
+            panel5.Name = "panel5";
+            panel5.Size = new Size(468, 854);
+            panel5.TabIndex = 2;
+            // 
+            // panel6
+            // 
+            panel6.BackColor = Color.White;
+            panel6.Controls.Add(flowLayoutPanel2);
+            panel6.Location = new Point(3, 3);
+            panel6.Margin = new Padding(10, 3, 10, 3);
+            panel6.Name = "panel6";
+            panel6.Padding = new Padding(20);
+            panel6.Size = new Size(462, 848);
+            panel6.TabIndex = 2;
+            // 
             // flowLayoutPanel2
             // 
-            flowLayoutPanel2.Controls.Add(panel1);
-            flowLayoutPanel2.Controls.Add(panel);
-            flowLayoutPanel2.Controls.Add(pnlSummaryBase);
-            flowLayoutPanel2.Controls.Add(pnlAttendanceLogBase1);
-            flowLayoutPanel2.Dock = DockStyle.Fill;
-            flowLayoutPanel2.Location = new Point(0, 0);
-            flowLayoutPanel2.Margin = new Padding(20);
+            flowLayoutPanel2.Controls.Add(panel4);
+            flowLayoutPanel2.Controls.Add(panel7);
+            flowLayoutPanel2.Controls.Add(panel8);
+            flowLayoutPanel2.Controls.Add(panel10);
+            flowLayoutPanel2.Controls.Add(panel12);
+            flowLayoutPanel2.Controls.Add(panel14);
+            flowLayoutPanel2.Controls.Add(panel16);
+            flowLayoutPanel2.Controls.Add(panel18);
+            flowLayoutPanel2.Controls.Add(panel19);
+            flowLayoutPanel2.Controls.Add(panel21);
+            flowLayoutPanel2.Controls.Add(panel23);
+            flowLayoutPanel2.Location = new Point(26, 23);
+            flowLayoutPanel2.Margin = new Padding(15);
             flowLayoutPanel2.Name = "flowLayoutPanel2";
-            flowLayoutPanel2.Padding = new Padding(20);
-            flowLayoutPanel2.Size = new Size(1628, 995);
+            flowLayoutPanel2.Size = new Size(406, 790);
             flowLayoutPanel2.TabIndex = 0;
+            // 
+            // panel4
+            // 
+            panel4.Controls.Add(sfButton1);
+            panel4.Controls.Add(pictureBox8);
+            panel4.Controls.Add(lblProfileName);
+            panel4.Location = new Point(0, 0);
+            panel4.Margin = new Padding(0);
+            panel4.Name = "panel4";
+            panel4.Size = new Size(406, 91);
+            panel4.TabIndex = 0;
+            // 
+            // sfButton1
+            // 
+            sfButton1.Font = new Font("Poppins", 9.75F, FontStyle.Italic, GraphicsUnit.Point, 0);
+            sfButton1.Location = new Point(101, 52);
+            sfButton1.Name = "sfButton1";
+            sfButton1.Size = new Size(130, 27);
+            sfButton1.TabIndex = 9;
+            sfButton1.Text = "View Profile";
+            sfButton1.TextAlign = ContentAlignment.MiddleLeft;
+            // 
+            // pictureBox8
+            // 
+            pictureBox8.Image = (Image)resources.GetObject("pictureBox8.Image");
+            pictureBox8.Location = new Point(2, 2);
+            pictureBox8.Margin = new Padding(0);
+            pictureBox8.Name = "pictureBox8";
+            pictureBox8.Size = new Size(80, 80);
+            pictureBox8.SizeMode = PictureBoxSizeMode.StretchImage;
+            pictureBox8.TabIndex = 8;
+            pictureBox8.TabStop = false;
+            // 
+            // lblProfileName
+            // 
+            lblProfileName.AutoSize = true;
+            lblProfileName.Font = new Font("Poppins Medium", 21.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblProfileName.Location = new Point(93, 6);
+            lblProfileName.Margin = new Padding(0);
+            lblProfileName.Name = "lblProfileName";
+            lblProfileName.Size = new Size(225, 51);
+            lblProfileName.TabIndex = 7;
+            lblProfileName.Text = "Lorem Ipsum";
+            // 
+            // panel7
+            // 
+            panel7.Controls.Add(label10);
+            panel7.Location = new Point(3, 94);
+            panel7.Name = "panel7";
+            panel7.Size = new Size(403, 47);
+            panel7.TabIndex = 1;
+            // 
+            // label10
+            // 
+            label10.AutoSize = true;
+            label10.Font = new Font("Poppins SemiBold", 18F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label10.Location = new Point(1, 2);
+            label10.Margin = new Padding(0);
+            label10.Name = "label10";
+            label10.Size = new Size(64, 42);
+            label10.TabIndex = 8;
+            label10.Text = "Info";
+            // 
+            // panel8
+            // 
+            panel8.Controls.Add(label13);
+            panel8.Controls.Add(label12);
+            panel8.Controls.Add(panel9);
+            panel8.Location = new Point(0, 144);
+            panel8.Margin = new Padding(0);
+            panel8.Name = "panel8";
+            panel8.Size = new Size(403, 74);
+            panel8.TabIndex = 2;
+            // 
+            // label13
+            // 
+            label13.AutoSize = true;
+            label13.Font = new Font("Poppins Light", 9.75F, FontStyle.Italic, GraphicsUnit.Point, 0);
+            label13.Location = new Point(81, 36);
+            label13.Margin = new Padding(0);
+            label13.Name = "label13";
+            label13.Size = new Size(89, 23);
+            label13.TabIndex = 9;
+            label13.Text = "Department";
+            // 
+            // label12
+            // 
+            label12.AutoSize = true;
+            label12.Font = new Font("Poppins SemiBold", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label12.Location = new Point(75, 6);
+            label12.Margin = new Padding(0);
+            label12.Name = "label12";
+            label12.Size = new Size(211, 37);
+            label12.TabIndex = 8;
+            label12.Text = "Human Resources";
+            // 
+            // panel9
+            // 
+            panel9.BackColor = SystemColors.Menu;
+            panel9.Controls.Add(pictureBox9);
+            panel9.Location = new Point(9, 6);
+            panel9.Margin = new Padding(0);
+            panel9.Name = "panel9";
+            panel9.Size = new Size(60, 60);
+            panel9.TabIndex = 0;
+            // 
+            // pictureBox9
+            // 
+            pictureBox9.Image = (Image)resources.GetObject("pictureBox9.Image");
+            pictureBox9.Location = new Point(10, 11);
+            pictureBox9.Name = "pictureBox9";
+            pictureBox9.Size = new Size(40, 40);
+            pictureBox9.SizeMode = PictureBoxSizeMode.StretchImage;
+            pictureBox9.TabIndex = 0;
+            pictureBox9.TabStop = false;
+            // 
+            // panel10
+            // 
+            panel10.Controls.Add(label14);
+            panel10.Controls.Add(label15);
+            panel10.Controls.Add(panel11);
+            panel10.Location = new Point(0, 218);
+            panel10.Margin = new Padding(0);
+            panel10.Name = "panel10";
+            panel10.Size = new Size(403, 74);
+            panel10.TabIndex = 3;
+            // 
+            // label14
+            // 
+            label14.AutoSize = true;
+            label14.Font = new Font("Poppins Light", 9.75F, FontStyle.Italic, GraphicsUnit.Point, 0);
+            label14.Location = new Point(81, 36);
+            label14.Margin = new Padding(0);
+            label14.Name = "label14";
+            label14.Size = new Size(86, 23);
+            label14.TabIndex = 9;
+            label14.Text = "Base Salary";
+            // 
+            // label15
+            // 
+            label15.AutoSize = true;
+            label15.Font = new Font("Poppins SemiBold", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label15.Location = new Point(75, 6);
+            label15.Margin = new Padding(0);
+            label15.Name = "label15";
+            label15.Size = new Size(113, 37);
+            label15.TabIndex = 8;
+            label15.Text = "P100,000";
+            // 
+            // panel11
+            // 
+            panel11.BackColor = SystemColors.Menu;
+            panel11.Controls.Add(pictureBox10);
+            panel11.Location = new Point(9, 6);
+            panel11.Margin = new Padding(0);
+            panel11.Name = "panel11";
+            panel11.Size = new Size(60, 60);
+            panel11.TabIndex = 0;
+            // 
+            // pictureBox10
+            // 
+            pictureBox10.Image = (Image)resources.GetObject("pictureBox10.Image");
+            pictureBox10.Location = new Point(10, 11);
+            pictureBox10.Name = "pictureBox10";
+            pictureBox10.Size = new Size(40, 40);
+            pictureBox10.SizeMode = PictureBoxSizeMode.StretchImage;
+            pictureBox10.TabIndex = 1;
+            pictureBox10.TabStop = false;
+            // 
+            // panel12
+            // 
+            panel12.Controls.Add(label16);
+            panel12.Controls.Add(label17);
+            panel12.Controls.Add(panel13);
+            panel12.Location = new Point(0, 292);
+            panel12.Margin = new Padding(0);
+            panel12.Name = "panel12";
+            panel12.Size = new Size(403, 74);
+            panel12.TabIndex = 4;
+            // 
+            // label16
+            // 
+            label16.AutoSize = true;
+            label16.Font = new Font("Poppins Light", 9.75F, FontStyle.Italic, GraphicsUnit.Point, 0);
+            label16.Location = new Point(81, 36);
+            label16.Margin = new Padding(0);
+            label16.Name = "label16";
+            label16.Size = new Size(72, 23);
+            label16.TabIndex = 9;
+            label16.Text = "Work Shift";
+            // 
+            // label17
+            // 
+            label17.AutoSize = true;
+            label17.Font = new Font("Poppins SemiBold", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label17.Location = new Point(75, 6);
+            label17.Margin = new Padding(0);
+            label17.Name = "label17";
+            label17.Size = new Size(213, 37);
+            label17.TabIndex = 8;
+            label17.Text = "6:00 AM - 6:00 PM";
+            // 
+            // panel13
+            // 
+            panel13.BackColor = SystemColors.Menu;
+            panel13.Controls.Add(pictureBox11);
+            panel13.Location = new Point(9, 6);
+            panel13.Margin = new Padding(0);
+            panel13.Name = "panel13";
+            panel13.Size = new Size(60, 60);
+            panel13.TabIndex = 0;
+            // 
+            // pictureBox11
+            // 
+            pictureBox11.Image = (Image)resources.GetObject("pictureBox11.Image");
+            pictureBox11.Location = new Point(10, 11);
+            pictureBox11.Name = "pictureBox11";
+            pictureBox11.Size = new Size(40, 40);
+            pictureBox11.SizeMode = PictureBoxSizeMode.StretchImage;
+            pictureBox11.TabIndex = 1;
+            pictureBox11.TabStop = false;
+            // 
+            // panel14
+            // 
+            panel14.Controls.Add(label18);
+            panel14.Controls.Add(label19);
+            panel14.Controls.Add(panel15);
+            panel14.Location = new Point(0, 366);
+            panel14.Margin = new Padding(0);
+            panel14.Name = "panel14";
+            panel14.Size = new Size(403, 74);
+            panel14.TabIndex = 5;
+            // 
+            // label18
+            // 
+            label18.AutoSize = true;
+            label18.Font = new Font("Poppins Light", 9.75F, FontStyle.Italic, GraphicsUnit.Point, 0);
+            label18.Location = new Point(81, 36);
+            label18.Margin = new Padding(0);
+            label18.Name = "label18";
+            label18.Size = new Size(136, 23);
+            label18.TabIndex = 9;
+            label18.Text = "Employment Status";
+            // 
+            // label19
+            // 
+            label19.AutoSize = true;
+            label19.Font = new Font("Poppins SemiBold", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label19.Location = new Point(75, 6);
+            label19.Margin = new Padding(0);
+            label19.Name = "label19";
+            label19.Size = new Size(275, 37);
+            label19.TabIndex = 8;
+            label19.Text = "Independent Contractor";
+            // 
+            // panel15
+            // 
+            panel15.BackColor = SystemColors.Menu;
+            panel15.Controls.Add(pictureBox12);
+            panel15.Location = new Point(9, 6);
+            panel15.Margin = new Padding(0);
+            panel15.Name = "panel15";
+            panel15.Size = new Size(60, 60);
+            panel15.TabIndex = 0;
+            // 
+            // pictureBox12
+            // 
+            pictureBox12.Image = (Image)resources.GetObject("pictureBox12.Image");
+            pictureBox12.Location = new Point(10, 11);
+            pictureBox12.Name = "pictureBox12";
+            pictureBox12.Size = new Size(40, 40);
+            pictureBox12.SizeMode = PictureBoxSizeMode.StretchImage;
+            pictureBox12.TabIndex = 1;
+            pictureBox12.TabStop = false;
+            // 
+            // panel16
+            // 
+            panel16.Controls.Add(label20);
+            panel16.Controls.Add(label21);
+            panel16.Controls.Add(panel17);
+            panel16.Location = new Point(0, 440);
+            panel16.Margin = new Padding(0);
+            panel16.Name = "panel16";
+            panel16.Size = new Size(403, 74);
+            panel16.TabIndex = 6;
+            // 
+            // label20
+            // 
+            label20.AutoSize = true;
+            label20.Font = new Font("Poppins Light", 9.75F, FontStyle.Italic, GraphicsUnit.Point, 0);
+            label20.Location = new Point(81, 36);
+            label20.Margin = new Padding(0);
+            label20.Name = "label20";
+            label20.Size = new Size(126, 23);
+            label20.TabIndex = 9;
+            label20.Text = "Employment Date";
+            // 
+            // label21
+            // 
+            label21.AutoSize = true;
+            label21.Font = new Font("Poppins SemiBold", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label21.Location = new Point(75, 6);
+            label21.Margin = new Padding(0);
+            label21.Name = "label21";
+            label21.Size = new Size(203, 37);
+            label21.TabIndex = 8;
+            label21.Text = "February 14, 2025";
+            // 
+            // panel17
+            // 
+            panel17.BackColor = SystemColors.Menu;
+            panel17.Controls.Add(pictureBox13);
+            panel17.Location = new Point(9, 6);
+            panel17.Margin = new Padding(0);
+            panel17.Name = "panel17";
+            panel17.Size = new Size(60, 60);
+            panel17.TabIndex = 0;
+            // 
+            // pictureBox13
+            // 
+            pictureBox13.Image = (Image)resources.GetObject("pictureBox13.Image");
+            pictureBox13.Location = new Point(10, 11);
+            pictureBox13.Name = "pictureBox13";
+            pictureBox13.Size = new Size(40, 40);
+            pictureBox13.SizeMode = PictureBoxSizeMode.StretchImage;
+            pictureBox13.TabIndex = 1;
+            pictureBox13.TabStop = false;
+            // 
+            // panel18
+            // 
+            panel18.Controls.Add(label22);
+            panel18.Location = new Point(3, 517);
+            panel18.Name = "panel18";
+            panel18.Size = new Size(403, 41);
+            panel18.TabIndex = 7;
+            // 
+            // label22
+            // 
+            label22.AutoSize = true;
+            label22.Font = new Font("Poppins SemiBold", 18F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label22.Location = new Point(1, 0);
+            label22.Margin = new Padding(0);
+            label22.Name = "label22";
+            label22.Size = new Size(128, 42);
+            label22.TabIndex = 8;
+            label22.Text = "Contacts";
+            // 
+            // panel19
+            // 
+            panel19.Controls.Add(pictureBox14);
+            panel19.Controls.Add(label23);
+            panel19.Controls.Add(label24);
+            panel19.Location = new Point(0, 561);
+            panel19.Margin = new Padding(0);
+            panel19.Name = "panel19";
+            panel19.Size = new Size(403, 74);
+            panel19.TabIndex = 8;
+            // 
+            // pictureBox14
+            // 
+            pictureBox14.Image = (Image)resources.GetObject("pictureBox14.Image");
+            pictureBox14.Location = new Point(9, 8);
+            pictureBox14.Margin = new Padding(0);
+            pictureBox14.Name = "pictureBox14";
+            pictureBox14.Size = new Size(60, 60);
+            pictureBox14.SizeMode = PictureBoxSizeMode.StretchImage;
+            pictureBox14.TabIndex = 10;
+            pictureBox14.TabStop = false;
+            // 
+            // label23
+            // 
+            label23.AutoSize = true;
+            label23.Font = new Font("Poppins Light", 9.75F, FontStyle.Italic, GraphicsUnit.Point, 0);
+            label23.Location = new Point(81, 41);
+            label23.Margin = new Padding(0);
+            label23.Name = "label23";
+            label23.Size = new Size(222, 23);
+            label23.TabIndex = 9;
+            label23.Text = "loremipsum@umindanao.edu.ph";
+            // 
+            // label24
+            // 
+            label24.AutoSize = true;
+            label24.Font = new Font("Poppins SemiBold", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label24.Location = new Point(75, 11);
+            label24.Margin = new Padding(0);
+            label24.Name = "label24";
+            label24.Size = new Size(76, 37);
+            label24.TabIndex = 8;
+            label24.Text = "Email";
+            // 
+            // panel21
+            // 
+            panel21.Controls.Add(pictureBox15);
+            panel21.Controls.Add(label25);
+            panel21.Controls.Add(label26);
+            panel21.Location = new Point(0, 635);
+            panel21.Margin = new Padding(0);
+            panel21.Name = "panel21";
+            panel21.Size = new Size(403, 74);
+            panel21.TabIndex = 9;
+            // 
+            // pictureBox15
+            // 
+            pictureBox15.Image = (Image)resources.GetObject("pictureBox15.Image");
+            pictureBox15.Location = new Point(9, 8);
+            pictureBox15.Margin = new Padding(0);
+            pictureBox15.Name = "pictureBox15";
+            pictureBox15.Size = new Size(60, 60);
+            pictureBox15.SizeMode = PictureBoxSizeMode.StretchImage;
+            pictureBox15.TabIndex = 11;
+            pictureBox15.TabStop = false;
+            // 
+            // label25
+            // 
+            label25.AutoSize = true;
+            label25.Font = new Font("Poppins Light", 9.75F, FontStyle.Italic, GraphicsUnit.Point, 0);
+            label25.Location = new Point(81, 41);
+            label25.Margin = new Padding(0);
+            label25.Name = "label25";
+            label25.Size = new Size(125, 23);
+            label25.TabIndex = 9;
+            label25.Text = "+63 978 456 8794";
+            // 
+            // label26
+            // 
+            label26.AutoSize = true;
+            label26.Font = new Font("Poppins SemiBold", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label26.Location = new Point(75, 11);
+            label26.Margin = new Padding(0);
+            label26.Name = "label26";
+            label26.Size = new Size(84, 37);
+            label26.TabIndex = 8;
+            label26.Text = "Phone";
+            // 
+            // panel23
+            // 
+            panel23.Controls.Add(pictureBox16);
+            panel23.Controls.Add(label27);
+            panel23.Controls.Add(label28);
+            panel23.Location = new Point(0, 709);
+            panel23.Margin = new Padding(0);
+            panel23.Name = "panel23";
+            panel23.Size = new Size(403, 74);
+            panel23.TabIndex = 10;
+            // 
+            // pictureBox16
+            // 
+            pictureBox16.Image = (Image)resources.GetObject("pictureBox16.Image");
+            pictureBox16.Location = new Point(9, 7);
+            pictureBox16.Margin = new Padding(0);
+            pictureBox16.Name = "pictureBox16";
+            pictureBox16.Size = new Size(60, 60);
+            pictureBox16.SizeMode = PictureBoxSizeMode.StretchImage;
+            pictureBox16.TabIndex = 12;
+            pictureBox16.TabStop = false;
+            // 
+            // label27
+            // 
+            label27.AutoSize = true;
+            label27.Font = new Font("Poppins Light", 9.75F, FontStyle.Italic, GraphicsUnit.Point, 0);
+            label27.Location = new Point(81, 38);
+            label27.Margin = new Padding(0);
+            label27.Name = "label27";
+            label27.Size = new Size(260, 23);
+            label27.TabIndex = 9;
+            label27.Text = "https://www.mywebsite.com.ph/profile";
+            // 
+            // label28
+            // 
+            label28.AutoSize = true;
+            label28.Font = new Font("Poppins SemiBold", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label28.Location = new Point(75, 8);
+            label28.Margin = new Padding(0);
+            label28.Name = "label28";
+            label28.Size = new Size(104, 37);
+            label28.TabIndex = 8;
+            label28.Text = "Website";
+            // 
+            // pnlDashboard
+            // 
+            pnlDashboard.Controls.Add(panel1);
+            pnlDashboard.Controls.Add(panel);
+            pnlDashboard.Controls.Add(pnlSummaryBase);
+            pnlDashboard.Controls.Add(pnlAttendanceLogBase1);
+            pnlDashboard.Dock = DockStyle.Fill;
+            pnlDashboard.Location = new Point(0, 0);
+            pnlDashboard.Margin = new Padding(20);
+            pnlDashboard.Name = "pnlDashboard";
+            pnlDashboard.Padding = new Padding(20);
+            pnlDashboard.Size = new Size(1628, 995);
+            pnlDashboard.TabIndex = 0;
             // 
             // panel1
             // 
@@ -663,7 +1296,7 @@
             // flowLayoutPanel4
             // 
             flowLayoutPanel4.Controls.Add(label5);
-            flowLayoutPanel4.Controls.Add(AttendanceDataGrid);
+            flowLayoutPanel4.Controls.Add(pnlDataGridBase);
             flowLayoutPanel4.FlowDirection = FlowDirection.TopDown;
             flowLayoutPanel4.Location = new Point(30, 30);
             flowLayoutPanel4.Margin = new Padding(30);
@@ -681,20 +1314,31 @@
             label5.TabIndex = 1;
             label5.Text = "Attendance Log";
             // 
+            // pnlDataGridBase
+            // 
+            pnlDataGridBase.BackColor = Color.Gray;
+            pnlDataGridBase.Controls.Add(AttendanceDataGrid);
+            pnlDataGridBase.Location = new Point(0, 62);
+            pnlDataGridBase.Margin = new Padding(0);
+            pnlDataGridBase.Name = "pnlDataGridBase";
+            pnlDataGridBase.Size = new Size(1068, 497);
+            pnlDataGridBase.TabIndex = 2;
+            // 
             // AttendanceDataGrid
             // 
             AttendanceDataGrid.AccessibleName = "Table";
             AttendanceDataGrid.AllowEditing = false;
             AttendanceDataGrid.AllowGrouping = false;
-            AttendanceDataGrid.Location = new Point(3, 65);
+            AttendanceDataGrid.Location = new Point(3, 3);
+            AttendanceDataGrid.Margin = new Padding(0);
             AttendanceDataGrid.Name = "AttendanceDataGrid";
-            AttendanceDataGrid.Size = new Size(1065, 491);
+            AttendanceDataGrid.Size = new Size(1062, 491);
             AttendanceDataGrid.Style.BorderColor = Color.FromArgb(100, 100, 100);
             AttendanceDataGrid.Style.CheckBoxStyle.CheckedBackColor = Color.FromArgb(0, 120, 215);
             AttendanceDataGrid.Style.CheckBoxStyle.CheckedBorderColor = Color.FromArgb(0, 120, 215);
             AttendanceDataGrid.Style.CheckBoxStyle.IndeterminateBorderColor = Color.FromArgb(0, 120, 215);
             AttendanceDataGrid.Style.HyperlinkStyle.DefaultLinkColor = Color.FromArgb(0, 120, 215);
-            AttendanceDataGrid.TabIndex = 3;
+            AttendanceDataGrid.TabIndex = 4;
             AttendanceDataGrid.Text = "sfDataGrid1";
             // 
             // Dashboard_Employee
@@ -717,7 +1361,49 @@
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             panelMain.ResumeLayout(false);
             panelMainDashboard.ResumeLayout(false);
+            pnlJobDesk.ResumeLayout(false);
+            panel3.ResumeLayout(false);
+            panel3.PerformLayout();
+            panel5.ResumeLayout(false);
+            panel6.ResumeLayout(false);
             flowLayoutPanel2.ResumeLayout(false);
+            panel4.ResumeLayout(false);
+            panel4.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox8).EndInit();
+            panel7.ResumeLayout(false);
+            panel7.PerformLayout();
+            panel8.ResumeLayout(false);
+            panel8.PerformLayout();
+            panel9.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)pictureBox9).EndInit();
+            panel10.ResumeLayout(false);
+            panel10.PerformLayout();
+            panel11.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)pictureBox10).EndInit();
+            panel12.ResumeLayout(false);
+            panel12.PerformLayout();
+            panel13.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)pictureBox11).EndInit();
+            panel14.ResumeLayout(false);
+            panel14.PerformLayout();
+            panel15.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)pictureBox12).EndInit();
+            panel16.ResumeLayout(false);
+            panel16.PerformLayout();
+            panel17.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)pictureBox13).EndInit();
+            panel18.ResumeLayout(false);
+            panel18.PerformLayout();
+            panel19.ResumeLayout(false);
+            panel19.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox14).EndInit();
+            panel21.ResumeLayout(false);
+            panel21.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox15).EndInit();
+            panel23.ResumeLayout(false);
+            panel23.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox16).EndInit();
+            pnlDashboard.ResumeLayout(false);
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
             panel.ResumeLayout(false);
@@ -754,8 +1440,9 @@
             pnlAttendanceLogBase2.ResumeLayout(false);
             flowLayoutPanel4.ResumeLayout(false);
             flowLayoutPanel4.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)flowLayout1).EndInit();
+            pnlDataGridBase.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)AttendanceDataGrid).EndInit();
+            ((System.ComponentModel.ISupportInitialize)flowLayout1).EndInit();
             ResumeLayout(false);
         }
 
@@ -768,7 +1455,7 @@
         private Syncfusion.WinForms.Controls.SfButton btnJobDesk;
         private Panel panelMain;
         private Panel panelMainDashboard;
-        private FlowLayoutPanel flowLayoutPanel2;
+        private FlowLayoutPanel pnlDashboard;
         private Panel panel1;
         private Label lblDahsbaordTitle;
         private FlowLayoutPanel panel;
@@ -814,6 +1501,58 @@
         private Panel pnlAttendanceLogBase2;
         private FlowLayoutPanel flowLayoutPanel4;
         private Label label5;
+        private FlowLayoutPanel pnlJobDesk;
+        private Panel panel3;
+        private Label label8;
+        private Panel pnlDataGridBase;
         private Syncfusion.WinForms.DataGrid.SfDataGrid AttendanceDataGrid;
+        private Panel panel5;
+        private Panel panel6;
+        private FlowLayoutPanel flowLayoutPanel2;
+        private Panel panel4;
+        private Syncfusion.WinForms.Controls.SfButton sfButton1;
+        private PictureBox pictureBox8;
+        private Label lblProfileName;
+        private Panel panel7;
+        private Label label10;
+        private Panel panel8;
+        private Panel panel9;
+        private Label label13;
+        private Label label12;
+        private Panel panel10;
+        private Label label14;
+        private Label label15;
+        private Panel panel11;
+        private Panel panel12;
+        private Label label16;
+        private Label label17;
+        private Panel panel13;
+        private Panel panel14;
+        private Label label18;
+        private Label label19;
+        private Panel panel15;
+        private Panel panel16;
+        private Label label20;
+        private Label label21;
+        private Panel panel17;
+        private Panel panel18;
+        private Label label22;
+        private Panel panel19;
+        private Label label23;
+        private Label label24;
+        private Panel panel21;
+        private Label label25;
+        private Label label26;
+        private Panel panel23;
+        private Label label27;
+        private Label label28;
+        private PictureBox pictureBox9;
+        private PictureBox pictureBox10;
+        private PictureBox pictureBox11;
+        private PictureBox pictureBox12;
+        private PictureBox pictureBox13;
+        private PictureBox pictureBox14;
+        private PictureBox pictureBox15;
+        private PictureBox pictureBox16;
     }
 }
