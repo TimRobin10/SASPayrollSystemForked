@@ -1,16 +1,10 @@
 ﻿using DomainLayer.Enums;
 using DomainLayer.Models.Attendance;
 using DomainLayer.Models.Employee;
-using DomainLayer.Models.Holiday;
 using DomainLayer.Models.Leave;
 using DomainLayer.Models.Payroll;
-using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DomainLayer.Models.Salary
 {
@@ -102,12 +96,12 @@ namespace DomainLayer.Models.Salary
             set
             {
                 _regularHolidaysWorked = value;
-                RegularHolidaysWorkedAmount
+                RegularHolidaysAmount
                     = GetAmount(RegularHolidaysWorked, Employee.BasicSemiMonthlyRate, Payroll.TotalWorkingDays, true, HolidayType.Regular);
             }
         }
         [Column(TypeName = "money")]
-        public decimal RegularHolidaysWorkedAmount { get; set; } = 0;
+        public decimal RegularHolidaysAmount { get; set; } = 0;
 
         private uint _regularHolidayNightsWorked = 0;
         [Column(TypeName = "tinyint")]
@@ -127,10 +121,10 @@ namespace DomainLayer.Models.Salary
         [Column(TypeName = "money")]
         public decimal RegularHolidayNightsAmount { get; set; } = 0;
 
-
+            //Special Non Working Holidays Worked Days and Nights
         private uint _specialDays = 0;
         [Column(TypeName = "tinyint")]
-        public uint SpecialWorkingHolidaysWorked 
+        public uint SpecialHolidaysWorked 
         {
             get
             {
@@ -139,16 +133,15 @@ namespace DomainLayer.Models.Salary
             set
             {
                 _specialDays = value;
-                SpecialWorkingHolidaysAmount
-                    = GetAmount(SpecialWorkingHolidaysWorked, Employee.BasicSemiMonthlyRate, Payroll.TotalWorkingDays, true, HolidayType.SpecialNonWorking);
+                SpecialHolidaysAmount
+                    = GetAmount(SpecialHolidaysWorked, Employee.BasicSemiMonthlyRate, Payroll.TotalWorkingDays, true, HolidayType.SpecialNonWorking);
             }
         }
         [Column(TypeName = "money")]
-        public decimal SpecialWorkingHolidaysAmount { get; set; } = 0;
-
+        public decimal SpecialHolidaysAmount { get; set; } = 0;
         private uint _specialNights = 0;
         [Column(TypeName = "tinyint")]
-        public uint SpecialWorkingHolidayNightsWorked
+        public uint SpecialHolidayNightsWorked
         {
             get
             {
@@ -157,15 +150,18 @@ namespace DomainLayer.Models.Salary
             set
             {
                 _specialNights = value;
-                SpecialWorkingHolidaysNightsAmount
-                    = GetAmount(SpecialWorkingHolidayNightsWorked, Employee.BasicSemiMonthlyRate, Payroll.TotalWorkingDays, false, HolidayType.SpecialNonWorking);
+                SpecialHolidayNightsAmount
+                    = GetAmount(SpecialHolidayNightsWorked, Employee.BasicSemiMonthlyRate, Payroll.TotalWorkingDays, false, HolidayType.SpecialNonWorking);
             }
         }
         [Column(TypeName = "money")]
-        public decimal SpecialWorkingHolidaysNightsAmount { get; set; }
+        public decimal SpecialHolidayNightsAmount { get; set; }
+
+        [Column(TypeName = "money")]
+        public decimal TotalBasic { get; private set; } = 0;
 
         //OTs
-            //Working Days
+        //Working Day OTs
         [Column(TypeName = "tinyint")]
         public uint RegularOT
         {
@@ -176,10 +172,9 @@ namespace DomainLayer.Models.Salary
             set
             {
                 _regularOT = value;
-                RegularOTAmount = GetRegularOTAmount(RegularOT, Employee.BasicSemiMonthlyRate, Payroll.TotalWorkingDays);
+                RegularOTAmount = GetOTAmount(RegularOT, Employee.BasicSemiMonthlyRate, Payroll.TotalWorkingDays);
             }
         }
-
         [Column(TypeName = "money")]
         public decimal RegularOTAmount { get; set; } = 0;
 
@@ -193,12 +188,77 @@ namespace DomainLayer.Models.Salary
             set
             {
                 _nightsOT = value;
-                NightsOTAmount = GetNightsOTAmount(NightsOT, Employee.BasicSemiMonthlyRate, Payroll.TotalWorkingDays);
+                NightsOTAmount = GetOTAmount(NightsOT, Employee.BasicSemiMonthlyRate, Payroll.TotalWorkingDays, false);
             }
         }
-
         [Column(TypeName = "money")]
         public decimal NightsOTAmount { get; set; } = 0;
+            //Regular Holiday OTs
+        private uint _regularHolidayOT = 0;
+        [Column(TypeName = "tinyint")]
+        public uint RegularHolidayOT
+        {
+            get
+            {
+                return _regularHolidayOT;
+            }
+            set
+            {
+                _regularHolidayOT = value;
+                RegularHolidayOTAmount = GetOTAmount(RegularHolidayOT, Employee.BasicSemiMonthlyRate, Payroll.TotalWorkingDays, true, HolidayType.Regular);
+            }
+        }
+        [Column(TypeName = "money")]
+        public decimal RegularHolidayOTAmount { get; set; } = 0;
+        private uint _regularHolidayNightOT = 0;
+        [Column(TypeName = "tinyint")]
+        public uint RegularHolidayNightOT
+        {
+            get
+            {
+                return _regularHolidayNightOT;
+            }
+            set
+            {
+                _regularHolidayNightOT = value;
+                RegularHolidayOTNightAmount = GetOTAmount(RegularHolidayOT, Employee.BasicSemiMonthlyRate, Payroll.TotalWorkingDays, false, HolidayType.Regular);
+            }
+        }
+        [Column(TypeName = "money")]
+        public decimal RegularHolidayOTNightAmount { get; set; } = 0;
+            //Special Holiday OTs
+        private uint _specialHolidayOT = 0;
+        [Column(TypeName = "tinyint")]
+        public uint SpecialHolidayOT
+        {
+            get
+            {
+                return _specialHolidayOT;
+            }
+            set
+            {
+                _specialHolidayOT = value;
+                SpecialHolidayOTAmount = GetOTAmount(RegularHolidayOT, Employee.BasicSemiMonthlyRate, Payroll.TotalWorkingDays, true, HolidayType.SpecialNonWorking);
+            }
+        }
+        [Column(TypeName = "money")]
+        public decimal SpecialHolidayOTAmount { get; set; } = 0;
+        private uint _specialHolidayNightOT = 0;
+        [Column(TypeName = "tinyint")]
+        public uint SpecialHolidayNightOT
+        {
+            get
+            {
+                return _specialHolidayNightOT;
+            }
+            set
+            {
+                _specialHolidayNightOT = value;
+                SpecialHolidayNightOTAmount = GetOTAmount(RegularHolidayOT, Employee.BasicSemiMonthlyRate, Payroll.TotalWorkingDays, false, HolidayType.SpecialNonWorking);
+            }
+        }
+        [Column(TypeName = "money")]
+        public decimal SpecialHolidayNightOTAmount { get; set; } = 0;
 
         [Column(TypeName = "money")]
         public decimal TotalOT { get; set; } = 0;
@@ -221,8 +281,7 @@ namespace DomainLayer.Models.Salary
         [Column(TypeName = "money")]
         public decimal LatesDeductionAmount { get; set; } = 0;
 
-        [Column(TypeName = "money")]
-        public decimal TotalBasic { get; private set; } = 0;
+        
 
         //Contributions
         [Column(TypeName = "money")]
@@ -285,7 +344,8 @@ namespace DomainLayer.Models.Salary
                 ApplyAttendances(Employee.Attendances);
             if (!skipLeaves)
                 ApplyLeaves(Employee.Leaves);
-            TotalBasic = GetTotalBasic(DaysAmount, NightsAmount, LatesDeductionAmount);
+            TotalBasic = DaysAmount + NightsAmount + RegularHolidaysAmount + RegularHolidayNightsAmount
+                + SpecialHolidaysAmount + SpecialHolidayNightsAmount;
             TotalOT = RegularOTAmount + NightsOTAmount;
             CalculateContributions(Employee.BasicSemiMonthlyRate * 2);
             TotalContributions = SSSAmount + PagIbigAmount + PhilHealthAmount;
@@ -312,24 +372,22 @@ namespace DomainLayer.Models.Salary
         }
         
             //OTs
-        private decimal GetRegularOTAmount(uint regularOT, decimal basicSemiMonthlyRate, uint totalDays)
+        private decimal GetOTAmount(uint OT, decimal basicSemiMonthlyRate, uint totalDays, bool day = true, HolidayType holidayType = HolidayType.Not)
         {
-            return regularOT * basicSemiMonthlyRate / totalDays / 8 * 1.3m;
-        }
-        private decimal GetNightsOTAmount(uint nightsOT, decimal basicSemiMonthlyRate, uint totalDays)
-        {
-            return nightsOT * basicSemiMonthlyRate / totalDays / 8 * 1.3m * 1.10m;
+            var normal = OT * basicSemiMonthlyRate / totalDays / 8 * 1.3m;
+            if (!day)
+                normal = normal * 1.1m;
+            if (holidayType == HolidayType.Regular)
+                normal = normal * 2;
+            if (holidayType == HolidayType.SpecialNonWorking)
+                normal = normal * 1.3m;
+            return normal;
         }
         
-        //Deductions
+            //Deductions
         private decimal GetLatesDeductionAmount(decimal latesMinutes, decimal basicSemiMonthly, uint totalDays)
         {
             return latesMinutes * basicSemiMonthly / totalDays / 480;
-        }
-        
-        private decimal GetTotalBasic(decimal daysAmount, decimal nightsAmount, decimal latesDeductions)
-        {
-            return daysAmount + nightsAmount - latesDeductions;
         }
         
             //Contributions
@@ -438,70 +496,70 @@ namespace DomainLayer.Models.Salary
         //}
 
         //Time Operations
-        private void ApplyAttendances(IEnumerable<AttendanceModel> attendances) 
-        {
-            uint totalWorkingDays = 0;
-            uint totalWorkingNights = 0;
+        //private void ApplyAttendances(IEnumerable<AttendanceModel> attendances) 
+        //{
+        //    uint totalWorkingDays = 0;
+        //    uint totalWorkingNights = 0;
 
-            uint totalRegularHolidayDays = 0;
-            uint totalRegularHolidayNights = 0;
+        //    uint totalRegularHolidayDays = 0;
+        //    uint totalRegularHolidayNights = 0;
 
-            uint totalSpecialDays = 0;
-            uint totalSpecialNights = 0;
+        //    uint totalSpecialDays = 0;
+        //    uint totalSpecialNights = 0;
 
-            uint totalRegularOT = 0;
-            uint totalNightOT = 0;
-            decimal totalMinutesLate = 0;
-            foreach (var attendance in attendances)
-            {
-                var holiday = Payroll.Holidays.Where(h => h.Date == attendance.Date).FirstOrDefault();
-                if (IsDateBetween(attendance.Date, Payroll.CutOffStart, Payroll.CutOffEnd) && attendance.Status == FormStatus.Approved)
-                {
-                    if (attendance.TimeIn.IsBetween(DayStart, DayEnd))
-                    {
-                        if (holiday != null)
-                        {
-                            if (holiday.Type == HolidayType.Regular)
-                                totalRegularHolidayDays++;
-                            else if (holiday.Type == HolidayType.Regular)
-                                totalSpecialDays++;
-                        }
-                        else
-                            totalWorkingDays++;
-                        if (attendance.TotalHours > 8)
-                        {
-                            totalRegularOT += (attendance.TotalHours - 8);
-                        }
-                        if (attendance.TimeIn > DayWorkShiftStart)
-                        {
-                            var span = attendance.TimeIn - DayWorkShiftStart;
-                            totalMinutesLate += (decimal)span.TotalMinutes;
-                        }
-                    }
-                    else
-                    {
-                        totalWorkingNights++;
-                        if (attendance.TotalHours > 8)
-                        {
-                            totalNightOT += (attendance.TotalHours - 8);
-                        }
-                        if (attendance.TimeIn > DayWorkShiftEnd)
-                        {
-                            var span = attendance.TimeIn - DayWorkShiftStart;
-                            totalMinutesLate += (decimal)span.TotalMinutes;
-                        }
-                    }
-                }
-            }
+        //    uint totalRegularOT = 0;
+        //    uint totalNightOT = 0;
+        //    decimal totalMinutesLate = 0;
+        //    foreach (var attendance in attendances)
+        //    {
+        //        var holiday = Payroll.Holidays.Where(h => h.Date == attendance.Date).FirstOrDefault();
+        //        if (IsDateBetween(attendance.Date, Payroll.CutOffStart, Payroll.CutOffEnd) && attendance.Status == FormStatus.Approved)
+        //        {
+        //            if (attendance.TimeIn.IsBetween(DayStart, DayEnd))
+        //            {
+        //                if (holiday != null)
+        //                {
+        //                    if (holiday.Type == HolidayType.Regular)
+        //                        totalRegularHolidayDays++;
+        //                    else if (holiday.Type == HolidayType.Regular)
+        //                        totalSpecialDays++;
+        //                }
+        //                else
+        //                    totalWorkingDays++;
+        //                if (attendance.TotalHours > 8)
+        //                {
+        //                    totalRegularOT += (attendance.TotalHours - 8);
+        //                }
+        //                if (attendance.TimeIn > DayWorkShiftStart)
+        //                {
+        //                    var span = attendance.TimeIn - DayWorkShiftStart;
+        //                    totalMinutesLate += (decimal)span.TotalMinutes;
+        //                }
+        //            }
+        //            else
+        //            {
+        //                totalWorkingNights++;
+        //                if (attendance.TotalHours > 8)
+        //                {
+        //                    totalNightOT += (attendance.TotalHours - 8);
+        //                }
+        //                if (attendance.TimeIn > DayWorkShiftEnd)
+        //                {
+        //                    var span = attendance.TimeIn - DayWorkShiftStart;
+        //                    totalMinutesLate += (decimal)span.TotalMinutes;
+        //                }
+        //            }
+        //        }
+        //    }
 
-            DaysWorked = totalWorkingDays;
-            RegularOT = totalRegularOT;
-            NightsWorked = totalWorkingNights;
-            NightsOT = totalNightOT;
-            LatesMinutes = totalMinutesLate;
-        }
+        //    DaysWorked = totalWorkingDays;
+        //    RegularOT = totalRegularOT;
+        //    NightsWorked = totalWorkingNights;
+        //    NightsOT = totalNightOT;
+        //    LatesMinutes = totalMinutesLate;
+        //}
 
-        private void A(IEnumerable<AttendanceModel> attendances)
+        private void ApplyAttendances(IEnumerable<AttendanceModel> attendances)
         {
             var normalDays = attendances
                 .Where(a => IsDateBetween(a.Date, Payroll.CutOffStart, Payroll.CutOffEnd) && a.Status == FormStatus.Approved)
@@ -510,7 +568,14 @@ namespace DomainLayer.Models.Salary
                 .ToList();
 
             DaysWorked = (uint)normalDays.Count();
-
+            var nDOTs = normalDays.Where(a => a.TimeOut > DayEnd).ToList();
+            uint nDOT = 0;
+            foreach (var day in nDOTs)
+            {
+                var span = day.TimeOut - DayEnd;
+                nDOT += (uint)Math.Floor(span.TotalHours);
+            }
+            RegularOT = nDOT;
 
             var regHDays = attendances
                 .Where(a => IsDateBetween(a.Date, Payroll.CutOffStart, Payroll.CutOffEnd) && a.Status == FormStatus.Approved)
@@ -526,7 +591,7 @@ namespace DomainLayer.Models.Salary
                 .Where(a => Payroll.Holidays.Where(h => h.Date == a.Date && h.Type == HolidayType.SpecialNonWorking).FirstOrDefault() != null)
                 .ToList();
 
-            SpecialWorkingHolidaysWorked = (uint)specHDays.Count();
+            SpecialHolidaysWorked = (uint)specHDays.Count();
 
             var normalNights = attendances
                 .Where(a => IsDateBetween(a.Date, Payroll.CutOffStart, Payroll.CutOffEnd) && a.Status == FormStatus.Approved)
@@ -534,19 +599,48 @@ namespace DomainLayer.Models.Salary
                 .Where(a => Payroll.Holidays.Where(h => h.Date == a.Date).FirstOrDefault() == null)
                 .ToList();
 
-            
+            NightsWorked = (uint)normalNights.Count();
 
+            var regHNights = attendances
+                .Where(a => IsDateBetween(a.Date, Payroll.CutOffStart, Payroll.CutOffEnd) && a.Status == FormStatus.Approved)
+                .Where(a => !a.TimeIn.IsBetween(DayStart, DayEnd))
+                .Where(a => Payroll.Holidays.Where(h => h.Date == a.Date && h.Type == HolidayType.Regular).FirstOrDefault() != null)
+                .ToList();
+
+            RegularHolidayNightsWorked = (uint)regHNights.Count();
+
+            var specHNights = attendances
+                .Where(a => IsDateBetween(a.Date, Payroll.CutOffStart, Payroll.CutOffEnd) && a.Status == FormStatus.Approved)
+                .Where(a => !a.TimeIn.IsBetween(DayStart, DayEnd))
+                .Where(a => Payroll.Holidays.Where(h => h.Date == a.Date && h.Type == HolidayType.SpecialNonWorking).FirstOrDefault() != null)
+                .ToList();
+
+            SpecialHolidayNightsWorked = (uint)specHNights.Count();
+
+            var lates = attendances
+                .Where(a => a.TimeIn > DayWorkShiftStart)
+                .Where(a => Payroll.Holidays.Where(h => h.Date == a.Date).FirstOrDefault() == null)
+                .ToList();
+
+            decimal totalMinutesLate = 0;
+            foreach (var late in lates)
+            {
+                var span = late.TimeIn - DayStart;
+                totalMinutesLate += (decimal)span.TotalMinutes;
+            }
+            LatesMinutes = totalMinutesLate;
         }
 
         private void ApplyLeaves(IEnumerable<LeaveModel> leaves) 
         {
-            uint totalDays = 0;
-            foreach (var leave in leaves)
+            uint totalLeaves = 0;
+            var validLeaves = leaves.Where(l => IsDateBetween(l.DateOfAbsence, Payroll.CutOffStart, Payroll.CutOffEnd)).ToList();
+            foreach (var leave in validLeaves)
             {
                 if (IsDateBetween(leave.DateOfAbsence, Payroll.CutOffStart, Payroll.CutOffEnd) && leave.Status == FormStatus.Approved)
-                    totalDays += leave.Duration;
+                    totalLeaves += leave.Duration;
             }
-            DaysWorked += totalDays;
+            DaysWorked += totalLeaves;
         }
         private bool IsDateBetween(DateOnly date, DateOnly start, DateOnly end)
         {
