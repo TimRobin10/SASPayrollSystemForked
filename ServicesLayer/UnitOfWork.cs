@@ -117,11 +117,13 @@ namespace ServicesLayer
         private async Task SeedHolidays()
         {
             var holidays = await HolidayRepository.GetAllAsync();
+            
             if (holidays.Count() == 0)
             {
                 var defaults = new DefaultHolidays();
                 await HolidayRepository.AddRangeAsync(defaults.DefaultHolidaysList);
             }
+            
 
         }
 
@@ -171,8 +173,9 @@ namespace ServicesLayer
                     };
                     rolemodels.Add(role);
                 }
+                await RoleRepository.AddRangeAsync(rolemodels);
             }
-            await RoleRepository.AddRangeAsync(rolemodels);
+            
         }
 
         private async Task SeedAdmin()

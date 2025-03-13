@@ -36,13 +36,12 @@ namespace PresentationLayer
 
             //Attendacne Log Properties
             InitAttendanceLogProperties();
-
-            _unitOfWork.InitialSeeding();
         }
 
         public void Dashboard_Employee_Load(object sender, EventArgs e)
         {
             this.MaximizeBox = false;
+
         }
 
         private void Panel_Paint(object sender, PaintEventArgs e)
