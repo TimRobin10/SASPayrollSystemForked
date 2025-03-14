@@ -42,14 +42,13 @@ namespace PresentationLayer
 
             //DataGrid Properties
             InitDataGrid();
-
-            _unitOfWork.InitialSeeding();
         }
 
         public void Dashboard_Employee_Load(object sender, EventArgs e)
         {
 
             this.MaximizeBox = false;
+
             btnDashboard.Focus();
             pnlDashboard.Show();
             pnlJobDesk.Hide();

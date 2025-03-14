@@ -51,8 +51,6 @@ namespace PresentationLayer.Views
             //For Runding Form COrners
             this.FormBorderStyle = FormBorderStyle.None;
             Region = System.Drawing.Region.FromHrgn(CreateRoundRectRgn(0, 0, Width, Height, 20, 20));
-
-            _unitOfWork.InitialSeeding();
         }
 
         public void InitButtonProperties(Syncfusion.WinForms.Controls.SfButton btn)
